@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guía de Arica</title>
 <meta name="description" content="Guía turística de Arica: lugares, mapa, historia, gastronomía, eventos, clima y más.">
+<meta name="theme-color" content="#0b2530">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23F2B33D'/%3E%3Ccircle cx='16' cy='16' r='12' fill='none' stroke='%2317458F' stroke-width='3' stroke-dasharray='3 5.4'/%3E%3C/svg%3E">
+<!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:title" content="Guía de Arica · Ciudad de la Eterna Primavera">
+<meta property="og:description" content="Playas junto al Morro, momias de 7.000 años, el Carnaval Con la Fuerza del Sol y lagos a más de 4.500 metros. Planifica tu viaje a Arica.">
+<meta property="og:url" content="https://guiaarica.vercel.app/">
+<meta property="og:image" content="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Morro_arica_3.jpg/1280px-Morro_arica_3.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -600,6 +610,111 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 .now .live { display: inline-flex; align-items: center; gap: 8px; }
 .now .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c-naturaleza); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-naturaleza) 30%, transparent); }
 
+/* =====================================================================
+   REDISEÑO TURÍSTICO: fotos grandes, portada a pantalla completa,
+   experiencias, banners y animaciones suaves al bajar.
+   ===================================================================== */
+
+/* Barra superior: transparente sobre la portada, sólida al bajar */
+.topbar { transition: background-color .3s, border-color .3s; }
+body.on-hero .topbar { background: transparent; border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+body.on-hero .topbar .brand, body.on-hero .topbar .toplinks a, body.on-hero .topbar .icon-btn { color: #fff; }
+body.on-hero .topbar .menu-btn { border-color: rgba(255,255,255,.5); }
+body.on-hero .topbar .toplinks a:hover, body.on-hero .topbar .icon-btn:hover { background: rgba(255,255,255,.16); color: #fff; }
+body.on-hero .brand svg circle:last-child { stroke: #fff; }
+
+/* Portada a pantalla completa con fotos que cambian */
+.hero { position: relative; isolation: isolate; margin-top: -61px; min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: 120px 0 18px; color: #fff; background: #0b2530; overflow: hidden; }
+.hero-media, .hero-shade { position: absolute; inset: 0; z-index: -1; }
+.hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.6s ease; }
+.hero-media img.on { opacity: 1; animation: kb 12s ease-out both; }
+@keyframes kb { from { transform: scale(1.12); } to { transform: scale(1); } }
+.hero-shade { background:
+  linear-gradient(180deg, rgba(4,14,20,.55) 0%, rgba(4,14,20,0) 28%, rgba(4,14,20,.2) 52%, rgba(4,14,20,.9) 100%),
+  linear-gradient(90deg, rgba(4,14,20,.5) 0%, rgba(4,14,20,0) 70%); }
+.hero-in { align-self: end; }
+.hero .coords { color: rgba(255,255,255,.85); }
+.hero h1 { color: #fff; font-size: clamp(4.4rem, 19vw, 12.5rem); text-shadow: 0 6px 50px rgba(0,0,0,.25); }
+.hero h1 .sub { color: var(--sun); font-size: clamp(1.15rem, 3.6vw, 2rem); margin-top: 14px; }
+.hero p.lead { color: rgba(255,255,255,.93); max-width: 46ch; font-size: clamp(1.05rem, 2.2vw, 1.3rem); }
+.hero-cta { margin-top: 30px; }
+.btn.big { min-height: 52px; padding: 10px 28px; font-size: 16px; }
+.btn.glass { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.6); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.btn.glass:hover { background: rgba(255,255,255,.24); filter: none; }
+.hero-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 40px; }
+.hero-cap { margin: 0; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.8); }
+.hero-ctrl { display: flex; align-items: center; gap: 4px; flex: none; }
+.dots { display: flex; }
+.dot { width: 34px; height: 40px; padding: 0; border: 0; background: none; display: grid; place-items: center; }
+.dot::before { content: ""; width: 20px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.45); transition: background-color .3s, width .3s; }
+.dot[aria-current="true"]::before { background: var(--sun); width: 28px; }
+.hero-pause { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.2); color: #fff; display: grid; place-items: center; padding: 0; }
+.hero-pause svg { width: 14px; height: 14px; fill: currentColor; }
+.hero :focus-visible, .banner :focus-visible { outline-color: #fff; }
+.facts { margin-top: 0; }
+@media (max-width: 599px) { .hero-cap { display: none; } .hero-foot { justify-content: flex-end; margin-top: 24px; } }
+@media (prefers-reduced-motion: reduce) { .hero-media img { transition: none; } .hero-media img.on { animation: none; } }
+
+/* Contenedor de foto genérico */
+.ph { display: block; position: relative; overflow: hidden; background: var(--a-mount); }
+.ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph-credit, .d-photo figcaption { position: absolute; right: 8px; bottom: 6px; z-index: 2; max-width: calc(100% - 16px); font: 500 10px/1.3 var(--font-mono); color: rgba(255,255,255,.9); text-shadow: 0 1px 3px rgba(0,0,0,.8); text-align: right; pointer-events: none; }
+
+/* Experiencias: mosaico de fotos */
+.exp { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 200px; }
+.exp-big { grid-column: 1 / -1; grid-row: span 2; }
+@media (min-width: 900px) { .exp { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 270px; gap: 16px; } .exp-big { grid-column: span 2; } }
+.exp-card { position: relative; display: block; height: 100%; border-radius: 14px; overflow: hidden; color: #fff; text-decoration: none; background: #0b2530; box-shadow: 0 10px 30px -18px rgba(0,0,0,.6); }
+.exp-card .ph { position: absolute; inset: 0; }
+.exp-card .ph img { transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.exp-card:hover .ph img { transform: scale(1.07); }
+.exp-card::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(4,14,20,.9) 0%, rgba(4,14,20,.3) 45%, rgba(4,14,20,0) 70%); }
+.exp-card .ph-credit { top: 8px; bottom: auto; }
+.exp-txt { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 20px; display: grid; gap: 4px; }
+.exp-k { font: 500 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--sun); }
+.exp-txt b { font: 800 clamp(1.2rem, 2.2vw, 1.6rem)/1.1 var(--font-display); font-stretch: 110%; }
+.exp-big .exp-txt b { font-size: clamp(1.7rem, 4vw, 2.7rem); }
+.exp-d { font-size: 14px; color: rgba(255,255,255,.88); max-width: 44ch; }
+.exp-card:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+@media (max-width: 899px) { .exp li:not(.exp-big) .exp-d { display: none; } .exp-txt { padding: 14px; } }
+@media (max-width: 599px) { .exp li:not(.exp-big) .ph-credit, .banner .ph-credit { display: none; } }
+@media (prefers-reduced-motion: reduce) { .exp-card .ph img { transition: none; } .exp-card:hover .ph img { transform: none; } }
+
+/* Banners de foto a todo el ancho */
+.banner { position: relative; isolation: isolate; color: #fff; padding-block: clamp(96px, 16vw, 190px); overflow: hidden; background: #0b2530; }
+.banner.short { padding-block: clamp(72px, 11vw, 130px); }
+.banner > .ph { position: absolute; inset: 0; z-index: -2; }
+.banner-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(4,14,20,.86) 0%, rgba(4,14,20,.55) 50%, rgba(4,14,20,.15) 100%); }
+.banner-in { display: grid; gap: 14px; justify-items: start; }
+.banner .eyebrow { color: rgba(255,255,255,.88); }
+.banner h2 { margin: 0; font: 800 clamp(2.4rem, 7vw, 4.8rem)/1 var(--font-display); font-stretch: 118%; letter-spacing: -.025em; max-width: 15ch; text-wrap: balance; }
+.banner p { margin: 0; max-width: 56ch; font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,.92); }
+.banner-nums { list-style: none; margin: 6px 0 8px; padding: 0; display: flex; flex-wrap: wrap; gap: 14px 40px; }
+.banner-nums li { display: grid; }
+.banner-nums b { font: 800 clamp(2rem, 5vw, 3.2rem)/1 var(--font-display); font-stretch: 112%; color: var(--sun); }
+.banner-nums span { font-size: 14px; color: rgba(255,255,255,.88); }
+.quick { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.quick a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 18px; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.5); color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.quick a:hover { background: var(--sun); border-color: var(--sun); color: var(--on-sun); }
+
+/* Fotos en rutas y en la ficha de cada lugar */
+.route.has-ph { padding-top: 0; overflow: hidden; }
+.route-ph { margin: 0 -22px 4px; aspect-ratio: 16 / 9; }
+.d-photo { margin: -22px -22px 0; position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 8px 8px 0 0; background: var(--a-mount); }
+.d-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.detail { overflow: hidden; }
+
+/* Galería de fotos en mosaico */
+#lib-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 160px; grid-auto-flow: dense; gap: 10px; }
+#lib-grid > li:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
+#lib-grid .shot { height: 100%; aspect-ratio: auto; }
+@media (min-width: 700px) { #lib-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 200px; } }
+@media (min-width: 1000px) { #lib-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 210px; gap: 14px; } }
+.gal-sub { margin: 40px 0 14px; }
+
+/* Aparición suave al bajar */
+.js-reveal .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.js-reveal .reveal.in { opacity: 1; transform: none; }
 </style>
 </head>
 <body>
@@ -615,6 +730,8 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
     <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
     <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 20v-3M16 20v-3"/><circle cx="8" cy="14.3" r=".6"/><circle cx="16" cy="14.3" r=".6"/></symbol>
     <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 3L3 10.5l6.5 2.5L12 20z"/><path d="M9.5 13L21 3"/></symbol>
@@ -635,11 +752,12 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       Arica
     </a>
     <nav class="toplinks" aria-label="Accesos directos">
+      <a href="#experiencias">Experiencias</a>
       <a href="#lugares">Lugares</a>
       <a href="#rutas">Rutas</a>
+      <a href="#carnaval">Carnaval</a>
       <a href="#gastronomia">Comer</a>
-      <a href="#clima">Clima</a>
-      <a href="#emergencias">Emergencias</a>
+      <a href="#planifica">Planifica</a>
     </nav>
     <button class="icon-btn" id="fav-btn" type="button" aria-label="Mis lugares guardados">
       <svg aria-hidden="true"><use href="#i-star"/></svg><span class="count" id="fav-count">0</span>
@@ -661,45 +779,46 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </div>
     <div class="menu-groups">
       <div>
-        <h3>Conocer</h3>
+        <h3>Inspírate</h3>
+        <ol>
+          <li><a href="#experiencias">Experiencias</a></li>
+          <li><a href="#lugares">Lugares, mapa y buscador</a></li>
+          <li><a href="#rutas">Rutas turísticas</a></li>
+          <li><a href="#actividades">Actividades</a></li>
+          <li><a href="#galeria">Galería de fotos</a></li>
+        </ol>
+      </div>
+      <div>
+        <h3>Vive Arica</h3>
+        <ol>
+          <li><a href="#carnaval">Carnaval Con la Fuerza del Sol</a></li>
+          <li><a href="#eventos">Fiestas del año</a></li>
+          <li><a href="#cultura">Cultura y tradiciones</a></li>
+          <li><a href="#gastronomia">Comida típica</a></li>
+          <li><a href="#comer">Dónde comer</a></li>
+        </ol>
+      </div>
+      <div>
+        <h3>Planifica tu viaje</h3>
+        <ol>
+          <li><a href="#clima">Clima y pronóstico</a></li>
+          <li><a href="#alojamiento">Alojamiento</a></li>
+          <li><a href="#transporte">Transporte</a></li>
+          <li><a href="#emergencias">Emergencias</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+        </ol>
+      </div>
+      <div>
+        <h3>Conoce Arica</h3>
         <ol>
           <li><a href="#historia">Historia de la ciudad</a></li>
           <li><a href="#monumentos">Monumentos históricos</a></li>
-          <li><a href="#cultura">Cultura y tradiciones</a></li>
-          <li><a href="#naturaleza">Flora y fauna local</a></li>
-          <li><a href="#economia">Economía local</a></li>
+          <li><a href="#naturaleza">Flora y fauna</a></li>
           <li><a href="#datos">Datos curiosos</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Visitar</h3>
-        <ol>
-          <li><a href="#lugares">Lugares, mapa y buscador</a></li>
-          <li><a href="#rutas">Rutas turísticas</a></li>
-          <li><a href="#galeria">Galería de imágenes</a></li>
-          <li><a href="#actividades">Actividades recreativas</a></li>
-          <li><a href="#eventos">Eventos y festividades</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Disfrutar</h3>
-        <ol>
-          <li><a href="#gastronomia">Gastronomía local</a></li>
-          <li><a href="#comer">Lugares para comer</a></li>
-          <li><a href="#alojamiento">Alojamiento</a></li>
-          <li><a href="#transporte">Transporte público</a></li>
-          <li><a href="#clima">Clima y pronóstico</a></li>
+          <li><a href="#economia">Economía local</a></li>
           <li><a href="#negocios">Directorio de negocios</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Ayuda y comunidad</h3>
-        <ol>
-          <li><a href="#emergencias">Servicios de emergencia</a></li>
-          <li><a href="#noticias">Noticias de la ciudad</a></li>
-          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="#noticias">Noticias</a></li>
           <li><a href="#contacto">Contacto</a></li>
-          <li><a href="#redes">Redes sociales</a></li>
           <li><a href="#acerca">Sobre el proyecto</a></li>
         </ol>
       </div>
@@ -711,65 +830,60 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 
 <!-- ================= INICIO ================= -->
 <section class="hero" id="inicio" aria-labelledby="h-inicio">
+  <div class="hero-media" id="hero-media"></div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <p class="coords">18°29′ S · 70°19′ O · Región de Arica y Parinacota · Chile</p>
+    <h1 id="h-inicio">Arica<span class="sub">Ciudad de la Eterna Primavera</span></h1>
+    <p class="lead">Playas junto al Morro, las momias artificiales más antiguas del mundo, valles de olivos en pleno desierto y lagos a más de 4.500 metros. Todo en un mismo viaje.</p>
+    <div class="hero-cta">
+      <a class="btn sun big" href="#experiencias">Descubre Arica</a>
+      <a class="btn glass big" href="#rutas">Ver rutas</a>
+    </div>
+  </div>
+  <div class="wrap hero-foot">
+    <p class="hero-cap" id="hero-cap"></p>
+    <div class="hero-ctrl">
+      <div class="dots" id="hero-dots" role="group" aria-label="Elegir foto de portada"></div>
+      <button class="hero-pause" id="hero-pause" type="button" aria-label="Pausar el cambio de fotos" aria-pressed="false"><svg aria-hidden="true"><use href="#i-pause"/></svg></button>
+    </div>
+  </div>
+</section>
+<div class="facts" aria-label="Arica en cifras">
   <div class="wrap">
-    <div class="hero-grid">
-      <div>
-        <p class="coords">18°29′ S · 70°19′ O · Región de Arica y Parinacota</p>
-        <h1 id="h-inicio">Arica<span class="sub">Ciudad de la Eterna Primavera</span></h1>
-        <p class="lead">Una guía para visitar la puerta norte de Chile: playas junto al Morro, un desierto casi sin lluvia, valles de olivos, las momias más antiguas conocidas y un altiplano sobre los 4.000 metros.</p>
-        <div class="hero-cta">
-          <a class="btn sun" href="#lugares">Explorar el plano</a>
-          <a class="btn" href="#rutas">Ver rutas</a>
-          <a class="btn ghost" href="#gastronomia">Qué comer</a>
-        </div>
-      </div>
-      <figure class="hero-art">
-        <svg viewBox="0 0 560 440" role="img" aria-label="Ilustración de El Morro de Arica junto al mar, con el sol sobre la cordillera y la ciudad a sus pies">
-          <rect width="560" height="440" fill="var(--a-sky)"/>
-          <rect y="140" width="560" height="150" fill="var(--a-sky2)" opacity=".55"/>
-          <circle cx="410" cy="150" r="80" fill="none" stroke="var(--sun)" stroke-width="20" stroke-dasharray="4 27.1"/>
-          <circle cx="410" cy="150" r="54" fill="var(--sun)"/>
-          <path d="M0 275 L70 205 L120 242 L190 172 L262 252 L332 208 L402 264 L472 192 L560 257 V310 H0Z" fill="var(--a-mount)"/>
-          <path d="M190 172 l15 20 -11 -5 -9 13z M472 192 l14 19 -10 -4 -9 12z" fill="var(--a-white)" opacity=".85"/>
-          <path d="M20 335 L68 302 Q110 226 190 211 Q252 206 302 270 L362 335Z" fill="var(--a-rock)"/>
-          <path d="M190 211 Q252 206 302 270 L362 335 L248 335 Q250 272 190 211Z" fill="var(--a-rock2)" opacity=".6"/>
-          <path d="M193 211 V180" stroke="var(--a-ink)" stroke-width="3"/>
-          <path d="M193 181 h28 l-7 8 7 8 h-28z" fill="var(--c-historia)"/>
-          <g fill="var(--a-white)" opacity=".92">
-            <rect x="318" y="302" width="26" height="33"/><rect x="348" y="292" width="22" height="43"/><rect x="374" y="306" width="30" height="29"/>
-            <rect x="408" y="296" width="24" height="39"/><rect x="436" y="308" width="32" height="27"/><rect x="472" y="298" width="22" height="37"/><rect x="498" y="310" width="34" height="25"/>
-          </g>
-          <g fill="var(--a-ink)" opacity=".35">
-            <rect x="324" y="310" width="5" height="6"/><rect x="334" y="310" width="5" height="6"/><rect x="354" y="302" width="5" height="6"/><rect x="354" y="316" width="5" height="6"/>
-            <rect x="414" y="306" width="5" height="6"/><rect x="424" y="320" width="5" height="6"/><rect x="478" y="308" width="5" height="6"/>
-          </g>
-          <rect y="335" width="560" height="105" fill="var(--a-sea)"/>
-          <rect y="338" width="560" height="96" fill="url(#wv)"/>
-          <g fill="var(--sun)" opacity=".55"><rect x="372" y="345" width="76" height="5" rx="2.5"/><rect x="382" y="361" width="56" height="5" rx="2.5"/><rect x="392" y="377" width="36" height="5" rx="2.5"/></g>
-          <path d="M0 440 V408 Q140 392 262 418 T560 400 V440Z" fill="var(--a-sand)"/>
-          <path d="M92 88 q10 -11 20 0 q10 -11 20 0 M150 62 q8 -9 16 0 q8 -9 16 0" fill="none" stroke="var(--a-ink)" stroke-width="3" stroke-linecap="round"/>
-        </svg>
-      </figure>
-    </div>
+    <ul>
+      <li><b>≈ 7.000</b><span>años tienen las momias Chinchorro</span></li>
+      <li><b>4.517 m</b><span>de altura, el lago Chungará</span></li>
+      <li><b>19,2 °C</b><span>de temperatura media en el año</span></li>
+      <li><b>Casi 0</b><span>milímetros de lluvia en un año normal</span></li>
+    </ul>
   </div>
-  <div class="facts">
-    <div class="wrap">
-      <ul>
-        <li><b>221.364</b><span>habitantes en la comuna (censo 2017)</span></li>
-        <li><b>19,2 °C</b><span>temperatura media anual</span></li>
-        <li><b>≈ 2.400 h</b><span>de sol al año</span></li>
-        <li><b>Casi 0</b><span>milímetros de lluvia en un año normal</span></li>
-      </ul>
-    </div>
+</div>
+<div class="step" aria-hidden="true"><svg><rect width="100%" height="14" fill="url(#stp)"/></svg></div>
+
+<!-- ================= EXPERIENCIAS ================= -->
+<section class="sec" id="experiencias" aria-labelledby="h-exp">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Qué vivir en Arica</p>
+      <h2 id="h-exp">Del mar al altiplano en un solo viaje</h2>
+      <p class="sec-lede">En pocas horas pasas de ver el atardecer frente al Morro a caminar junto a un volcán nevado. Elige por dónde empezar.</p>
+    </header>
+    <ul class="exp">
+      <li class="exp-big"><a class="exp-card" href="#lugares" data-place="lauca"><span class="ph" data-ph="chungara" data-size="big"></span><span class="exp-txt"><span class="exp-k">Altiplano · 4.517 m</span><b>Lago Chungará y Parque Lauca</b><span class="exp-d">Volcanes nevados, vicuñas y flamencos junto a uno de los lagos más altos del mundo.</span></span></a></li>
+      <li><a class="exp-card" href="#lugares" data-place="chinchorro"><span class="ph" data-ph="atardecer"></span><span class="exp-txt"><span class="exp-k">Costa</span><b>Playas y surf</b><span class="exp-d">Olas para aprender, olas para expertos y atardeceres sobre el Pacífico.</span></span></a></li>
+      <li><a class="exp-card" href="#lugares" data-place="museo"><span class="ph" data-ph="momia"></span><span class="exp-txt"><span class="exp-k">Patrimonio UNESCO</span><b>Momias Chinchorro</b><span class="exp-d">Las momias artificiales más antiguas conocidas, en el museo de Azapa.</span></span></a></li>
+      <li><a class="exp-card" href="#lugares" data-place="morro"><span class="ph" data-ph="morronoche"></span><span class="exp-txt"><span class="exp-k">Ciudad</span><b>El Morro y el centro</b><span class="exp-d">Sube al mirador y recorre la catedral atribuida al taller de Eiffel.</span></span></a></li>
+      <li><a class="exp-card" href="#lugares" data-place="azapa"><span class="ph" data-ph="azapa"></span><span class="exp-txt"><span class="exp-k">Valle</span><b>Valle de Azapa</b><span class="exp-d">Un oasis de olivos en pleno desierto, con artesanía andina.</span></span></a></li>
+    </ul>
   </div>
-  <div class="step" aria-hidden="true"><svg><rect width="100%" height="14" fill="url(#stp)"/></svg></div>
 </section>
 
 <!-- ================= LUGARES / MAPA ================= -->
 <section class="sec" id="lugares" aria-labelledby="h-lugares">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">02 · Lugares turísticos, mapa y buscador</p>
+      <p class="eyebrow">Lugares turísticos, mapa y buscador</p>
       <h2 id="h-lugares">Lugares para conocer</h2>
       <p class="sec-lede">Playas, plazas, parques, monumentos y pueblos. Toca un punto del plano o elige uno de la lista. Busca por nombre o tipo, guarda tus favoritos y lee lo que recomiendan otros visitantes.</p>
     </header>
@@ -811,6 +925,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 
       <div class="side-col">
         <article class="card detail" id="detalle" aria-labelledby="d-name">
+          <figure class="d-photo" id="d-photo" hidden><img id="d-img" alt="" decoding="async"><figcaption id="d-credit"></figcaption></figure>
           <span class="tag" id="d-tag"><span class="sw"></span><span id="d-cat"></span></span>
           <h3 id="d-name"></h3>
           <p id="d-text"></p>
@@ -859,7 +974,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec alt" id="rutas" aria-labelledby="h-rutas">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">03 · Rutas turísticas</p>
+      <p class="eyebrow">Rutas turísticas</p>
       <h2 id="h-rutas">Recorridos recomendados</h2>
       <p class="sec-lede">Cinco formas de ordenar el viaje, de un paseo a pie por el centro a dos días en el altiplano. Cada ruta se dibuja en el plano.</p>
     </header>
@@ -904,20 +1019,41 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </section>
 
-<!-- ================= GALERÍA ================= -->
-<section class="sec" id="galeria" aria-labelledby="h-galeria">
+<!-- ================= ACTIVIDADES ================= -->
+<section class="sec" id="actividades" aria-labelledby="h-act">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">04 · Galería de imágenes</p>
-      <h2 id="h-galeria">Arica en imágenes</h2>
-      <p class="sec-lede" id="gal-lede">Nueve ilustraciones del proyecto con los paisajes y escenas que definen a la ciudad. Toca una para verla grande.</p>
+      <p class="eyebrow">Actividades recreativas</p>
+      <h2 id="h-act">Deportes, paseos y excursiones</h2>
+      <p class="sec-lede">Mar, desierto, valles y altiplano en un radio corto. Ocho ideas para llenar los días.</p>
     </header>
-    <div class="user-photos" id="user-photos" hidden>
-      <h3 class="gal-sub">Fotos</h3>
-      <ul class="gallery" id="photo-grid"></ul>
+    <ul class="cards" data-more="4" data-more-label="actividades">
+      <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Principiantes y expertos</span><h3>Surf y bodyboard</h3><p>Chinchorro y Las Machas tienen olas para partir. El Gringo, en la ex isla El Alacrán, es una ola de fama internacional solo para expertos.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Playa y mar</span><h3>Baño, buceo y kayak</h3><p>Chinchorro, El Laucho y La Lisera son las playas más usadas para bañarse. La Lisera tiene aguas calmas y sirve para bucear; Chinchorro, para kayak y windsurf. El mar es frío: respeta la señalización.</p></article></li>
+      <li><article class="card act" style="--tc:var(--accent)"><span class="lvl">Aventura</span><h3>Parapente</h3><p>Se vuela desde los cerros de las playas La Lisera y El Laucho, junto al Morro. Hazlo con un operador local.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-naturaleza)"><span class="lvl">Naturaleza</span><h3>Senderismo, escalada y bici</h3><p>Las Cuevas de Anzota tienen senderos, escaleras a las cuevas y vías de escalada. El sector ha tenido obras de recuperación: verifica si el acceso está abierto.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-naturaleza)"><span class="lvl">Fotografía</span><h3>Observación de aves</h3><p>El humedal del río Lluta, Santuario de la Naturaleza de más de 30 hectáreas, registra más de 165 especies de aves.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-valles)"><span class="lvl">Valles</span><h3>Valle de Azapa y pueblos</h3><p>Olivares y museo en Azapa; Caleta Camarones para pescar y comer con pescadores; Codpa, con aguas termales y el vino Pintatani.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-altiplano)"><span class="lvl">Altura</span><h3>Altiplano y Parque Lauca</h3><p>Senderos Las Cuevas, Parinacota y Chungará, y el recorrido Parinacota, lagunas de Cotacotani y lago Chungará. Hay tours de un día.</p></article></li>
+      <li><article class="card act" style="--tc:var(--c-historia)"><span class="lvl">A pie</span><h3>Paseos por la ciudad</h3><p>Sube el Morro caminando: el sendero parte en el extremo sur de la calle Colón y toma unos 10 minutos. Después recorre la Plaza Colón y la calle Bolognesi.</p></article></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= GALERÍA ================= -->
+<section class="sec alt" id="galeria" aria-labelledby="h-galeria">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Galería de imágenes</p>
+      <h2 id="h-galeria">Arica en imágenes</h2>
+      <p class="sec-lede" id="gal-lede">Paisajes, fiestas y rincones de la ciudad y sus alrededores. Toca una foto para verla en grande.</p>
+    </header>
+    <div class="user-photos" id="user-photos">
+      <ul class="gallery" id="lib-grid" data-more="10" data-more-label="fotos"></ul>
+      <ul class="gallery" id="photo-grid" hidden></ul>
     </div>
-    <h3 class="gal-sub" id="gal-ill" hidden>Ilustraciones</h3>
-    <ul class="gallery" id="gallery">
+    <h3 class="gal-sub" id="gal-ill">Ilustraciones del proyecto</h3>
+    <ul class="gallery" id="gallery" data-more="5" data-more-label="ilustraciones">
       <li><button class="shot" type="button" data-cap="El Morro de Arica al atardecer">
         <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="El Morro de Arica al atardecer sobre el mar">
           <rect width="400" height="300" fill="var(--a-sky)"/><rect y="110" width="400" height="95" fill="var(--a-sky2)" opacity=".6"/>
@@ -1052,84 +1188,20 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </dialog>
 
-
-<!-- ================= HISTORIA ================= -->
-<section class="sec alt" id="historia" aria-labelledby="h-historia">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">05 · Historia de la ciudad</p>
-      <h2 id="h-historia">Cómo se fundó y cómo ha cambiado</h2>
-      <p class="sec-lede">Arica pasó de aldea de pescadores y pueblo andino a puerto de la plata, ciudad de frontera, puerto libre y, hoy, capital regional. Cada etapa dejó marcas que todavía se pueden ver: momias, templos, rieles y edificios de metal.</p>
-    </header>
-    <ul class="eras" aria-label="Épocas">
-      <li style="--era:var(--c-historia)"><i></i>Pueblos originarios</li>
-      <li style="--era:var(--c-valles)"><i></i>Colonia</li>
-      <li style="--era:var(--accent)"><i></i>Guerra y frontera</li>
-      <li style="--era:var(--c-naturaleza)"><i></i>Ciudad moderna</li>
+<!-- ================= BANNER: CARNAVAL ================= -->
+<section class="banner" id="carnaval" aria-labelledby="h-carn">
+  <span class="ph" data-ph="carnaval" data-size="big"></span>
+  <div class="banner-shade" aria-hidden="true"></div>
+  <div class="wrap banner-in">
+    <p class="eyebrow">Cada verano, en enero o febrero</p>
+    <h2 id="h-carn">Carnaval Con la Fuerza del Sol</h2>
+    <p>Tres días de bronces, tambores y trajes bordados: más de 70 comparsas y cerca de 16.000 bailarines y músicos llenan las calles de la ciudad.</p>
+    <ul class="banner-nums">
+      <li><b>3</b><span>días de fiesta</span></li>
+      <li><b>70+</b><span>comparsas</span></li>
+      <li><b>16.000</b><span>bailarines y músicos</span></li>
     </ul>
-    <ol class="tl" data-more="5" data-more-label="hitos">
-      <li class="e1"><span class="yr">Hace más de 7.000 años</span><div><h3>Los Chinchorro</h3><p>Pescadores de la costa desarrollan la momificación artificial, una de las más antiguas que se conocen. El territorio ya estaba poblado desde hace más de 11.000 años.</p></div></li>
-      <li class="e1"><span class="yr">Siglos IV al IX</span><div><h3>Influencia de Tiwanaku</h3><p>La cultura tiwanaku llega desde el altiplano y forma caseríos en la zona. Uno de ellos se conoce como Ariaka o Ariqui; el significado del nombre varía según el autor.</p></div></li>
-      <li class="e1"><span class="yr">Siglo XI a c. 1473</span><div><h3>Señoríos regionales y dominio inca</h3><p>Distintos señoríos controlan la región hasta que llegan los incas del Cuzco.</p></div></li>
-      <li class="e2"><span class="yr">1541</span><div><h3>Fundación española</h3><p>La fecha tradicional es el 25 de abril, día de San Marcos, y de ahí el nombre San Marcos de Arica. Algunos historiadores discuten esa fecha y el acta que la respalda.</p></div></li>
-      <li class="e2"><span class="yr">1545</span><div><h3>La plata de Potosí</h3><p>El descubrimiento de las minas de Potosí impulsa el crecimiento de Arica, que se vuelve puerto de salida hacia el Pacífico.</p></div></li>
-      <li class="e2"><span class="yr">28 de julio de 1821</span><div><h3>Independencia</h3><p>La independencia se proclama en Arica.</p></div></li>
-      <li class="e3"><span class="yr">25 de diciembre de 1856</span><div><h3>Llega el ferrocarril Tacna–Arica</h3><p>El tren une el puerto con Tacna y refuerza su papel como salida al mar.</p></div></li>
-      <li class="e3"><span class="yr">1868 y 1877</span><div><h3>Terremotos y maremotos</h3><p>En 1868 un terremoto de magnitud cercana a 8,5 y un maremoto de 7 a 10 metros golpean la ciudad. En 1877 otro tsunami alcanza hasta 14 metros.</p></div></li>
-      <li class="e3"><span class="yr">7 de junio de 1880</span><div><h3>Asalto y Toma del Morro</h3><p>En plena Guerra del Pacífico, el ejército chileno toma el Morro, la fortaleza que defendía la ciudad. La acción dura menos de una hora.</p></div></li>
-      <li class="e3"><span class="yr">1883</span><div><h3>Tratado de Ancón</h3><p>Arica pasa a administración chilena. El plebiscito previsto para decidir su destino nunca se realizó.</p></div></li>
-      <li class="e3"><span class="yr">1913</span><div><h3>Ferrocarril Arica–La Paz</h3><p>Se inaugura la línea que conecta el puerto con Bolivia.</p></div></li>
-      <li class="e3"><span class="yr">1929</span><div><h3>Tratado de Lima</h3><p>Chile y Perú fijan sus fronteras: Arica queda en Chile.</p></div></li>
-      <li class="e4"><span class="yr">1953</span><div><h3>Puerto Libre</h3><p>Un régimen de puerto libre atrae comercio y nuevos habitantes: en cinco años la población pasa de unos 15.000 a más de 70.000 personas.</p></div></li>
-      <li class="e4"><span class="yr">1958</span><div><h3>Junta de Adelanto de Arica</h3><p>Se deroga el puerto libre y se crea la Junta de Adelanto (Ley 13.039) para promover el desarrollo de la ciudad.</p></div></li>
-      <li class="e4"><span class="yr">2007</span><div><h3>Región de Arica y Parinacota</h3><p>La ley promulgada el 23 de marzo crea la nueva región. El 8 de octubre de 2007 Arica se convierte en su capital.</p></div></li>
-      <li class="e4"><span class="yr">2021</span><div><h3>Patrimonio Mundial</h3><p>La UNESCO reconoce los asentamientos y la momificación artificial de la cultura Chinchorro.</p></div></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ================= MONUMENTOS ================= -->
-<section class="sec" id="monumentos" aria-labelledby="h-monumentos">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">06 · Monumentos históricos</p>
-      <h2 id="h-monumentos">Edificios y sitios patrimoniales</h2>
-      <p class="sec-lede">Del centro de la ciudad a las quebradas y el altiplano: ocho lugares que cuentan la historia de Arica.</p>
-    </header>
-    <ul class="cards" data-more="4" data-more-label="monumentos">
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">01</span><h3>Morro de Arica</h3><p>Peñón de unos 130 metros con mirador, cañones y el Museo Histórico y de Armas. Aquí ocurrió el asalto de 1880. Es uno de los sitios que integran el Patrimonio Mundial Chinchorro.</p><span class="pill">Historia militar</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">02</span><h3>Catedral de San Marcos</h3><p>Iglesia neoclásica de tres naves, con fachada asimétrica y vitrales de colores. Su estructura de metal se levantó en la década de 1870 y se atribuye al taller de Gustave Eiffel.</p><span class="pill">Plaza Colón</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">03</span><h3>Ex Aduana (Casa de la Cultura)</h3><p>Edificio portuario del siglo XIX, también ligado al taller de Eiffel. Hoy funciona como Casa de la Cultura.</p><span class="pill">Centro</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">04</span><h3>Estación del ferrocarril Arica–La Paz</h3><p>La estación de pasajeros y la administración de la línea inaugurada en 1913 son Monumento Nacional.</p><span class="pill">Monumento Nacional</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">05</span><h3>Museo Arqueológico San Miguel de Azapa</h3><p>Guarda más de 20.000 piezas, entre ellas las momias Chinchorro, y tiene petroglifos al aire libre. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p><span class="pill">Valle de Azapa</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">06</span><h3>Geoglifos y petroglifos</h3><p>Figuras gigantes en los cerros del valle de Lluta y grabados en roca en Azapa, hechos por pueblos andinos antiguos. Se miran desde fuera, sin pisarlos.</p><span class="pill">Arte rupestre</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">07</span><h3>Iglesias de Putre y Parinacota</h3><p>La de Putre, de piedra y adobe, data de 1670 y es Monumento Nacional. Parinacota, a más de 4.000 metros, es Monumento Nacional y Zona Típica, con su iglesia del siglo XVII.</p><span class="pill">Altiplano</span></article></li>
-      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">08</span><h3>Caleta Camarones</h3><p>Pueblo pesquero a unos 100 km al sur, con un cementerio indígena de más de 9.000 años y un mirador con un monumento a las momias Chinchorro.</p><span class="pill">Sitio Chinchorro</span></article></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ================= CULTURA ================= -->
-<section class="sec alt" id="cultura" aria-labelledby="h-cultura">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">07 · Cultura y tradiciones</p>
-      <h2 id="h-cultura">Una ciudad de muchas herencias</h2>
-      <p class="sec-lede">Arica es una de las ciudades más multiculturales de Chile. Aquí se cruzan la herencia aymara, la afrodescendiente y las influencias de sus vecinos Perú y Bolivia.</p>
-    </header>
-    <div class="split">
-      <div class="stack">
-        <article class="card feature" style="--tc:var(--c-altiplano)"><h3>Pueblo aymara</h3><p>Vive en la precordillera y el altiplano: Putre, Parinacota, Socoroma. Su calendario sigue las estaciones andinas: el Año Nuevo Andino llega con el solsticio de invierno y en agosto se agradece a la Pachamama, la Madre Tierra, con ofrendas.</p></article>
-        <article class="card feature" style="--tc:var(--c-historia)"><h3>Herencia afrodescendiente</h3><p>Una comunidad con raíces en los valles de Azapa y Lluta, reconocida por ley como pueblo tribal afrodescendiente en 2019. Sus tambores y su música forman parte del carnaval, y cada noviembre se celebra el mes de la herencia africana.</p></article>
-        <article class="card feature" style="--tc:var(--c-playas)"><h3>Frontera viva</h3><p>Tacna y La Paz quedan cerca. Esa cercanía se nota en la comida, en las ferias y en las costumbres de la ciudad.</p></article>
-      </div>
-      <div class="stack">
-        <article class="card feature" style="--tc:var(--c-valles)"><h3>Carnaval y bailes</h3><p>Caporales, morenadas, tinkus y tobas llenan las calles en el Carnaval Con la Fuerza del Sol, con comparsas de la precordillera, el altiplano y el mundo afrodescendiente.</p>
-          <ul class="pills"><li class="pill">Caporales</li><li class="pill">Morenada</li><li class="pill">Tinku</li><li class="pill">Tobas</li></ul></article>
-        <article class="card feature" style="--tc:var(--c-naturaleza)"><h3>Fiestas religiosas</h3><p>El 25 de abril se celebra a San Marcos, patrono de la ciudad. En el interior, la Virgen de las Peñas reúne a peregrinos en Livilcar, y los templos de la Ruta de las Misiones guardan el barroco andino.</p></article>
-        <article class="card feature" style="--tc:var(--accent)"><h3>Artesanía</h3><p>Tejidos de alpaca, cerámica, esculturas y réplicas en miniatura de iglesias misionales, muchos hechos por artesanos indígenas. Se encuentran en el Poblado Artesanal, una réplica del pueblo de Parinacota.</p></article>
-      </div>
-    </div>
+    <a class="btn sun big" href="#eventos">Ver las fiestas del año</a>
   </div>
 </section>
 
@@ -1137,7 +1209,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec" id="eventos" aria-labelledby="h-eventos">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">08 · Eventos y festividades</p>
+      <p class="eyebrow">Eventos y festividades</p>
       <h2 id="h-eventos">Fiestas, ferias y conciertos</h2>
       <p class="sec-lede">Un calendario para planear el viaje según la época del año. Filtra por estación.</p>
     </header>
@@ -1162,11 +1234,35 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </section>
 
-<!-- ================= GASTRONOMÍA ================= -->
-<section class="sec alt" id="gastronomia" aria-labelledby="h-gastro">
+<!-- ================= CULTURA ================= -->
+<section class="sec alt" id="cultura" aria-labelledby="h-cultura">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">09 · Gastronomía local</p>
+      <p class="eyebrow">Cultura y tradiciones</p>
+      <h2 id="h-cultura">Una ciudad de muchas herencias</h2>
+      <p class="sec-lede">Arica es una de las ciudades más multiculturales de Chile. Aquí se cruzan la herencia aymara, la afrodescendiente y las influencias de sus vecinos Perú y Bolivia.</p>
+    </header>
+    <div class="split">
+      <div class="stack">
+        <article class="card feature" style="--tc:var(--c-altiplano)"><h3>Pueblo aymara</h3><p>Vive en la precordillera y el altiplano: Putre, Parinacota, Socoroma. Su calendario sigue las estaciones andinas: el Año Nuevo Andino llega con el solsticio de invierno y en agosto se agradece a la Pachamama, la Madre Tierra, con ofrendas.</p></article>
+        <article class="card feature" style="--tc:var(--c-historia)"><h3>Herencia afrodescendiente</h3><p>Una comunidad con raíces en los valles de Azapa y Lluta, reconocida por ley como pueblo tribal afrodescendiente en 2019. Sus tambores y su música forman parte del carnaval, y cada noviembre se celebra el mes de la herencia africana.</p></article>
+        <article class="card feature" style="--tc:var(--c-playas)"><h3>Frontera viva</h3><p>Tacna y La Paz quedan cerca. Esa cercanía se nota en la comida, en las ferias y en las costumbres de la ciudad.</p></article>
+      </div>
+      <div class="stack">
+        <article class="card feature" style="--tc:var(--c-valles)"><h3>Carnaval y bailes</h3><p>Caporales, morenadas, tinkus y tobas llenan las calles en el Carnaval Con la Fuerza del Sol, con comparsas de la precordillera, el altiplano y el mundo afrodescendiente.</p>
+          <ul class="pills"><li class="pill">Caporales</li><li class="pill">Morenada</li><li class="pill">Tinku</li><li class="pill">Tobas</li></ul></article>
+        <article class="card feature" style="--tc:var(--c-naturaleza)"><h3>Fiestas religiosas</h3><p>El 25 de abril se celebra a San Marcos, patrono de la ciudad. En el interior, la Virgen de las Peñas reúne a peregrinos en Livilcar, y los templos de la Ruta de las Misiones guardan el barroco andino.</p></article>
+        <article class="card feature" style="--tc:var(--accent)"><h3>Artesanía</h3><p>Tejidos de alpaca, cerámica, esculturas y réplicas en miniatura de iglesias misionales, muchos hechos por artesanos indígenas. Se encuentran en el Poblado Artesanal, una réplica del pueblo de Parinacota.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GASTRONOMÍA ================= -->
+<section class="sec" id="gastronomia" aria-labelledby="h-gastro">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Gastronomía local</p>
       <h2 id="h-gastro">Comidas típicas</h2>
       <p class="sec-lede">La cocina de Arica mezcla influencias aymaras, peruanas y bolivianas, con el mar y los valles como despensa.</p>
     </header>
@@ -1189,10 +1285,10 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 </section>
 
 <!-- ================= DÓNDE COMER ================= -->
-<section class="sec" id="comer" aria-labelledby="h-comer">
+<section class="sec alt" id="comer" aria-labelledby="h-comer">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">10 · Lugares para comer</p>
+      <p class="eyebrow">Lugares para comer</p>
       <h2 id="h-comer">Restaurantes, cafeterías y locales</h2>
       <p class="sec-lede">Una selección armada con guías de viaje y reseñas. Sirve para partir, no para cerrar la lista.</p>
     </header>
@@ -1230,23 +1326,249 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </section>
 
-<!-- ================= ACTIVIDADES ================= -->
-<section class="sec alt" id="actividades" aria-labelledby="h-act">
+<!-- ================= BANNER: PLANIFICA ================= -->
+<section class="banner short" id="planifica" aria-labelledby="h-plan">
+  <span class="ph" data-ph="barcos" data-size="big"></span>
+  <div class="banner-shade" aria-hidden="true"></div>
+  <div class="wrap banner-in">
+    <p class="eyebrow">Planifica tu viaje</p>
+    <h2 id="h-plan">Todo lo práctico, en un solo lugar</h2>
+    <p>Qué tiempo hace, dónde dormir, cómo moverte y a quién llamar si necesitas ayuda.</p>
+    <ul class="quick">
+      <li><a href="#clima">Clima</a></li>
+      <li><a href="#alojamiento">Alojamiento</a></li>
+      <li><a href="#transporte">Transporte</a></li>
+      <li><a href="#emergencias">Emergencias</a></li>
+      <li><a href="#faq">Preguntas frecuentes</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CLIMA ================= -->
+<section class="sec band" id="clima" aria-labelledby="h-clima">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">11 · Actividades recreativas</p>
-      <h2 id="h-act">Deportes, paseos y excursiones</h2>
-      <p class="sec-lede">Mar, desierto, valles y altiplano en un radio corto. Ocho ideas para llenar los días.</p>
+      <p class="eyebrow">Clima actual y pronóstico</p>
+      <h2 id="h-clima">El clima en Arica</h2>
+      <p class="sec-lede">Casi no llueve, el sol brilla gran parte del año y las temperaturas se mantienen templadas: por algo la llaman la Ciudad de la Eterna Primavera.</p>
     </header>
-    <ul class="cards" data-more="4" data-more-label="actividades">
-      <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Principiantes y expertos</span><h3>Surf y bodyboard</h3><p>Chinchorro y Las Machas tienen olas para partir. El Gringo, en la ex isla El Alacrán, es una ola de fama internacional solo para expertos.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Playa y mar</span><h3>Baño, buceo y kayak</h3><p>Chinchorro, El Laucho y La Lisera son las playas más usadas para bañarse. La Lisera tiene aguas calmas y sirve para bucear; Chinchorro, para kayak y windsurf. El mar es frío: respeta la señalización.</p></article></li>
-      <li><article class="card act" style="--tc:var(--accent)"><span class="lvl">Aventura</span><h3>Parapente</h3><p>Se vuela desde los cerros de las playas La Lisera y El Laucho, junto al Morro. Hazlo con un operador local.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-naturaleza)"><span class="lvl">Naturaleza</span><h3>Senderismo, escalada y bici</h3><p>Las Cuevas de Anzota tienen senderos, escaleras a las cuevas y vías de escalada. El sector ha tenido obras de recuperación: verifica si el acceso está abierto.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-naturaleza)"><span class="lvl">Fotografía</span><h3>Observación de aves</h3><p>El humedal del río Lluta, Santuario de la Naturaleza de más de 30 hectáreas, registra más de 165 especies de aves.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-valles)"><span class="lvl">Valles</span><h3>Valle de Azapa y pueblos</h3><p>Olivares y museo en Azapa; Caleta Camarones para pescar y comer con pescadores; Codpa, con aguas termales y el vino Pintatani.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-altiplano)"><span class="lvl">Altura</span><h3>Altiplano y Parque Lauca</h3><p>Senderos Las Cuevas, Parinacota y Chungará, y el recorrido Parinacota, lagunas de Cotacotani y lago Chungará. Hay tours de un día.</p></article></li>
-      <li><article class="card act" style="--tc:var(--c-historia)"><span class="lvl">A pie</span><h3>Paseos por la ciudad</h3><p>Sube el Morro caminando: el sendero parte en el extremo sur de la calle Colón y toma unos 10 minutos. Después recorre la Plaza Colón y la calle Bolognesi.</p></article></li>
+    <div class="weather">
+      <div class="card now">
+        <h4 id="w-when">Captura del 15 de octubre de 2026, por la noche</h4>
+        <div class="big" id="w-temp">21 °C</div>
+        <div class="cond" id="w-cond">Despejado</div>
+        <small id="w-note">No se pudo cargar el clima en vivo, así que se muestra una captura de referencia. Para el pronóstico al minuto, mira <a href="https://www.meteochile.gob.cl/" target="_blank" rel="noopener noreferrer">meteochile.gob.cl</a>.</small>
+        <ul class="fc" id="w-fc" aria-label="Pronóstico a ocho días">
+          <li><span class="d">Jue 15</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">5 %</span></li>
+          <li><span class="d">Vie 16</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
+          <li><span class="d">Sáb 17</span><span class="hi">22°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
+          <li><span class="d">Dom 18</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">0 %</span></li>
+          <li><span class="d">Lun 19</span><span class="hi">25°</span><span class="lo">18°</span><span class="rn">0 %</span></li>
+          <li><span class="d">Mar 20</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">5 %</span></li>
+          <li><span class="d">Mié 21</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
+          <li><span class="d">Jue 22</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
+        </ul>
+        <small>Máxima, mínima y probabilidad de lluvia.</small>
+      </div>
+      <div class="card chart-card">
+        <h3 style="margin-bottom:12px">Temperatura promedio por mes</h3>
+        <svg id="chart" viewBox="0 0 560 290" role="img" aria-label="Rango de temperaturas promedio por mes en Arica: máximas de 18 a 26 grados y mínimas de 14 a 20 grados"></svg>
+        <p class="srcline" style="margin-top:10px">Promedios mensuales redondeados (modelo NASA POWER vía climate-zone.com). El mes actual va en blanco. En un año normal prácticamente no llueve.</p>
+      </div>
+    </div>
+    <ul class="tips">
+      <li>Lleva protector solar y lentes: el sol es fuerte casi todo el año.</li>
+      <li>En invierno las máximas rondan los 18 °C y hay más nubosidad: sirve una chaqueta liviana, sobre todo de noche.</li>
+      <li>No necesitas paraguas, pero sí abrigo y agua para el altiplano: Lauca está sobre los 4.000 metros.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ALOJAMIENTO ================= -->
+<section class="sec" id="alojamiento" aria-labelledby="h-alo">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Alojamiento</p>
+      <h2 id="h-alo">Hoteles, hostales y campings</h2>
+      <p class="sec-lede">Opciones junto al mar, en el centro y cerca del terminal de buses. En temporada alta y durante el carnaval conviene reservar con tiempo.</p>
+    </header>
+    <div class="eat-group" style="margin-top:0">
+      <h3>Hoteles</h3>
+      <ul class="eat" data-more="3" data-more-label="lugares">
+        <li class="card lodge"><span class="type">Hotel</span><h3>Antay Hotel &amp; Spa</h3><p>Habitaciones con vista al mar, spa, gimnasio, casino y centro de convenciones. Está en la calle Chile.</p></li>
+        <li class="card lodge"><span class="type">Hotel</span><h3>Hotel Apacheta</h3><p>En la costa, al sur del centro, entre las playas La Lisera y El Laucho.</p></li>
+      </ul>
+    </div>
+    <div class="eat-group">
+      <h3>Hostales</h3>
+      <ul class="eat" data-more="3" data-more-label="lugares">
+        <li class="card lodge"><span class="type">Hostal</span><h3>Raymi House Hostel</h3><p>Cerca de la catedral y la Plaza Colón.</p></li>
+        <li class="card lodge"><span class="type">Hostal</span><h3>Illariy Wasi Hostal</h3><p>En pleno centro de la ciudad.</p></li>
+        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel La Posada de Gallo</h3><p>A unos 2 km del centro.</p></li>
+        <li class="card lodge"><span class="type">Hostal</span><h3>Willka Kuti Backpackers</h3><p>Hostal para mochileros, a unos 4 km del centro.</p></li>
+        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel Doña Ines</h3><p>Cerca del terminal de buses.</p></li>
+        <li class="card lodge"><span class="type">Hostal</span><h3>Hostal Ecuador</h3><p>En calle Juan Noé, a corta distancia a pie del centro; según guías antiguas, con desayuno incluido.</p></li>
+      </ul>
+    </div>
+    <div class="eat-group">
+      <h3>Camping</h3>
+      <div class="card lodge" style="max-width:620px"><span class="type">Pendiente de confirmar</span><p style="font-size:15px">No logramos confirmar campings con fuentes confiables, así que preferimos no listar ninguno. Consulta el registro de alojamientos de Sernatur o a la Municipalidad de Arica antes de elegir.</p></div>
+    </div>
+    <p class="note"><b>Confirma antes de reservar.</b> La lista viene de portales de reservas y guías de viaje: puede haber cambios de nombre, precios y disponibilidad.</p>
+  </div>
+</section>
+
+<!-- ================= TRANSPORTE ================= -->
+<section class="sec alt" id="transporte" aria-labelledby="h-tra">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Transporte público</p>
+      <h2 id="h-tra">Micros, colectivos y cómo llegar</h2>
+      <p class="sec-lede">Dentro de la ciudad se anda bien a pie, en micro o en colectivo. Para salir a otras ciudades o a Perú, hay dos terminales de buses casi pegados.</p>
+    </header>
+    <ul class="cards cards-3" data-more="3" data-more-label="opciones">
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Micros urbanas</h3><p>Recorren las avenidas principales y llegan al terminal de buses. Desde el 1 de junio de 2026 todos los recorridos debían operar solo con pago digital: tarjeta Kupos (cuesta $2.500 y se recarga en línea o en puntos físicos), código QR, o TNE validada para estudiantes. Se acerca la tarjeta o el QR al validador de la entrada.</p></article></li>
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-car"/></svg></div><h3>Colectivos</h3><p>Taxis compartidos que siguen rutas fijas. Pregunta la tarifa antes de subir y, si dudas, confirma el recorrido con el conductor.</p></article></li>
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-walk"/></svg></div><h3>A pie</h3><p>El centro, la Plaza Colón y el comienzo del sendero al Morro se recorren caminando, y varias playas quedan a pocos minutos.</p></article></li>
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Buses a otras ciudades</h3><p>El Terminal Rodoviario sirve los viajes dentro de Chile, como Iquique (unas 5 horas) y Santiago. El Terminal Internacional, a unos 100 metros, atiende los buses y colectivos a Perú y Bolivia.</p></article></li>
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></div><h3>Aeropuerto Chacalluta</h3><p>Aeropuerto internacional con conexiones a Santiago. Al centro se llega en unos 25 minutos en taxi; también hay minibuses y arriendo de autos en el terminal.</p></article></li>
+      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-train"/></svg></div><h3>Cruzar a Tacna (Perú)</h3><p>Los colectivos salen del Terminal Internacional y, con los trámites en la frontera, el viaje toma entre 1,5 y 2 horas. Lleva tu documento y revisa los horarios y requisitos vigentes.</p></article></li>
+    </ul>
+    <p class="note"><b>Recorridos:</b> esta guía no incluye un mapa oficial de líneas. Pregunta en el terminal o en la Municipalidad por los recorridos vigentes. Para el altiplano, arrendar un auto o tomar un bus hasta Parinacota puede salir más barato que un tour.</p>
+  </div>
+</section>
+
+<!-- ================= EMERGENCIAS ================= -->
+<section class="sec" id="emergencias" aria-labelledby="h-eme">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Servicios de emergencia</p>
+      <h2 id="h-eme">Hospitales, bomberos y policías</h2>
+      <p class="sec-lede">En el celular, toca el número para llamar. Son gratuitos y funcionan en todo Chile.</p>
+    </header>
+    <ul class="sos">
+      <li><a href="tel:131"><b>131</b><span>Ambulancia (SAMU)</span></a></li>
+      <li><a href="tel:132"><b>132</b><span>Bomberos</span></a></li>
+      <li><a href="tel:133"><b>133</b><span>Carabineros</span></a></li>
+      <li><a href="tel:134"><b>134</b><span>PDI (Policía de Investigaciones)</span></a></li>
+    </ul>
+    <div class="split">
+      <article class="card hosp">
+        <h4>Hospital</h4>
+        <h3>Hospital Regional de Arica Dr. Juan Noé Crevani</h3>
+        <p>18 de Septiembre 1000, Arica. Teléfono: (58) 220 4570.</p>
+        <p>Es el hospital público de alta complejidad de la región. Ante una urgencia, llama primero al 131.</p>
+      </article>
+      <article class="card hosp">
+        <h4>Otras líneas útiles</h4>
+        <ul class="lines">
+          <li><span>Incendios forestales (CONAF)</span><b>130</b></li>
+          <li><span>Autoridad Marítima</span><b>137</b></li>
+          <li><span>Salud Responde</span><b>600 360 7777</b></li>
+          <li><span>Prevención del suicidio</span><b>*4141</b></li>
+          <li><span>Línea Libre (niñas, niños y adolescentes)</span><b>1515</b></li>
+          <li><span>Denuncia Seguro (anónima)</span><b>*4242</b></li>
+        </ul>
+      </article>
+    </div>
+    <ul class="tips" style="margin-top:24px">
+      <li>Para ubicar la comisaría más cercana, llama al 133 o consulta en carabineros.cl.</li>
+      <li>En Putre y Lauca, si aparece dolor de cabeza fuerte, náuseas o mareo por la altura, descansa, toma agua y baja de altura; si no mejora, busca atención médica.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec alt" id="faq" aria-labelledby="h-faq">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 id="h-faq">Dudas comunes de los visitantes</h2>
+    </header>
+    <div class="faq">
+      <details open><summary>¿Cuándo conviene ir a Arica?</summary><div class="ans"><p>Se puede ir todo el año. De diciembre a marzo las máximas rondan los 24 a 26 °C y es la mejor época de playa. En invierno bajan a unos 18 °C y hay más nubosidad. El Carnaval Con la Fuerza del Sol cae entre enero y febrero.</p></div></details>
+      <details><summary>¿Llueve?</summary><div class="ans"><p>Casi nunca: en un año normal caen apenas uno o dos milímetros.</p></div></details>
+      <details><summary>¿Cómo llego?</summary><div class="ans"><p>En avión, al aeropuerto Chacalluta; en bus, al Terminal Rodoviario; y desde Perú, en colectivo desde Tacna (1,5 a 2 horas con los trámites en la frontera).</p></div></details>
+      <details><summary>¿Cómo pago la micro?</summary><div class="ans"><p>Desde el 1 de junio de 2026 los recorridos urbanos debían operar sin efectivo: se paga con tarjeta Kupos, con código QR o con TNE validada.</p></div></details>
+      <details><summary>¿Puedo bañarme en las playas?</summary><div class="ans"><p>Chinchorro, El Laucho y La Lisera son las más usadas para bañarse; La Lisera es la de aguas más calmas. El mar es frío. Sigue la señalización y las indicaciones de los salvavidas, y no te bañes donde rompen olas fuertes, como en El Gringo.</p></div></details>
+      <details><summary>¿Qué hago con la altura en Putre y Lauca?</summary><div class="ans"><p>Putre está a unos 3.500 metros y Parinacota y Lauca, sobre los 4.000. Conviene dormir una noche en Putre, tomar agua, moverse con calma y llevar abrigo.</p></div></details>
+      <details><summary>¿Dónde veo las momias Chinchorro?</summary><div class="ans"><p>En el Museo Arqueológico San Miguel de Azapa, en el valle de Azapa. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p></div></details>
+      <details><summary>¿Puedo cruzar a Tacna, en Perú?</summary><div class="ans"><p>Sí. Los colectivos salen del Terminal Internacional. Lleva tu documento y revisa los requisitos migratorios y los horarios de la frontera antes de viajar.</p></div></details>
+      <details><summary>¿Mis lugares guardados se comparten con otras personas?</summary><div class="ans"><p>No. Los lugares que guardas quedan solo en este navegador. Las opiniones de visitantes se activarán más adelante.</p></div></details>
+      <details><summary>¿Cómo corrijo un dato o agrego mi negocio?</summary><div class="ans"><p>Escríbenos por el <a href="#contacto" class="to-contact" data-kind="correccion">formulario de contacto</a>.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANNER: CONOCE ================= -->
+<section class="banner short" id="conoce" aria-labelledby="h-conoce">
+  <span class="ph" data-ph="poconchile" data-size="big"></span>
+  <div class="banner-shade" aria-hidden="true"></div>
+  <div class="wrap banner-in">
+    <p class="eyebrow">Conoce Arica</p>
+    <h2 id="h-conoce">Una historia de más de 7.000 años</h2>
+    <p>Momias, templos andinos, trenes a dos países y la batalla del Morro. Para quienes quieren entender la ciudad que visitan.</p>
+    <ul class="quick">
+      <li><a href="#historia">Historia</a></li>
+      <li><a href="#monumentos">Monumentos</a></li>
+      <li><a href="#naturaleza">Flora y fauna</a></li>
+      <li><a href="#datos">Datos curiosos</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= HISTORIA ================= -->
+<section class="sec" id="historia" aria-labelledby="h-historia">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Historia de la ciudad</p>
+      <h2 id="h-historia">Cómo se fundó y cómo ha cambiado</h2>
+      <p class="sec-lede">Arica pasó de aldea de pescadores y pueblo andino a puerto de la plata, ciudad de frontera, puerto libre y, hoy, capital regional. Cada etapa dejó marcas que todavía se pueden ver: momias, templos, rieles y edificios de metal.</p>
+    </header>
+    <ul class="eras" aria-label="Épocas">
+      <li style="--era:var(--c-historia)"><i></i>Pueblos originarios</li>
+      <li style="--era:var(--c-valles)"><i></i>Colonia</li>
+      <li style="--era:var(--accent)"><i></i>Guerra y frontera</li>
+      <li style="--era:var(--c-naturaleza)"><i></i>Ciudad moderna</li>
+    </ul>
+    <ol class="tl" data-more="5" data-more-label="hitos">
+      <li class="e1"><span class="yr">Hace más de 7.000 años</span><div><h3>Los Chinchorro</h3><p>Pescadores de la costa desarrollan la momificación artificial, una de las más antiguas que se conocen. El territorio ya estaba poblado desde hace más de 11.000 años.</p></div></li>
+      <li class="e1"><span class="yr">Siglos IV al IX</span><div><h3>Influencia de Tiwanaku</h3><p>La cultura tiwanaku llega desde el altiplano y forma caseríos en la zona. Uno de ellos se conoce como Ariaka o Ariqui; el significado del nombre varía según el autor.</p></div></li>
+      <li class="e1"><span class="yr">Siglo XI a c. 1473</span><div><h3>Señoríos regionales y dominio inca</h3><p>Distintos señoríos controlan la región hasta que llegan los incas del Cuzco.</p></div></li>
+      <li class="e2"><span class="yr">1541</span><div><h3>Fundación española</h3><p>La fecha tradicional es el 25 de abril, día de San Marcos, y de ahí el nombre San Marcos de Arica. Algunos historiadores discuten esa fecha y el acta que la respalda.</p></div></li>
+      <li class="e2"><span class="yr">1545</span><div><h3>La plata de Potosí</h3><p>El descubrimiento de las minas de Potosí impulsa el crecimiento de Arica, que se vuelve puerto de salida hacia el Pacífico.</p></div></li>
+      <li class="e2"><span class="yr">28 de julio de 1821</span><div><h3>Independencia</h3><p>La independencia se proclama en Arica.</p></div></li>
+      <li class="e3"><span class="yr">25 de diciembre de 1856</span><div><h3>Llega el ferrocarril Tacna–Arica</h3><p>El tren une el puerto con Tacna y refuerza su papel como salida al mar.</p></div></li>
+      <li class="e3"><span class="yr">1868 y 1877</span><div><h3>Terremotos y maremotos</h3><p>En 1868 un terremoto de magnitud cercana a 8,5 y un maremoto de 7 a 10 metros golpean la ciudad. En 1877 otro tsunami alcanza hasta 14 metros.</p></div></li>
+      <li class="e3"><span class="yr">7 de junio de 1880</span><div><h3>Asalto y Toma del Morro</h3><p>En plena Guerra del Pacífico, el ejército chileno toma el Morro, la fortaleza que defendía la ciudad. La acción dura menos de una hora.</p></div></li>
+      <li class="e3"><span class="yr">1883</span><div><h3>Tratado de Ancón</h3><p>Arica pasa a administración chilena. El plebiscito previsto para decidir su destino nunca se realizó.</p></div></li>
+      <li class="e3"><span class="yr">1913</span><div><h3>Ferrocarril Arica–La Paz</h3><p>Se inaugura la línea que conecta el puerto con Bolivia.</p></div></li>
+      <li class="e3"><span class="yr">1929</span><div><h3>Tratado de Lima</h3><p>Chile y Perú fijan sus fronteras: Arica queda en Chile.</p></div></li>
+      <li class="e4"><span class="yr">1953</span><div><h3>Puerto Libre</h3><p>Un régimen de puerto libre atrae comercio y nuevos habitantes: en cinco años la población pasa de unos 15.000 a más de 70.000 personas.</p></div></li>
+      <li class="e4"><span class="yr">1958</span><div><h3>Junta de Adelanto de Arica</h3><p>Se deroga el puerto libre y se crea la Junta de Adelanto (Ley 13.039) para promover el desarrollo de la ciudad.</p></div></li>
+      <li class="e4"><span class="yr">2007</span><div><h3>Región de Arica y Parinacota</h3><p>La ley promulgada el 23 de marzo crea la nueva región. El 8 de octubre de 2007 Arica se convierte en su capital.</p></div></li>
+      <li class="e4"><span class="yr">2021</span><div><h3>Patrimonio Mundial</h3><p>La UNESCO reconoce los asentamientos y la momificación artificial de la cultura Chinchorro.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= MONUMENTOS ================= -->
+<section class="sec alt" id="monumentos" aria-labelledby="h-monumentos">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Monumentos históricos</p>
+      <h2 id="h-monumentos">Edificios y sitios patrimoniales</h2>
+      <p class="sec-lede">Del centro de la ciudad a las quebradas y el altiplano: ocho lugares que cuentan la historia de Arica.</p>
+    </header>
+    <ul class="cards" data-more="4" data-more-label="monumentos">
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">01</span><h3>Morro de Arica</h3><p>Peñón de unos 130 metros con mirador, cañones y el Museo Histórico y de Armas. Aquí ocurrió el asalto de 1880. Es uno de los sitios que integran el Patrimonio Mundial Chinchorro.</p><span class="pill">Historia militar</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">02</span><h3>Catedral de San Marcos</h3><p>Iglesia neoclásica de tres naves, con fachada asimétrica y vitrales de colores. Su estructura de metal se levantó en la década de 1870 y se atribuye al taller de Gustave Eiffel.</p><span class="pill">Plaza Colón</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">03</span><h3>Ex Aduana (Casa de la Cultura)</h3><p>Edificio portuario del siglo XIX, también ligado al taller de Eiffel. Hoy funciona como Casa de la Cultura.</p><span class="pill">Centro</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">04</span><h3>Estación del ferrocarril Arica–La Paz</h3><p>La estación de pasajeros y la administración de la línea inaugurada en 1913 son Monumento Nacional.</p><span class="pill">Monumento Nacional</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">05</span><h3>Museo Arqueológico San Miguel de Azapa</h3><p>Guarda más de 20.000 piezas, entre ellas las momias Chinchorro, y tiene petroglifos al aire libre. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p><span class="pill">Valle de Azapa</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">06</span><h3>Geoglifos y petroglifos</h3><p>Figuras gigantes en los cerros del valle de Lluta y grabados en roca en Azapa, hechos por pueblos andinos antiguos. Se miran desde fuera, sin pisarlos.</p><span class="pill">Arte rupestre</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">07</span><h3>Iglesias de Putre y Parinacota</h3><p>La de Putre, de piedra y adobe, data de 1670 y es Monumento Nacional. Parinacota, a más de 4.000 metros, es Monumento Nacional y Zona Típica, con su iglesia del siglo XVII.</p><span class="pill">Altiplano</span></article></li>
+      <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">08</span><h3>Caleta Camarones</h3><p>Pueblo pesquero a unos 100 km al sur, con un cementerio indígena de más de 9.000 años y un mirador con un monumento a las momias Chinchorro.</p><span class="pill">Sitio Chinchorro</span></article></li>
     </ul>
   </div>
 </section>
@@ -1255,7 +1577,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec" id="naturaleza" aria-labelledby="h-nat">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">12 · Flora y fauna local</p>
+      <p class="eyebrow">Flora y fauna local</p>
       <h2 id="h-nat">Animales y plantas de la zona</h2>
       <p class="sec-lede">De la costa al altiplano cambian el aire, la altura y todo lo que vive: el Parque Nacional Lauca es parque nacional desde 1970 y Reserva de la Biosfera de la UNESCO desde 1981.</p>
     </header>
@@ -1297,98 +1619,26 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </section>
 
-
-<!-- ================= CLIMA ================= -->
-<section class="sec band" id="clima" aria-labelledby="h-clima">
+<!-- ================= DATOS CURIOSOS ================= -->
+<section class="sec alt" id="datos" aria-labelledby="h-dat">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">13 · Clima actual y pronóstico</p>
-      <h2 id="h-clima">El clima en Arica</h2>
-      <p class="sec-lede">Casi no llueve, el sol brilla gran parte del año y las temperaturas se mantienen templadas: por algo la llaman la Ciudad de la Eterna Primavera.</p>
+      <p class="eyebrow">Datos curiosos</p>
+      <h2 id="h-dat">¿Sabías que…?</h2>
+      <p class="sec-lede">Diez datos para sorprender a quien viaja contigo.</p>
     </header>
-    <div class="weather">
-      <div class="card now">
-        <h4 id="w-when">Captura del 15 de octubre de 2026, por la noche</h4>
-        <div class="big" id="w-temp">21 °C</div>
-        <div class="cond" id="w-cond">Despejado</div>
-        <small id="w-note">No se pudo cargar el clima en vivo, así que se muestra una captura de referencia. Para el pronóstico al minuto, mira <a href="https://www.meteochile.gob.cl/" target="_blank" rel="noopener noreferrer">meteochile.gob.cl</a>.</small>
-        <ul class="fc" id="w-fc" aria-label="Pronóstico a ocho días">
-          <li><span class="d">Jue 15</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">5 %</span></li>
-          <li><span class="d">Vie 16</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
-          <li><span class="d">Sáb 17</span><span class="hi">22°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
-          <li><span class="d">Dom 18</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">0 %</span></li>
-          <li><span class="d">Lun 19</span><span class="hi">25°</span><span class="lo">18°</span><span class="rn">0 %</span></li>
-          <li><span class="d">Mar 20</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">5 %</span></li>
-          <li><span class="d">Mié 21</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
-          <li><span class="d">Jue 22</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
-        </ul>
-        <small>Máxima, mínima y probabilidad de lluvia.</small>
-      </div>
-      <div class="card chart-card">
-        <h3 style="margin-bottom:12px">Temperatura promedio por mes</h3>
-        <svg id="chart" viewBox="0 0 560 290" role="img" aria-label="Rango de temperaturas promedio por mes en Arica: máximas de 18 a 26 grados y mínimas de 14 a 20 grados"></svg>
-        <p class="srcline" style="margin-top:10px">Promedios mensuales redondeados (modelo NASA POWER vía climate-zone.com). El mes actual va en blanco. En un año normal prácticamente no llueve.</p>
-      </div>
-    </div>
-    <ul class="tips">
-      <li>Lleva protector solar y lentes: el sol es fuerte casi todo el año.</li>
-      <li>En invierno las máximas rondan los 18 °C y hay más nubosidad: sirve una chaqueta liviana, sobre todo de noche.</li>
-      <li>No necesitas paraguas, pero sí abrigo y agua para el altiplano: Lauca está sobre los 4.000 metros.</li>
+    <ul class="facts-grid" data-more="5" data-more-label="datos">
+      <li class="card fact"><p>Las momias Chinchorro, de hace unos 7.000 años, están entre las momias artificiales más antiguas que se conocen. Son Patrimonio Mundial de la UNESCO.</p></li>
+      <li class="card fact"><p>En un año normal casi no llueve. Sobre el papel, Arica es una de las ciudades habitadas más áridas del planeta.</p></li>
+      <li class="card fact"><p>Desde Arica salieron trenes hacia dos países: el ferrocarril a Tacna (1856) y el que llega a La Paz (1913).</p></li>
+      <li class="card fact"><p>La Catedral de San Marcos y la Ex Aduana tienen estructuras de metal que se atribuyen al taller de Gustave Eiffel.</p></li>
+      <li class="card fact"><p>Arica fue peruana hasta la Guerra del Pacífico: el Morro se tomó en menos de una hora, el 7 de junio de 1880.</p></li>
+      <li class="card fact"><p>Tras el Puerto Libre de 1953, la población pasó de unos 15.000 a más de 70.000 habitantes en solo cinco años.</p></li>
+      <li class="card fact"><p>El Carnaval Con la Fuerza del Sol llegó a reunir cerca de 16.000 bailarines y músicos en una sola edición.</p></li>
+      <li class="card fact"><p>La yareta, una planta del altiplano, crece apenas entre 1 y 2 milímetros al año.</p></li>
+      <li class="card fact"><p>La queñoa de altura suele citarse como el árbol que crece a mayor altitud en el mundo, y vive en los cerros de la región.</p></li>
+      <li class="card fact"><p>El Gringo, una ola sobre un arrecife en la ex isla El Alacrán, es famosa entre surfistas expertos de todo el mundo.</p></li>
     </ul>
-  </div>
-</section>
-
-<!-- ================= ALOJAMIENTO ================= -->
-<section class="sec" id="alojamiento" aria-labelledby="h-alo">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">14 · Alojamiento</p>
-      <h2 id="h-alo">Hoteles, hostales y campings</h2>
-      <p class="sec-lede">Opciones junto al mar, en el centro y cerca del terminal de buses. En temporada alta y durante el carnaval conviene reservar con tiempo.</p>
-    </header>
-    <div class="eat-group" style="margin-top:0">
-      <h3>Hoteles</h3>
-      <ul class="eat" data-more="3" data-more-label="lugares">
-        <li class="card lodge"><span class="type">Hotel</span><h3>Antay Hotel &amp; Spa</h3><p>Habitaciones con vista al mar, spa, gimnasio, casino y centro de convenciones. Está en la calle Chile.</p></li>
-        <li class="card lodge"><span class="type">Hotel</span><h3>Hotel Apacheta</h3><p>En la costa, al sur del centro, entre las playas La Lisera y El Laucho.</p></li>
-      </ul>
-    </div>
-    <div class="eat-group">
-      <h3>Hostales</h3>
-      <ul class="eat" data-more="3" data-more-label="lugares">
-        <li class="card lodge"><span class="type">Hostal</span><h3>Raymi House Hostel</h3><p>Cerca de la catedral y la Plaza Colón.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Illariy Wasi Hostal</h3><p>En pleno centro de la ciudad.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel La Posada de Gallo</h3><p>A unos 2 km del centro.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Willka Kuti Backpackers</h3><p>Hostal para mochileros, a unos 4 km del centro.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel Doña Ines</h3><p>Cerca del terminal de buses.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostal Ecuador</h3><p>En calle Juan Noé, a corta distancia a pie del centro; según guías antiguas, con desayuno incluido.</p></li>
-      </ul>
-    </div>
-    <div class="eat-group">
-      <h3>Camping</h3>
-      <div class="card lodge" style="max-width:620px"><span class="type">Pendiente de confirmar</span><p style="font-size:15px">No logramos confirmar campings con fuentes confiables, así que preferimos no listar ninguno. Consulta el registro de alojamientos de Sernatur o a la Municipalidad de Arica antes de elegir.</p></div>
-    </div>
-    <p class="note"><b>Confirma antes de reservar.</b> La lista viene de portales de reservas y guías de viaje: puede haber cambios de nombre, precios y disponibilidad.</p>
-  </div>
-</section>
-
-<!-- ================= TRANSPORTE ================= -->
-<section class="sec alt" id="transporte" aria-labelledby="h-tra">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">15 · Transporte público</p>
-      <h2 id="h-tra">Micros, colectivos y cómo llegar</h2>
-      <p class="sec-lede">Dentro de la ciudad se anda bien a pie, en micro o en colectivo. Para salir a otras ciudades o a Perú, hay dos terminales de buses casi pegados.</p>
-    </header>
-    <ul class="cards cards-3" data-more="3" data-more-label="opciones">
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Micros urbanas</h3><p>Recorren las avenidas principales y llegan al terminal de buses. Desde el 1 de junio de 2026 todos los recorridos debían operar solo con pago digital: tarjeta Kupos (cuesta $2.500 y se recarga en línea o en puntos físicos), código QR, o TNE validada para estudiantes. Se acerca la tarjeta o el QR al validador de la entrada.</p></article></li>
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-car"/></svg></div><h3>Colectivos</h3><p>Taxis compartidos que siguen rutas fijas. Pregunta la tarifa antes de subir y, si dudas, confirma el recorrido con el conductor.</p></article></li>
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-walk"/></svg></div><h3>A pie</h3><p>El centro, la Plaza Colón y el comienzo del sendero al Morro se recorren caminando, y varias playas quedan a pocos minutos.</p></article></li>
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Buses a otras ciudades</h3><p>El Terminal Rodoviario sirve los viajes dentro de Chile, como Iquique (unas 5 horas) y Santiago. El Terminal Internacional, a unos 100 metros, atiende los buses y colectivos a Perú y Bolivia.</p></article></li>
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></div><h3>Aeropuerto Chacalluta</h3><p>Aeropuerto internacional con conexiones a Santiago. Al centro se llega en unos 25 minutos en taxi; también hay minibuses y arriendo de autos en el terminal.</p></article></li>
-      <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-train"/></svg></div><h3>Cruzar a Tacna (Perú)</h3><p>Los colectivos salen del Terminal Internacional y, con los trámites en la frontera, el viaje toma entre 1,5 y 2 horas. Lleva tu documento y revisa los horarios y requisitos vigentes.</p></article></li>
-    </ul>
-    <p class="note"><b>Recorridos:</b> esta guía no incluye un mapa oficial de líneas. Pregunta en el terminal o en la Municipalidad por los recorridos vigentes. Para el altiplano, arrendar un auto o tomar un bus hasta Parinacota puede salir más barato que un tour.</p>
   </div>
 </section>
 
@@ -1396,7 +1646,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec" id="economia" aria-labelledby="h-eco">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">16 · Economía local</p>
+      <p class="eyebrow">Economía local</p>
       <h2 id="h-eco">De qué vive Arica</h2>
       <p class="sec-lede">Un puerto, valles agrícolas en pleno desierto, una zona franca y un turismo que crece. Cifras de la región de Arica y Parinacota.</p>
     </header>
@@ -1422,7 +1672,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec alt" id="negocios" aria-labelledby="h-neg">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">17 · Directorio de negocios</p>
+      <p class="eyebrow">Directorio de negocios</p>
       <h2 id="h-neg">Tiendas y emprendimientos locales</h2>
       <p class="sec-lede">Mercados, ferias y tiendas donde comprar lo que se produce y se hace en la zona. Filtra por tipo o busca por nombre.</p>
     </header>
@@ -1461,7 +1711,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 <section class="sec" id="noticias" aria-labelledby="h-not">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">18 · Noticias de la ciudad</p>
+      <p class="eyebrow">Noticias de la ciudad</p>
       <h2 id="h-not">Información y novedades locales</h2>
       <p class="sec-lede">Titulares recientes sobre turismo, transporte y cultura, con el enlace a la fuente.</p>
     </header>
@@ -1488,96 +1738,11 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   </div>
 </section>
 
-<!-- ================= EMERGENCIAS ================= -->
-<section class="sec alt" id="emergencias" aria-labelledby="h-eme">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">19 · Servicios de emergencia</p>
-      <h2 id="h-eme">Hospitales, bomberos y policías</h2>
-      <p class="sec-lede">En el celular, toca el número para llamar. Son gratuitos y funcionan en todo Chile.</p>
-    </header>
-    <ul class="sos">
-      <li><a href="tel:131"><b>131</b><span>Ambulancia (SAMU)</span></a></li>
-      <li><a href="tel:132"><b>132</b><span>Bomberos</span></a></li>
-      <li><a href="tel:133"><b>133</b><span>Carabineros</span></a></li>
-      <li><a href="tel:134"><b>134</b><span>PDI (Policía de Investigaciones)</span></a></li>
-    </ul>
-    <div class="split">
-      <article class="card hosp">
-        <h4>Hospital</h4>
-        <h3>Hospital Regional de Arica Dr. Juan Noé Crevani</h3>
-        <p>18 de Septiembre 1000, Arica. Teléfono: (58) 220 4570.</p>
-        <p>Es el hospital público de alta complejidad de la región. Ante una urgencia, llama primero al 131.</p>
-      </article>
-      <article class="card hosp">
-        <h4>Otras líneas útiles</h4>
-        <ul class="lines">
-          <li><span>Incendios forestales (CONAF)</span><b>130</b></li>
-          <li><span>Autoridad Marítima</span><b>137</b></li>
-          <li><span>Salud Responde</span><b>600 360 7777</b></li>
-          <li><span>Prevención del suicidio</span><b>*4141</b></li>
-          <li><span>Línea Libre (niñas, niños y adolescentes)</span><b>1515</b></li>
-          <li><span>Denuncia Seguro (anónima)</span><b>*4242</b></li>
-        </ul>
-      </article>
-    </div>
-    <ul class="tips" style="margin-top:24px">
-      <li>Para ubicar la comisaría más cercana, llama al 133 o consulta en carabineros.cl.</li>
-      <li>En Putre y Lauca, si aparece dolor de cabeza fuerte, náuseas o mareo por la altura, descansa, toma agua y baja de altura; si no mejora, busca atención médica.</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ================= DATOS CURIOSOS ================= -->
-<section class="sec" id="datos" aria-labelledby="h-dat">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">20 · Datos curiosos</p>
-      <h2 id="h-dat">¿Sabías que…?</h2>
-      <p class="sec-lede">Diez datos para sorprender a quien viaja contigo.</p>
-    </header>
-    <ul class="facts-grid" data-more="5" data-more-label="datos">
-      <li class="card fact"><p>Las momias Chinchorro, de hace unos 7.000 años, están entre las momias artificiales más antiguas que se conocen. Son Patrimonio Mundial de la UNESCO.</p></li>
-      <li class="card fact"><p>En un año normal casi no llueve. Sobre el papel, Arica es una de las ciudades habitadas más áridas del planeta.</p></li>
-      <li class="card fact"><p>Desde Arica salieron trenes hacia dos países: el ferrocarril a Tacna (1856) y el que llega a La Paz (1913).</p></li>
-      <li class="card fact"><p>La Catedral de San Marcos y la Ex Aduana tienen estructuras de metal que se atribuyen al taller de Gustave Eiffel.</p></li>
-      <li class="card fact"><p>Arica fue peruana hasta la Guerra del Pacífico: el Morro se tomó en menos de una hora, el 7 de junio de 1880.</p></li>
-      <li class="card fact"><p>Tras el Puerto Libre de 1953, la población pasó de unos 15.000 a más de 70.000 habitantes en solo cinco años.</p></li>
-      <li class="card fact"><p>El Carnaval Con la Fuerza del Sol llegó a reunir cerca de 16.000 bailarines y músicos en una sola edición.</p></li>
-      <li class="card fact"><p>La yareta, una planta del altiplano, crece apenas entre 1 y 2 milímetros al año.</p></li>
-      <li class="card fact"><p>La queñoa de altura suele citarse como el árbol que crece a mayor altitud en el mundo, y vive en los cerros de la región.</p></li>
-      <li class="card fact"><p>El Gringo, una ola sobre un arrecife en la ex isla El Alacrán, es famosa entre surfistas expertos de todo el mundo.</p></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ================= FAQ ================= -->
-<section class="sec alt" id="faq" aria-labelledby="h-faq">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="eyebrow">21 · Preguntas frecuentes</p>
-      <h2 id="h-faq">Dudas comunes de los visitantes</h2>
-    </header>
-    <div class="faq">
-      <details open><summary>¿Cuándo conviene ir a Arica?</summary><div class="ans"><p>Se puede ir todo el año. De diciembre a marzo las máximas rondan los 24 a 26 °C y es la mejor época de playa. En invierno bajan a unos 18 °C y hay más nubosidad. El Carnaval Con la Fuerza del Sol cae entre enero y febrero.</p></div></details>
-      <details><summary>¿Llueve?</summary><div class="ans"><p>Casi nunca: en un año normal caen apenas uno o dos milímetros.</p></div></details>
-      <details><summary>¿Cómo llego?</summary><div class="ans"><p>En avión, al aeropuerto Chacalluta; en bus, al Terminal Rodoviario; y desde Perú, en colectivo desde Tacna (1,5 a 2 horas con los trámites en la frontera).</p></div></details>
-      <details><summary>¿Cómo pago la micro?</summary><div class="ans"><p>Desde el 1 de junio de 2026 los recorridos urbanos debían operar sin efectivo: se paga con tarjeta Kupos, con código QR o con TNE validada.</p></div></details>
-      <details><summary>¿Puedo bañarme en las playas?</summary><div class="ans"><p>Chinchorro, El Laucho y La Lisera son las más usadas para bañarse; La Lisera es la de aguas más calmas. El mar es frío. Sigue la señalización y las indicaciones de los salvavidas, y no te bañes donde rompen olas fuertes, como en El Gringo.</p></div></details>
-      <details><summary>¿Qué hago con la altura en Putre y Lauca?</summary><div class="ans"><p>Putre está a unos 3.500 metros y Parinacota y Lauca, sobre los 4.000. Conviene dormir una noche en Putre, tomar agua, moverse con calma y llevar abrigo.</p></div></details>
-      <details><summary>¿Dónde veo las momias Chinchorro?</summary><div class="ans"><p>En el Museo Arqueológico San Miguel de Azapa, en el valle de Azapa. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p></div></details>
-      <details><summary>¿Puedo cruzar a Tacna, en Perú?</summary><div class="ans"><p>Sí. Los colectivos salen del Terminal Internacional. Lleva tu documento y revisa los requisitos migratorios y los horarios de la frontera antes de viajar.</p></div></details>
-      <details><summary>¿Mis lugares guardados se comparten con otras personas?</summary><div class="ans"><p>No. Los lugares que guardas quedan solo en este navegador. Las opiniones de visitantes se activarán más adelante.</p></div></details>
-      <details><summary>¿Cómo corrijo un dato o agrego mi negocio?</summary><div class="ans"><p>Escríbenos por el <a href="#contacto" class="to-contact" data-kind="correccion">formulario de contacto</a>.</p></div></details>
-    </div>
-  </div>
-</section>
-
 <!-- ================= CONTACTO ================= -->
-<section class="sec" id="contacto" aria-labelledby="h-con">
+<section class="sec alt" id="contacto" aria-labelledby="h-con">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">22 · Formulario de contacto</p>
+      <p class="eyebrow">Formulario de contacto</p>
       <h2 id="h-con">Consultas y sugerencias</h2>
       <p class="sec-lede">¿Falta un lugar, hay un dato desactualizado o quieres sumar tu negocio? Cuéntanos.</p>
     </header>
@@ -1610,10 +1775,10 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 </section>
 
 <!-- ================= REDES ================= -->
-<section class="sec alt" id="redes" aria-labelledby="h-red">
+<section class="sec" id="redes" aria-labelledby="h-red">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">23 · Redes sociales</p>
+      <p class="eyebrow">Redes sociales</p>
       <h2 id="h-red">Cuentas y canales para seguir</h2>
       <p class="sec-lede">Canales oficiales y de medios locales donde se publica lo que pasa en la ciudad. Se abren en una pestaña nueva.</p>
     </header>
@@ -1630,10 +1795,10 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 </section>
 
 <!-- ================= SOBRE EL PROYECTO ================= -->
-<section class="sec" id="acerca" aria-labelledby="h-acerca">
+<section class="sec alt" id="acerca" aria-labelledby="h-acerca">
   <div class="wrap">
     <header class="sec-head">
-      <p class="eyebrow">24 · Sobre el proyecto</p>
+      <p class="eyebrow">Sobre el proyecto</p>
       <h2 id="h-acerca">Para qué existe esta página</h2>
     </header>
     <div class="split">
@@ -1667,6 +1832,9 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
           <li><a href="https://www.aeropuertosdelmundo.net/aeropuerto-ARI-transporte/" target="_blank" rel="noopener noreferrer">Aeropuertos del Mundo · Traslados</a></li>
           <li><a href="https://www.hostelworld.com/hostels/south-america/chile/arica/" target="_blank" rel="noopener noreferrer">Hostelworld · Arica</a></li>
         </ul>
+        <h3 style="margin:28px 0 8px">Créditos de las fotos</h3>
+        <p class="srcline" style="margin:0 0 12px">Fotos de Wikimedia Commons con licencias Creative Commons. Toca el título para ver la foto original, su autor y su licencia.</p>
+        <ul class="sources" id="credits" data-more="6" data-more-label="créditos"></ul>
       </div>
     </div>
   </div>
@@ -2051,6 +2219,14 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     $("#d-where").textContent = p.where;
     $("#d-tip").textContent = p.tip || "";
     $("#d-tip-wrap").hidden = !p.tip;
+    var phk = PLACE_PH[p.id], pic = phk && PH[phk];
+    $("#d-photo").hidden = !pic;
+    if (pic) {
+      var im = $("#d-img");
+      if (im.getAttribute("src") !== pic.sm) im.src = pic.sm;
+      im.alt = pic.t;
+      $("#d-credit").textContent = credit(pic);
+    }
     var fav = state.favs.has(p.id);
     $("#d-fav").setAttribute("aria-pressed", String(fav));
     $("#d-fav-label").textContent = fav ? "Guardado" : "Guardar";
@@ -2280,7 +2456,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   /* ---------- Galería ---------- */
   var viewer = { list: [], i: 0 };
   function openViewer(i) {
-    viewer.list = $$("#gallery .shot, #photo-grid .shot");
+    viewer.list = $$(".gallery .shot").filter(function (b) { return b.offsetParent !== null; });
     viewer.i = Math.max(0, Math.min(i, viewer.list.length - 1));
     paintViewer();
     openDialog($("#viewer"));
@@ -2293,7 +2469,8 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     var media = b.querySelector("svg, img");
     if (media) {
       var c = media.cloneNode(true);
-      c.removeAttribute("width"); c.removeAttribute("height");
+      c.removeAttribute("width"); c.removeAttribute("height"); c.removeAttribute("loading");
+      if (c.tagName.toLowerCase() === "img" && b.getAttribute("data-big")) c.src = b.getAttribute("data-big");
       if (c.tagName.toLowerCase() === "svg") c.setAttribute("preserveAspectRatio", "xMidYMid meet");
       stage.appendChild(c);
     }
@@ -2309,7 +2486,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       var b = e.target.closest && e.target.closest(".shot");
       if (!b || b.closest("dialog")) return;
       if (e.target.closest(".del")) return;
-      var all = $$("#gallery .shot, #photo-grid .shot");
+      var all = $$(".gallery .shot").filter(function (x) { return x.offsetParent !== null; });
       openViewer(all.indexOf(b));
     });
     $("#v-prev").addEventListener("click", function () { stepViewer(-1); });
@@ -2482,6 +2659,200 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     });
   }
 
+  /* =====================================================================
+     FOTOS DE LA PÁGINA
+     Son de Wikimedia Commons, con licencias Creative Commons que permiten usarlas
+     si se nombra al autor. Por eso cada foto muestra su crédito y hay una lista
+     completa en "Sobre el proyecto".
+     Para cambiar una foto por una propia: reemplaza big y sm por "fotos/tu-archivo.jpg"
+     y cambia t (título), by (autor) y lic (licencia).
+     ===================================================================== */
+  var WM = "https://thumb.wikimedia.org/wikipedia/commons/thumb/";
+  function wmPhoto(t, by, lic, path, opt) {
+    var name = path.split("/").pop();
+    opt = opt || {};
+    return {
+      t: t, by: by, lic: lic,
+      page: "https://commons.wikimedia.org/wiki/File:" + name,
+      big: opt.big || WM + path + "/1920px-" + name,
+      sm: opt.sm || WM + path + "/960px-" + name
+    };
+  }
+  var PH = {
+    morro: wmPhoto("El Morro de Arica", "Capablazab", "CC BY-SA 3.0", "a/a9/Morro_arica_3.jpg"),
+    lauca: wmPhoto("Llamas y alpacas frente al volcán Parinacota", "mtchm", "CC BY-SA 2.0", "a/a7/Parinacota_volcano.jpg", { big: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Parinacota_volcano.jpg" }),
+    carnaval: wmPhoto("Carnaval Andino Con la Fuerza del Sol", "Carlos Teixidor Cadenas", "CC BY-SA 4.0", "8/86/Carnaval_Andino_con_la_Fuerza_del_Sol._Arica%2C_Chile.jpg"),
+    atardecer: wmPhoto("Atardecer en playa Chinchorro", "Sayayinz", "CC BY-SA 3.0", "9/9b/Atardecer_de_verano.JPG"),
+    chungara: wmPhoto("Lago Chungará", "Luca Galuzzi", "CC BY-SA 2.5", "0/01/Chungara_Lake_and_Volcan_Sajama_Chile_Luca_Galuzzi_2006.jpg"),
+    flamenco: wmPhoto("Flamenco chileno en el lago Chungará", "Satdeep Gill", "CC BY-SA 4.0", "4/42/Chilean_Flamingo_at_Chungara_Lake_01.jpg"),
+    momia: wmPhoto("Momia Chinchorro, Museo de Azapa", "WeHaKa", "CC BY-SA 4.0", "f/f5/Momia_Chinchorro_Roja.jpg"),
+    azapa: wmPhoto("Valle de Azapa", "Till Niermann", "CC BY 3.0", "0/03/Azapa_panorama.jpg", { big: WM + "0/03/Azapa_panorama.jpg/3840px-Azapa_panorama.jpg", sm: WM + "0/03/Azapa_panorama.jpg/1920px-Azapa_panorama.jpg" }),
+    anzota: wmPhoto("Cuevas de Anzota", "Selagam", "CC BY-SA 4.0", "6/6b/Cuevas_de_Anzota-vista_desde_escalera.jpg"),
+    catedral: wmPhoto("Catedral de San Marcos", "Till Niermann", "CC BY-SA 3.0", "4/46/Catedral_de_San_Marcos%2C_Arica%2C_Chile.jpg"),
+    morronoche: wmPhoto("El Morro iluminado de noche", "Capablazab", "CC BY-SA 3.0", "4/4b/Morro_arica_1.jpg"),
+    putre: wmPhoto("Putre desde el mirador Alto de Putre", "WeHaKa", "CC BY-SA 4.0", "9/99/Putre_-_Mirador_Alto_de_Putre_%285%29.jpg"),
+    barcos: wmPhoto("Atardecer desde la ex isla El Alacrán", "Álvaro Orozco", "CC BY 3.0", "7/71/Atardecer_Con_Barcos_%28255404905%29.jpeg"),
+    carnaval2: wmPhoto("Comparsa en el carnaval", "Ideasenturismo", "CC BY-SA 3.0", "e/e8/Carnaval_con_la_Fuerza_del_Sol%2C_Arica.JPG"),
+    chungara2: wmPhoto("Camino al lago Chungará", "WeHaKa", "CC BY-SA 4.0", "e/e7/Lago_Chungar%C3%A1_-_Parinacota_%281%29.jpg"),
+    playa: wmPhoto("El Morro desde la playa", "Jowyto", "CC BY-SA 3.0", "a/a9/Morro_de_Arica_desde_la_playa.JPG"),
+    lluta: wmPhoto("Humedal del río Lluta", "Andrea021", "CC BY-SA 4.0", "8/84/Humedal_del_r%C3%ADo_Lluta.jpg"),
+    poconchile: wmPhoto("Iglesia de San Jerónimo, Poconchile", "Till Niermann", "CC BY-SA 3.0", "4/41/San_Jer%C3%B3nimo%2C_Poconchile%2C_Chile.jpg")
+  };
+  var HERO_PH = ["morro", "lauca", "carnaval", "atardecer"];
+  var GAL_PH = ["lauca", "carnaval", "morro", "atardecer", "flamenco", "chungara2", "momia", "catedral", "anzota", "barcos", "putre", "carnaval2", "lluta", "poconchile", "playa", "azapa", "morronoche", "chungara"];
+  var ROUTE_PH = { centro: "catedral", costa: "anzota", azapa: "azapa", lluta: "lluta", altiplano: "chungara2" };
+  var PLACE_PH = { morro: "playa", "plaza-catedral": "catedral", chinchorro: "atardecer", gringo: "barcos", anzota: "anzota", humedal: "lluta", museo: "momia", azapa: "azapa", putre: "putre", lauca: "lauca" };
+
+  function credit(p) { return p.lic ? "Foto: " + p.by + " · " + p.lic : (p.by || ""); }
+
+  /* Rellena cada <span class="ph" data-ph="clave"> con su foto y su crédito */
+  function fillPhotos() {
+    $$(".route").forEach(function (li) {
+      var b = li.querySelector("[data-route]");
+      var k = b && ROUTE_PH[b.getAttribute("data-route")];
+      if (!k || li.querySelector(".route-ph")) return;
+      var s = el("span", "ph route-ph");
+      s.setAttribute("data-ph", k);
+      li.insertBefore(s, li.firstChild);
+      li.classList.add("has-ph");
+    });
+    $$(".ph[data-ph]").forEach(function (s) {
+      var p = PH[s.getAttribute("data-ph")];
+      if (!p || s.querySelector("img")) return;
+      var img = document.createElement("img");
+      img.src = s.getAttribute("data-size") === "big" ? p.big : p.sm;
+      img.alt = p.t; img.loading = "lazy"; img.decoding = "async";
+      s.appendChild(img);
+      s.appendChild(el("span", "ph-credit", credit(p)));
+    });
+  }
+
+  /* Portada: fotos que cambian solas, con puntos para elegir y botón de pausa */
+  function startHero() {
+    var slides = HERO_PH.map(function (k) { return PH[k]; });
+    var own = window.PORTADA;
+    if (own && PHOTO_FILE.test(String(own.archivo || ""))) {
+      slides.unshift({ t: String(own.texto || "Arica"), by: String(own.credito || ""), lic: "", big: "fotos/" + own.archivo });
+    }
+    var media = $("#hero-media"), dots = $("#hero-dots"), cap = $("#hero-cap"), pause = $("#hero-pause");
+    var imgs = [], cur = 0, timer = null, paused = reduceMotion();
+    var small = window.matchMedia("(max-width: 700px)").matches; /* en celular, fotos más livianas */
+    slides.forEach(function (p, i) {
+      var img = document.createElement("img");
+      var src = small && p.sm ? p.sm : p.big;
+      img.alt = ""; img.decoding = "async";
+      if (i === 0) { img.setAttribute("fetchpriority", "high"); img.src = src; }
+      else img.setAttribute("data-src", src);
+      media.appendChild(img);
+      imgs.push(img);
+      var d = el("button", "dot");
+      d.type = "button";
+      d.setAttribute("aria-label", "Foto " + (i + 1) + ": " + p.t);
+      d.addEventListener("click", function () { show(i); restart(); });
+      dots.appendChild(d);
+    });
+    function load(i) {
+      var im = imgs[i];
+      if (im && im.getAttribute("data-src")) { im.src = im.getAttribute("data-src"); im.removeAttribute("data-src"); }
+    }
+    function show(i) {
+      cur = i; load(i); load((i + 1) % imgs.length);
+      imgs.forEach(function (im, k) { im.classList.toggle("on", k === i); });
+      $$(".dot", dots).forEach(function (d, k) { d.setAttribute("aria-current", k === i ? "true" : "false"); });
+      var p = slides[i];
+      cap.textContent = p.t + (credit(p) ? " · " + credit(p) : "");
+    }
+    function paintPause() {
+      pause.setAttribute("aria-pressed", String(paused));
+      pause.setAttribute("aria-label", paused ? "Reanudar el cambio de fotos" : "Pausar el cambio de fotos");
+      pause.querySelector("use").setAttribute("href", paused ? "#i-play" : "#i-pause");
+    }
+    function restart() {
+      clearInterval(timer);
+      if (!paused && imgs.length > 1) timer = setInterval(function () { show((cur + 1) % imgs.length); }, 7000);
+    }
+    pause.addEventListener("click", function () { paused = !paused; paintPause(); restart(); });
+    document.addEventListener("visibilitychange", function () { if (document.hidden) clearInterval(timer); else restart(); });
+    show(0); paintPause(); restart();
+  }
+
+  /* La barra de arriba es transparente mientras se ve la portada */
+  function bindTopbar() {
+    var hero = $("#inicio");
+    function upd() { document.body.classList.toggle("on-hero", window.scrollY < hero.offsetHeight - 80); }
+    window.addEventListener("scroll", upd, { passive: true });
+    window.addEventListener("resize", upd);
+    upd();
+  }
+
+  /* Tarjetas de experiencias: abren la ficha del lugar en el plano */
+  function bindExperiences() {
+    $$(".exp-card[data-place]").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var id = a.getAttribute("data-place");
+        if (!byId[id]) return;
+        e.preventDefault();
+        state.route = null; state.filter = "todos"; state.q = ""; $("#q").value = "";
+        select(id, false);
+        $(narrow() ? "#detalle" : "#lugares").scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+      });
+    });
+  }
+
+  /* Galería de fotos reales */
+  function makeShot(src, big, title, small) {
+    var li = el("li");
+    var b = el("button", "shot");
+    b.type = "button";
+    b.setAttribute("data-cap", title + (small ? " · " + small : ""));
+    if (big) b.setAttribute("data-big", big);
+    var img = document.createElement("img");
+    img.src = src; img.alt = title; img.loading = "lazy"; img.decoding = "async";
+    img.addEventListener("error", function () { li.hidden = true; });
+    b.appendChild(img);
+    var cap = el("span", "shot-cap");
+    cap.appendChild(el("b", null, title));
+    if (small) cap.appendChild(el("small", null, small));
+    b.appendChild(cap);
+    li.appendChild(b);
+    return li;
+  }
+  function renderLibrary() {
+    var grid = $("#lib-grid");
+    GAL_PH.forEach(function (k) { var p = PH[k]; grid.appendChild(makeShot(p.sm, p.big, p.t, credit(p))); });
+  }
+
+  /* Lista de créditos de las fotos (obligatoria por las licencias) */
+  function renderCredits() {
+    var ul = $("#credits");
+    if (!ul) return;
+    Object.keys(PH).forEach(function (k) {
+      var p = PH[k];
+      var li = el("li");
+      var a = el("a", null, p.t);
+      a.href = p.page; a.target = "_blank"; a.rel = "noopener noreferrer";
+      li.appendChild(a);
+      li.appendChild(document.createTextNode(" · " + p.by + " · " + p.lic));
+      ul.appendChild(li);
+    });
+  }
+
+  /* Los bloques aparecen suavemente al bajar (se desactiva si la persona pidió menos movimiento) */
+  function bindReveal() {
+    if (reduceMotion() || !("IntersectionObserver" in window)) return;
+    var nodes = $$(".sec-head, .exp > li, .cards > li, .routes > li, .dishes > li, .eat > li, .gallery > li, .evts > li, .facts-grid > li, .banner-in, .feature");
+    document.documentElement.classList.add("js-reveal");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -6% 0px" });
+    nodes.forEach(function (n) {
+      var i = n.parentNode ? Array.prototype.indexOf.call(n.parentNode.children, n) : 0;
+      n.classList.add("reveal");
+      n.style.transitionDelay = (i % 4) * 80 + "ms";
+      io.observe(n);
+    });
+  }
+
   /* ---------- Capacidades de Claude (opiniones, noticias, mensajes, fotos) ---------- */
   function use(name) {
     try {
@@ -2646,47 +3017,15 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 
   /* Fotos fijas (versión alojada en Vercel): se leen de fotos.js y de la carpeta fotos/ */
   var PHOTO_FILE = /^[A-Za-z0-9_.\-]+\.(jpe?g|png|webp|gif|avif)$/i;
-  function showPhotoHeadings() {
-    $("#gal-ill").hidden = false;
-    $("#gal-lede").textContent = "Fotos de la ciudad y sus alrededores, junto a las ilustraciones del proyecto. Toca una para verla grande.";
-  }
-  /* Foto real en la portada: se configura con window.PORTADA en fotos.js */
-  function renderHeroPhoto() {
-    var o = window.PORTADA;
-    if (!o || !PHOTO_FILE.test(String(o.archivo || ""))) return;
-    var fig = $(".hero-art");
-    var img = document.createElement("img");
-    img.alt = String(o.texto || "Vista de Arica");
-    img.decoding = "async";
-    img.addEventListener("load", function () {
-      fig.replaceChildren(img);
-      if (o.credito) fig.appendChild(el("figcaption", null, String(o.credito)));
-    });
-    img.src = "fotos/" + o.archivo; /* si la foto no existe, se queda la ilustración */
-  }
+  /* Fotos propias del grupo (fotos.js): van primero en la galería. La de PORTADA se usa en startHero(). */
   function renderStaticPhotos() {
     var list = Array.isArray(window.FOTOS) ? window.FOTOS : [];
     var items = list.filter(function (o) { return o && PHOTO_FILE.test(String(o.archivo || "")); });
-    if (!items.length) return;
-    var grid = $("#photo-grid");
-    grid.replaceChildren();
-    $("#user-photos").hidden = false;
-    showPhotoHeadings();
+    var grid = $("#lib-grid");
+    var first = grid.firstChild;
     items.forEach(function (o) {
       var text = String(o.texto || "Foto de Arica");
-      var li = el("li");
-      var b = el("button", "shot"); b.type = "button";
-      b.setAttribute("data-cap", text);
-      var img = document.createElement("img");
-      img.src = "fotos/" + o.archivo; img.alt = text; img.loading = "lazy"; img.decoding = "async";
-      img.addEventListener("error", function () { li.hidden = true; });
-      b.appendChild(img);
-      var cap = el("span", "shot-cap");
-      cap.appendChild(el("b", null, text));
-      cap.appendChild(el("small", null, o.credito ? "Foto: " + String(o.credito) : "Foto"));
-      b.appendChild(cap);
-      li.appendChild(b);
-      grid.appendChild(li);
+      grid.insertBefore(makeShot("fotos/" + o.archivo, "", text, o.credito ? "Foto: " + String(o.credito) : "Foto del proyecto"), first);
     });
   }
 
@@ -2696,8 +3035,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     var grid = $("#photo-grid");
     state.db.collection("galeria").orderBy("ts", "desc").limit(60).onSnapshot(function (snap) {
       grid.replaceChildren();
-      $("#user-photos").hidden = snap.empty;
-      if (!snap.empty) showPhotoHeadings();
+      grid.hidden = snap.empty;
       snap.docs.forEach(function (d) {
         var o = d.data() || {};
         if (!o.assetId || !/^[0-9a-f]{32}$/.test(String(o.assetId))) return;
@@ -2791,10 +3129,16 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   bindContact();
   drawChart();
   loadWeather();
-  bindMore();
-  renderHeroPhoto();
+  startHero();
+  bindTopbar();
+  bindExperiences();
+  renderLibrary();
   renderStaticPhotos();
+  renderCredits();
+  fillPhotos();
+  bindMore();
   renderAll();
+  bindReveal();
   connect();
 })();
 

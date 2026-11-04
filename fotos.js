@@ -9,11 +9,13 @@
 // usa las que permiten reutilizarse (por ejemplo, Wikimedia Commons) y escribe el autor en "credito".
 // Consejo: achica las fotos a unos 1600 px de ancho antes de subirlas para que la página cargue rápido.
 
-// Foto grande de la portada (reemplaza la ilustración del Morro). Déjalo en null para usar la ilustración.
+// La página ya trae fotos de Wikimedia Commons. Lo que pongas aquí se suma a esas fotos.
+//
+// Foto propia para la portada: aparece como la primera foto. Déjalo en null para usar solo las que ya trae.
 window.PORTADA = null;
 // window.PORTADA = { archivo: "portada-morro.jpg", texto: "El Morro de Arica visto desde la playa", credito: "Foto: Nombre del autor" };
 
-// Fotos de la galería. Aparecen antes de las ilustraciones.
+// Fotos propias para la galería. Aparecen primero, antes de las que ya trae la página.
 window.FOTOS = [
   // { archivo: "morro-atardecer.jpg", texto: "El Morro al atardecer", credito: "Nombre del autor" },
   // { archivo: "playa-chinchorro.jpg", texto: "Playa Chinchorro" },
