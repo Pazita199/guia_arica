@@ -712,6 +712,41 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 @media (min-width: 1000px) { #lib-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 210px; gap: 14px; } }
 .gal-sub { margin: 40px 0 14px; }
 
+/* Fotos en las tarjetas de flora y fauna */
+.species li { overflow: hidden; }
+.sp-ph { margin: -14px -16px 10px; aspect-ratio: 4 / 3; }
+.species b { font-size: 1.05rem; }
+
+/* Botones de Google Maps y direcciones */
+.map-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.map-links .btn { min-height: 40px; }
+.lodge .addr, .dir .where-l { display: flex; gap: 6px; align-items: baseline; }
+.lodge .addr { font-size: 14px; color: var(--ink); font-weight: 500; }
+.lodge .addr::before, .dir .where-l::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--sun); transform: translateY(-1px); }
+.dir > li, #comer .eat > li, #alojamiento .eat > li { display: flex; flex-direction: column; gap: 4px; }
+.dir li .map-links, .eat li .map-links { margin-top: auto; padding-top: 10px; }
+.actions .btn svg, .map-links .btn svg { fill: none; }
+
+/* Recorridos de micros y colectivos */
+.routes-info { display: grid; gap: 16px; margin-top: 28px; }
+.lines-card { padding: 22px; display: grid; gap: 14px; }
+.lines-card > h3, .lines-head h3 { font-size: 1.4rem; }
+.lines-head { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: end; justify-content: space-between; }
+.lines-head > div { display: grid; gap: 6px; max-width: 70ch; }
+.lines-head p { margin: 0; color: var(--ink-2); }
+.lines-head b { color: var(--ink); }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 15px; }
+.tbl th { text-align: left; font: 600 12px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); padding: 10px 14px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+.tbl td { padding: 10px 14px; border-top: 1px solid var(--line); vertical-align: middle; }
+.tbl tr:first-child td { border-top: 0; }
+.tbl td:last-child { color: var(--ink-2); font-size: 14px; white-space: nowrap; }
+.ln { display: inline-grid; place-items: center; min-width: 44px; height: 30px; padding: 0 8px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font: 700 13px var(--font-mono); }
+.lines-card .tips { margin: 0; }
+.lines-card .tips li { color: var(--ink-2); }
+.lines-card .tips b { color: var(--ink); }
+@media (max-width: 599px) { .tbl td:last-child { white-space: normal; } .tbl th, .tbl td { padding: 9px 10px; } }
+
 /* Aparición suave al bajar */
 .js-reveal .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .js-reveal .reveal.in { opacity: 1; transform: none; }
@@ -934,6 +969,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
             <div id="d-tip-wrap"><dt>Consejo</dt><dd id="d-tip"></dd></div>
           </dl>
           <div class="actions">
+            <a class="btn sun" id="d-dir" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-pin"/></svg>Cómo llegar</a>
             <button class="btn ghost" id="d-fav" type="button" aria-pressed="false">
               <svg class="star" aria-hidden="true"><use href="#i-star"/></svg>
               <span id="d-fav-label">Guardar</span>
@@ -1052,116 +1088,6 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
       <ul class="gallery" id="lib-grid" data-more="10" data-more-label="fotos"></ul>
       <ul class="gallery" id="photo-grid" hidden></ul>
     </div>
-    <h3 class="gal-sub" id="gal-ill">Ilustraciones del proyecto</h3>
-    <ul class="gallery" id="gallery" data-more="5" data-more-label="ilustraciones">
-      <li><button class="shot" type="button" data-cap="El Morro de Arica al atardecer">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="El Morro de Arica al atardecer sobre el mar">
-          <rect width="400" height="300" fill="var(--a-sky)"/><rect y="110" width="400" height="95" fill="var(--a-sky2)" opacity=".6"/>
-          <circle cx="285" cy="118" r="46" fill="none" stroke="var(--sun)" stroke-width="12" stroke-dasharray="3 15.1" opacity=".8"/><circle cx="285" cy="118" r="30" fill="var(--sun)"/>
-          <path d="M0 208 L40 192 Q95 122 165 142 Q215 156 245 208 L262 218 L0 218Z" fill="var(--a-rock)"/>
-          <path d="M165 142 Q215 156 245 208 L262 218 L180 218 Q186 168 165 142Z" fill="var(--a-rock2)" opacity=".6"/>
-          <path d="M120 127 V100" stroke="var(--a-ink)" stroke-width="2.5"/><path d="M120 101 h20 l-5 6 5 6 h-20z" fill="var(--c-historia)"/>
-          <rect y="218" width="400" height="82" fill="var(--a-sea)"/><rect y="221" width="400" height="79" fill="url(#wv)"/>
-          <g fill="var(--sun)" opacity=".55"><rect x="255" y="226" width="60" height="4" rx="2"/><rect x="262" y="240" width="46" height="4" rx="2"/><rect x="270" y="254" width="30" height="4" rx="2"/></g>
-        </svg>
-        <span class="shot-cap"><b>El Morro al atardecer</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Playa Chinchorro, la playa larga del norte de la ciudad">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Playa con sombrilla y una tabla de surf clavada en la arena">
-          <rect width="400" height="300" fill="var(--a-sky)"/><circle cx="105" cy="96" r="44" fill="none" stroke="var(--sun)" stroke-width="10" stroke-dasharray="3 14.2" opacity=".8"/><circle cx="105" cy="96" r="28" fill="var(--sun)"/>
-          <rect y="140" width="400" height="75" fill="var(--a-sea)"/><rect y="143" width="400" height="70" fill="url(#wv)"/>
-          <path d="M0 205 Q120 188 260 214 T400 204 V300 H0Z" fill="var(--a-sand)"/>
-          <path d="M0 205 Q120 188 260 214 T400 204" fill="none" stroke="var(--a-white)" stroke-width="4" opacity=".7"/>
-          <path d="M300 218 V268" stroke="var(--a-ink)" stroke-width="3"/><path d="M258 226 Q300 178 342 226Z" fill="var(--c-historia)"/><path d="M300 190 Q280 204 279 226 M300 190 Q320 204 321 226" fill="none" stroke="var(--a-white)" stroke-width="3" opacity=".8"/>
-          <ellipse cx="86" cy="252" rx="9" ry="36" fill="var(--c-playas)" transform="rotate(-12 86 252)"/><ellipse cx="86" cy="252" rx="2" ry="30" fill="var(--a-white)" opacity=".7" transform="rotate(-12 86 252)"/>
-        </svg>
-        <span class="shot-cap"><b>Playa Chinchorro</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Catedral de San Marcos, en la Plaza Colón">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Fachada de la Catedral de San Marcos con una torre y un frontón">
-          <rect width="400" height="300" fill="var(--a-sky)"/><rect y="170" width="400" height="60" fill="var(--a-sky2)" opacity=".5"/>
-          <rect y="236" width="400" height="64" fill="var(--a-sand)"/>
-          <rect x="86" y="88" width="46" height="148" fill="var(--a-white)" stroke="var(--a-ink)" stroke-width="2"/>
-          <path d="M80 90 L109 50 L138 90Z" fill="var(--a-rock)"/><path d="M109 50 V32 M102 40 h14" stroke="var(--a-ink)" stroke-width="2.5" stroke-linecap="round"/>
-          <rect x="124" y="122" width="160" height="114" fill="var(--a-white)" stroke="var(--a-ink)" stroke-width="2"/>
-          <path d="M114 124 L204 80 L294 124Z" fill="var(--a-rock2)" stroke="var(--a-ink)" stroke-width="2"/>
-          <path d="M188 236 V192 a16 16 0 0 1 32 0 V236Z" fill="var(--a-rock)"/>
-          <path d="M144 196 v-26 a9 9 0 0 1 18 0 v26z M246 196 v-26 a9 9 0 0 1 18 0 v26z" fill="var(--a-mount)"/>
-          <circle cx="204" cy="144" r="13" fill="var(--a-mount)" stroke="var(--a-ink)" stroke-width="2"/><path d="M204 131 V157 M191 144 H217" stroke="var(--a-ink)" stroke-width="1.5"/>
-          <path d="M96 100 v26 a8 8 0 0 0 16 0 v-26z" fill="var(--a-mount)"/>
-          <path d="M40 236 V196 M350 236 V196" stroke="var(--a-rock)" stroke-width="5"/><circle cx="40" cy="186" r="24" fill="var(--a-green)"/><circle cx="350" cy="186" r="24" fill="var(--a-green)"/><circle cx="46" cy="178" r="8" fill="var(--a-green2)"/><circle cx="356" cy="178" r="8" fill="var(--a-green2)"/>
-        </svg>
-        <span class="shot-cap"><b>Catedral de San Marcos</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Valle de Azapa, con sus filas de olivos entre cerros de desierto">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Valle verde de olivos entre cerros de desierto">
-          <rect width="400" height="300" fill="var(--a-sky)"/><circle cx="320" cy="62" r="24" fill="var(--sun)"/>
-          <path d="M0 150 Q80 96 170 128 T400 112 V300 H0Z" fill="var(--a-sand)"/>
-          <path d="M0 150 Q80 96 170 128 T400 112 V140 Q250 150 170 160 T0 180Z" fill="var(--a-rock2)" opacity=".28"/>
-          <path d="M0 300 V216 Q120 168 205 190 T400 172 V300Z" fill="var(--a-green2)"/>
-          <path d="M0 300 V216 Q120 168 205 190 T400 172 V300Z" fill="url(#ol)"/>
-          <path d="M0 262 Q130 226 260 244 T400 230" fill="none" stroke="var(--a-sea2)" stroke-width="5" stroke-linecap="round" opacity=".9"/>
-        </svg>
-        <span class="shot-cap"><b>Valle de Azapa</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Geoglifos de Lluta: figuras trazadas sobre los cerros">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ladera de cerro con figuras de llamas, personas y un rombo trazadas en el suelo">
-          <rect width="400" height="300" fill="var(--a-sky)"/>
-          <path d="M0 84 Q120 42 240 72 T400 62 V300 H0Z" fill="var(--a-sand)"/>
-          <path d="M0 232 Q140 202 400 238 V300 H0Z" fill="var(--a-rock2)" opacity=".35"/>
-          <g fill="none" stroke="var(--a-rock)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M112 164 q32 -14 64 0 M120 164 v28 M132 165 v28 M160 165 v28 M172 164 v28 M176 164 q10 -28 16 -38 l12 -3 M112 164 l-8 -8"/>
-            <circle cx="262" cy="130" r="6"/><path d="M262 136 v30 M246 146 l16 8 l16 -8 M262 166 l-10 24 M262 166 l10 24"/>
-            <path d="M326 150 l24 28 l-24 28 l-24 -28z M326 164 l10 14 l-10 14 l-10 -14z"/>
-          </g>
-        </svg>
-        <span class="shot-cap"><b>Geoglifos de Lluta</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Lago Chungará y los volcanes Parinacota y Pomerape, con flamencos">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Dos volcanes nevados sobre un lago con flamencos">
-          <rect width="400" height="300" fill="var(--a-sky)"/><rect y="120" width="400" height="80" fill="var(--a-sky2)" opacity=".5"/>
-          <path d="M196 196 L272 98 L350 196Z" fill="var(--a-mount)" opacity=".85"/><path d="M272 98 l-16 20 10 -5 8 11 9 -12 9 6z" fill="var(--a-white)"/>
-          <path d="M50 196 L144 70 L238 196Z" fill="var(--a-mount)"/><path d="M144 70 l-22 29 14 -7 10 14 12 -15 14 8z" fill="var(--a-white)"/>
-          <rect y="192" width="400" height="26" fill="var(--a-green2)"/>
-          <path d="M0 210 Q100 198 200 210 T400 205 V300 H0Z" fill="var(--a-sea)"/>
-          <path d="M50 222 L144 282 L238 222Z" fill="var(--a-mount)" opacity=".25"/>
-          <use href="#flam" x="70" y="206" width="30" height="44"/><use href="#flam" x="106" y="214" width="26" height="38"/><use href="#flam" x="290" y="210" width="28" height="41"/>
-        </svg>
-        <span class="shot-cap"><b>Lago Chungará</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Textil andino con motivos escalonados">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Tejido andino de franjas con rombos y escalones">
-          <defs><pattern id="rb" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M20 3 L37 20 L20 37 L3 20Z" fill="none" stroke="var(--sun)" stroke-width="3"/><path d="M20 12 L28 20 L20 28 L12 20Z" fill="var(--a-white)"/></pattern></defs>
-          <rect width="400" height="300" fill="var(--a-sand)"/>
-          <rect y="0" width="400" height="56" fill="var(--c-historia)"/><rect y="56" width="400" height="8" fill="var(--a-ink)"/>
-          <rect y="64" width="400" height="116" fill="var(--a-sea)"/><rect y="70" width="400" height="104" fill="url(#rb)"/>
-          <rect y="180" width="400" height="8" fill="var(--a-ink)"/><rect y="188" width="400" height="48" fill="var(--c-altiplano)"/>
-          <rect y="236" width="400" height="8" fill="var(--a-ink)"/><rect y="244" width="400" height="56" fill="var(--c-naturaleza)"/>
-          <rect y="10" width="400" height="36" fill="url(#stp)" opacity=".9"/><rect y="250" width="400" height="44" fill="url(#stp)" opacity=".9"/>
-        </svg>
-        <span class="shot-cap"><b>Textil andino</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Carnaval Con la Fuerza del Sol: la máscara del sol">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Máscara de sol con plumas de colores, símbolo del carnaval">
-          <rect width="400" height="300" fill="var(--band)"/>
-          <circle cx="200" cy="150" r="128" fill="none" stroke="var(--sun)" stroke-width="26" stroke-dasharray="7 26.5"/>
-          <circle cx="200" cy="150" r="98" fill="none" stroke="var(--c-historia)" stroke-width="18" stroke-dasharray="12 17.8"/>
-          <circle cx="200" cy="150" r="76" fill="none" stroke="var(--a-pink)" stroke-width="12" stroke-dasharray="6 14.7"/>
-          <circle cx="200" cy="150" r="60" fill="var(--sun)"/>
-          <circle cx="180" cy="140" r="7" fill="var(--a-ink)"/><circle cx="220" cy="140" r="7" fill="var(--a-ink)"/>
-          <path d="M178 172 Q200 190 222 172" fill="none" stroke="var(--a-ink)" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="170" cy="162" r="6" fill="var(--c-historia)" opacity=".6"/><circle cx="230" cy="162" r="6" fill="var(--c-historia)" opacity=".6"/>
-        </svg>
-        <span class="shot-cap"><b>Con la Fuerza del Sol</b><small>Ilustración</small></span></button></li>
-      <li><button class="shot" type="button" data-cap="Muelle pesquero con un pelícano">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Muelle de madera sobre el mar con un pelícano y un bote">
-          <rect width="400" height="300" fill="var(--a-sky)"/><circle cx="330" cy="70" r="26" fill="var(--sun)"/>
-          <rect y="150" width="400" height="150" fill="var(--a-sea)"/><rect y="154" width="400" height="146" fill="url(#wv)"/>
-          <path d="M40 232 H150 L136 252 H56Z" fill="var(--c-historia)"/><path d="M95 232 V196 l24 36z" fill="var(--a-white)"/>
-          <rect x="0" y="168" width="270" height="12" fill="var(--a-rock2)"/><rect x="0" y="180" width="270" height="4" fill="var(--a-rock)"/>
-          <path d="M30 184 V240 M110 184 V240 M190 184 V240 M250 184 V240" stroke="var(--a-rock)" stroke-width="9"/>
-          <path d="M240 168 v-14 M262 168 v-14" stroke="var(--a-ink)" stroke-width="3" stroke-linecap="round"/>
-          <ellipse cx="248" cy="136" rx="30" ry="18" fill="var(--a-white)" stroke="var(--a-ink)" stroke-width="2"/>
-          <path d="M270 130 q16 -6 14 -26" fill="none" stroke="var(--a-white)" stroke-width="11" stroke-linecap="round"/>
-          <circle cx="284" cy="98" r="9" fill="var(--a-white)" stroke="var(--a-ink)" stroke-width="2"/>
-          <path d="M290 98 L332 108 L292 112Z" fill="var(--sun)" stroke="var(--a-ink)" stroke-width="1.5"/><circle cx="283" cy="96" r="1.8" fill="var(--a-ink)"/>
-        </svg>
-        <span class="shot-cap"><b>Muelle pesquero</b><small>Ilustración</small></span></button></li>
-    </ul>
-
     <form class="card photo-admin form" id="photo-form" hidden novalidate>
       <h3>Agregar una foto</h3>
       <p class="status" style="margin:0">Esta opción solo aparece para quienes administran la página. Formatos JPG, PNG o WebP.</p>
@@ -1389,32 +1315,27 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   <div class="wrap">
     <header class="sec-head">
       <p class="eyebrow">Alojamiento</p>
-      <h2 id="h-alo">Hoteles, hostales y campings</h2>
-      <p class="sec-lede">Opciones junto al mar, en el centro y cerca del terminal de buses. En temporada alta y durante el carnaval conviene reservar con tiempo.</p>
+      <h2 id="h-alo">Hoteles y hostales</h2>
+      <p class="sec-lede">Opciones junto al mar, en el centro y cerca de la playa Chinchorro. En temporada alta y durante el carnaval conviene reservar con tiempo. Toca <b>Fotos y contacto</b> para ver fotos del lugar, su teléfono y su página web en Google Maps.</p>
     </header>
     <div class="eat-group" style="margin-top:0">
       <h3>Hoteles</h3>
-      <ul class="eat" data-more="3" data-more-label="lugares">
-        <li class="card lodge"><span class="type">Hotel</span><h3>Antay Hotel &amp; Spa</h3><p>Habitaciones con vista al mar, spa, gimnasio, casino y centro de convenciones. Está en la calle Chile.</p></li>
-        <li class="card lodge"><span class="type">Hotel</span><h3>Hotel Apacheta</h3><p>En la costa, al sur del centro, entre las playas La Lisera y El Laucho.</p></li>
+      <ul class="eat lodges" data-more="3" data-more-label="lugares">
+        <li class="card lodge" data-maps="Antay Hotel & Spa, Avenida Chile 1108, Arica, Chile"><span class="type">Hotel</span><h3>Antay Hotel &amp; Spa</h3><p>Habitaciones con vista al mar, spa, gimnasio, casino y centro de convenciones.</p><p class="addr">Avenida Chile 1108</p></li>
+        <li class="card lodge" data-maps="Hotel Apacheta, Avenida Comandante San Martín 661, Arica, Chile"><span class="type">Hotel</span><h3>Hotel Apacheta</h3><p>En la costa, al sur del centro, entre las playas La Lisera y El Laucho.</p><p class="addr">Avenida Comandante San Martín 661</p></li>
       </ul>
     </div>
     <div class="eat-group">
       <h3>Hostales</h3>
-      <ul class="eat" data-more="3" data-more-label="lugares">
-        <li class="card lodge"><span class="type">Hostal</span><h3>Raymi House Hostel</h3><p>Cerca de la catedral y la Plaza Colón.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Illariy Wasi Hostal</h3><p>En pleno centro de la ciudad.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel La Posada de Gallo</h3><p>A unos 2 km del centro.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Willka Kuti Backpackers</h3><p>Hostal para mochileros, a unos 4 km del centro.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostel Doña Ines</h3><p>Cerca del terminal de buses.</p></li>
-        <li class="card lodge"><span class="type">Hostal</span><h3>Hostal Ecuador</h3><p>En calle Juan Noé, a corta distancia a pie del centro; según guías antiguas, con desayuno incluido.</p></li>
+      <ul class="eat lodges" data-more="3" data-more-label="lugares">
+        <li class="card lodge" data-maps="Raymi House Hostel, Chacabuco 940, Arica, Chile"><span class="type">Hostal</span><h3>Raymi House Hostel</h3><p>Hostal para viajeros en calle Chacabuco.</p><p class="addr">Chacabuco 940</p></li>
+        <li class="card lodge" data-maps="Illariy Wasi Hostal, General Velásquez 792, Arica, Chile"><span class="type">Hostal</span><h3>Illariy Wasi Hostal</h3><p>En pleno centro, a unos 800 metros de la Plaza Colón.</p><p class="addr">General Velásquez 792</p></li>
+        <li class="card lodge" data-maps="Hostel La Posada de Gallo, Arturo Gallo 202, Arica, Chile"><span class="type">Hostal</span><h3>Hostel La Posada de Gallo</h3><p>Hostal cerca del puerto de Arica.</p><p class="addr">Arturo Gallo 202</p></li>
+        <li class="card lodge" data-maps="Willka Kuti Backpackers, Brasilia 2465, Arica, Chile"><span class="type">Hostal</span><h3>Willka Kuti Backpackers</h3><p>Hostal para mochileros, a unos 300 metros de la playa Chinchorro.</p><p class="addr">Brasilia 2465</p></li>
+        <li class="card lodge" data-maps="Hostelling International Doña Inés, Manuel Rojas 2864, Arica, Chile"><span class="type">Hostal</span><h3>Hostel Doña Inés</h3><p>Albergue de la red Hostelling International.</p><p class="addr">Manuel Rojas 2864</p></li>
+        <li class="card lodge" data-maps="Hostal Ecuador, Juan Noé 989, Arica, Chile"><span class="type">Hostal</span><h3>Hostal Ecuador</h3><p>A corta distancia a pie del centro.</p><p class="addr">Juan Noé 989</p></li>
       </ul>
     </div>
-    <div class="eat-group">
-      <h3>Camping</h3>
-      <div class="card lodge" style="max-width:620px"><span class="type">Pendiente de confirmar</span><p style="font-size:15px">No logramos confirmar campings con fuentes confiables, así que preferimos no listar ninguno. Consulta el registro de alojamientos de Sernatur o a la Municipalidad de Arica antes de elegir.</p></div>
-    </div>
-    <p class="note"><b>Confirma antes de reservar.</b> La lista viene de portales de reservas y guías de viaje: puede haber cambios de nombre, precios y disponibilidad.</p>
   </div>
 </section>
 
@@ -1434,7 +1355,50 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
       <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></div><h3>Aeropuerto Chacalluta</h3><p>Aeropuerto internacional con conexiones a Santiago. Al centro se llega en unos 25 minutos en taxi; también hay minibuses y arriendo de autos en el terminal.</p></article></li>
       <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-train"/></svg></div><h3>Cruzar a Tacna (Perú)</h3><p>Los colectivos salen del Terminal Internacional y, con los trámites en la frontera, el viaje toma entre 1,5 y 2 horas. Lleva tu documento y revisa los horarios y requisitos vigentes.</p></article></li>
     </ul>
-    <p class="note"><b>Recorridos:</b> esta guía no incluye un mapa oficial de líneas. Pregunta en el terminal o en la Municipalidad por los recorridos vigentes. Para el altiplano, arrendar un auto o tomar un bus hasta Parinacota puede salir más barato que un tour.</p>
+    <div class="routes-info">
+      <div class="card lines-card">
+        <div class="lines-head">
+          <div>
+            <h3>Recorridos de las micros urbanas</h3>
+            <p>Hay 15 líneas de tres empresas. <b>13 de ellas tienen una de sus puntas en Playa La Lisera</b>, al pie del Morro y a pasos del centro: son las que más sirven a un visitante.</p>
+          </div>
+          <a class="btn sun" href="https://moovitapp.com/index/es-419/transporte_p%C3%BAblico-Arica-4505" target="_blank" rel="noopener noreferrer">Ver mapas y horarios en Moovit</a>
+        </div>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <caption class="sr">Líneas de micros urbanas de Arica, con sus dos puntas de recorrido y la empresa que las opera</caption>
+            <thead><tr><th scope="col">Línea</th><th scope="col">Recorrido (de punta a punta)</th><th scope="col">Empresa</th></tr></thead>
+            <tbody>
+              <tr><td><span class="ln">1N</span></td><td>Asoagro ↔ Playa La Lisera</td><td>Etrapas</td></tr>
+              <tr><td><span class="ln">1R</span></td><td>Playa La Lisera ↔ Rotonda Juan Guillén Canales</td><td>Etrapas</td></tr>
+              <tr><td><span class="ln">2</span></td><td>Asoagro ↔ Playa La Lisera</td><td>Transportes Línea Dos</td></tr>
+              <tr><td><span class="ln">4</span></td><td>Playa La Lisera ↔ Rotonda Juan Guillén Canales</td><td>Etrapas</td></tr>
+              <tr><td><span class="ln">5</span></td><td>CESFAM Punta Norte ↔ Playa La Lisera</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">6</span></td><td>Playa La Lisera ↔ Rotonda Juan Guillén Canales</td><td>Etrapas</td></tr>
+              <tr><td><span class="ln">7</span></td><td>Recorrido con punta en Playa La Lisera</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">8</span></td><td>Cerro Sombrero ↔ Playa La Lisera</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">9</span></td><td>Recorrido con punta en Cerro Sombrero</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">10</span></td><td>Playa La Lisera ↔ Asoagro</td><td>Transportes Línea Dos</td></tr>
+              <tr><td><span class="ln">12</span></td><td>Asoagro ↔ Playa La Lisera</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">14</span></td><td>Asoagro ↔ Playa La Lisera</td><td>Transportes Línea Dos</td></tr>
+              <tr><td><span class="ln">15</span></td><td>Asoagro ↔ Rotonda Juan Guillén Canales</td><td>Etrapas</td></tr>
+              <tr><td><span class="ln">16</span></td><td>Cerro Sombrero ↔ Playa La Lisera</td><td>Taxibuses Línea 7 y 8</td></tr>
+              <tr><td><span class="ln">113</span></td><td>Asoagro ↔ Playa La Lisera</td><td>Transportes Línea Dos</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="srcline">Líneas y puntas de recorrido según Moovit (noviembre de 2026), que recibe los datos de las propias empresas. Las calles por donde pasa cada línea, sus paradas y la hora de llegada en vivo se ven en la app Moovit o en su página.</p>
+      </div>
+      <div class="card lines-card">
+        <h3>Colectivos</h3>
+        <ul class="tips">
+          <li><b>Dentro de la ciudad:</b> los colectivos son taxis compartidos con recorrido fijo y un número de línea. No existe un mapa público con sus recorridos, así que dile al conductor a dónde vas antes de subir: te dirá si pasa por ahí.</li>
+          <li><b>Al valle de Azapa y al Museo:</b> hay colectivos rurales que salen del centro hacia el valle y pasan por el Museo Arqueológico San Miguel de Azapa. Según viajeros, salen de la esquina de Patricio Lynch con Chacabuco. La tarifa sube de noche.</li>
+          <li><b>A Tacna (Perú):</b> salen del Terminal Internacional, junto al Terminal Rodoviario.</li>
+          <li><b>Para el altiplano:</b> arrendar un auto o tomar un bus hasta Putre o Parinacota puede salir más barato que un tour.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1805,7 +1769,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
       <div class="prose">
         <p>Esta guía nació como un proyecto grupal para ayudar a quienes visitan Arica a planear su viaje en un solo lugar: qué ver, cómo moverse, dónde comer y dormir, y qué hacer en caso de emergencia.</p>
         <p>Está pensada para turistas, pero también para quienes viven aquí y quieren redescubrir su ciudad. Por eso tiene un plano para explorar, rutas ya armadas, un calendario de fiestas y un espacio para que los visitantes dejen sus opiniones.</p>
-        <p>Las ilustraciones son originales del proyecto. Los textos se armaron con fuentes públicas, que se listan al lado. Si encuentras un error, escríbenos por el formulario de contacto.</p>
+        <p>Las fotos son de Wikimedia Commons y cada una tiene su autor y licencia en la lista de créditos. Los textos se armaron con fuentes públicas, que se listan al lado. Si encuentras un error, escríbenos por el formulario de contacto.</p>
         <p><b>Aviso:</b> horarios, precios y direcciones pueden cambiar. Confirma siempre antes de ir.</p>
       </div>
       <div>
@@ -2219,6 +2183,8 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     $("#d-where").textContent = p.where;
     $("#d-tip").textContent = p.tip || "";
     $("#d-tip-wrap").hidden = !p.tip;
+    $("#d-dir").href = mapsDir(PLACE_Q[p.id] || p.name + ", Arica, Chile");
+    $("#d-dir").setAttribute("aria-label", "Cómo llegar a " + p.name + " en Google Maps");
     var phk = PLACE_PH[p.id], pic = phk && PH[phk];
     $("#d-photo").hidden = !pic;
     if (pic) {
@@ -2696,7 +2662,73 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     chungara2: wmPhoto("Camino al lago Chungará", "WeHaKa", "CC BY-SA 4.0", "e/e7/Lago_Chungar%C3%A1_-_Parinacota_%281%29.jpg"),
     playa: wmPhoto("El Morro desde la playa", "Jowyto", "CC BY-SA 3.0", "a/a9/Morro_de_Arica_desde_la_playa.JPG"),
     lluta: wmPhoto("Humedal del río Lluta", "Andrea021", "CC BY-SA 4.0", "8/84/Humedal_del_r%C3%ADo_Lluta.jpg"),
-    poconchile: wmPhoto("Iglesia de San Jerónimo, Poconchile", "Till Niermann", "CC BY-SA 3.0", "4/41/San_Jer%C3%B3nimo%2C_Poconchile%2C_Chile.jpg")
+    poconchile: wmPhoto("Iglesia de San Jerónimo, Poconchile", "Till Niermann", "CC BY-SA 3.0", "4/41/San_Jer%C3%B3nimo%2C_Poconchile%2C_Chile.jpg"),
+    /* Flora y fauna */
+    vicuna: wmPhoto("Vicuña junto al lago Chungará", "Luca Galuzzi", "CC BY-SA 2.5", "7/7a/Vicu%C3%B1a_Vigogne_Lago_Chungar%C3%A0_4570m_Chile_Luca_Galuzzi_2006.jpg"),
+    guanaco: wmPhoto("Guanaco en el Parque Nacional Lauca", "Bernard Gagnon", "CC BY-SA 3.0", "6/6f/Guanaco%2C_Lauca_National_Park.jpg"),
+    vizcacha: wmPhoto("Vizcacha peruana", "James Sykes", "CC BY-SA 4.0", "c/ca/Lagidium_peruanum_in_Santa_Cruz_ravine%2C_Cordillera_Blanca.jpg"),
+    culpeo: wmPhoto("Zorro culpeo", "Mar del Sur", "CC BY-SA 4.0", "a/a3/Lycalopex_culpaeus_culpaeus%2C_Pseudalopex_culpaeus_culpaeus_zorro_culpeo_%28Chile_central%29_03.jpg"),
+    puma: wmPhoto("Puma", "Charles J. Sharp", "CC BY-SA 4.0", "5/55/Puma_%28Puma_concolor_concolor%29_female_Leona_Amarga_6.jpg"),
+    quirquincho: wmPhoto("Quirquincho de la puna", "Guido Valverde", "CC BY-SA 3.0", "8/80/Chaetophractus_nationi%2C_Oruro%2C_Bolivia_-_20090824.jpg"),
+    suri: wmPhoto("Suri o ñandú del norte", "Hugo Hulsberg", "CC0", "4/46/Rhea_pennata_tarapacensis_243180876.jpg"),
+    kiula: wmPhoto("Perdiz de la puna", "Darío De la Fuente", "CC BY 4.0", "2/24/Tinamotis_pentlandii_50863871.jpg"),
+    gaviota: wmPhoto("Gaviota andina", "Boronian (obra derivada)", "CC BY-SA 3.0", "7/7d/Chroicocephalus_serranus_Altiplano3_cropped.jpg"),
+    marinos: wmPhoto("Pelícanos y lobo marino buscando alimento", "Alastair Rae", "CC BY-SA 2.0", "e/e4/Pelican_and_sea_lion_feeding_frenzy._%28153180611%29.jpg"),
+    yareta: wmPhoto("Yareta en Parinacota", "Matt Berger", "CC BY 4.0", "f/f5/Azorella_compacta_%28_Parinacota%2C_Chili%29_3.jpg"),
+    quenoa: wmPhoto("Queñoa (Polylepis rugulosa)", "Alexander Yates", "CC BY-SA 2.0", "e/eb/Polylepis_rugulosa_%28A._Yates%29.jpg"),
+    quenoa2: wmPhoto("Queñoa de altura", "Rodrisan", "CC BY-SA 3.0", "9/9c/Polylepis_Tarapacana_1.jpg"),
+    puskayo: wmPhoto("Puskayo", "Michael Wolf", "CC BY-SA 3.0", "b/b3/Cumulopuntia_boliviana_01.jpg"),
+    bofedal: wmPhoto("Llamas en el bofedal de Parinacota", "Rafa arica", "CC BY-SA 3.0", "5/51/Llamas_en_el_Bofedal_de_Parinacota.JPG")
+  };
+  /* Foto de cada especie de "Flora y fauna", según el nombre en negrita de su tarjeta */
+  var SPECIES_PH = {
+    "Vicuña": "vicuna", "Guanaco, llama y alpaca": "guanaco", "Vizcacha peruana": "vizcacha", "Zorro culpeo": "culpeo",
+    "Puma": "puma", "Quirquincho de la puna y chinchillón": "quirquincho", "Flamencos": "flamenco",
+    "Suri o ñandú del norte": "suri", "Perdiz de la puna (kiula)": "kiula", "Gaviota andina": "gaviota",
+    "Aves del humedal de Lluta": "lluta", "Aves marinas y lobos marinos": "marinos", "Yareta": "yareta",
+    "Queñoa": "quenoa", "Queñoa de altura": "quenoa2", "Puskayo": "puskayo", "Bofedales": "bofedal",
+    "Olivos, hortalizas y cítricos": "azapa"
+  };
+
+  /* ---------- Botones de Google Maps ("Cómo llegar" y "Fotos y contacto") ---------- */
+  function mapsDir(q) { return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(q); }
+  function mapsPlace(q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q); }
+  function mapBtn(href, text, cls) {
+    var a = el("a", "btn small " + (cls || "ghost"));
+    a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.innerHTML = '<svg aria-hidden="true"><use href="#i-pin"/></svg>';
+    a.appendChild(document.createTextNode(text));
+    return a;
+  }
+  /* Dirección para buscar en Google Maps cuando el nombre solo no basta */
+  var MAPS_Q = {
+    "Poblado Artesanal": "Poblado Artesanal, Hualles, Arica, Chile",
+    "Terminal Asoagro": "Terminal Agropecuario Asoagro, Arica, Chile",
+    "Feria boliviano-peruana": "Calle Máximo Lira, Arica, Chile",
+    "Sabores de Arica": "Bolognesi 317, Arica, Chile",
+    "Calle Bolognesi": "Calle Bolognesi, Arica, Chile",
+    "Boulevard Vereda Bolognesi": "Vereda Bolognesi, Arica, Chile",
+    "Avenida Raúl Pey": "Avenida Raúl Pey, Arica, Chile",
+    "Calle 21 de Mayo": "Calle 21 de Mayo, Arica, Chile"
+  };
+  function addMapLinks() {
+    /* Directorio de negocios, dónde comer y alojamiento */
+    $$("#negocios .dir > li, #comer .eat > li, #alojamiento .eat > li").forEach(function (li) {
+      if (li.querySelector(".map-links")) return;
+      var name = (li.querySelector("h3") || {}).textContent || "";
+      var q = li.getAttribute("data-maps") || MAPS_Q[name] || (name + ", Arica, Chile");
+      var row = el("div", "map-links");
+      row.appendChild(mapBtn(mapsDir(q), "Cómo llegar", "sun"));
+      if (li.classList.contains("lodge")) row.appendChild(mapBtn(mapsPlace(q), "Fotos y contacto"));
+      li.appendChild(row);
+    });
+  }
+  /* Ficha del lugar seleccionado en el plano */
+  var PLACE_Q = {
+    gringo: "Isla del Alacrán, Arica, Chile", humedal: "Humedal del río Lluta, Arica, Chile",
+    geoglifos: "Geoglifos de Lluta, Arica, Chile", azapa: "Valle de Azapa, Arica, Chile",
+    putre: "Putre, Chile", lauca: "Lago Chungará, Parque Nacional Lauca, Chile",
+    "plaza-catedral": "Catedral de San Marcos, Arica, Chile", aduana: "Ex Aduana de Arica, Chile"
   };
   var HERO_PH = ["morro", "lauca", "carnaval", "atardecer"];
   var GAL_PH = ["lauca", "carnaval", "morro", "atardecer", "flamenco", "chungara2", "momia", "catedral", "anzota", "barcos", "putre", "carnaval2", "lluta", "poconchile", "playa", "azapa", "morronoche", "chungara"];
@@ -2707,6 +2739,14 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 
   /* Rellena cada <span class="ph" data-ph="clave"> con su foto y su crédito */
   function fillPhotos() {
+    $$(".species > li").forEach(function (li) {
+      var b = li.querySelector("b");
+      var k = b && SPECIES_PH[b.textContent.trim()];
+      if (!k || li.querySelector(".sp-ph")) return;
+      var s = el("span", "ph sp-ph");
+      s.setAttribute("data-ph", k);
+      li.insertBefore(s, li.firstChild);
+    });
     $$(".route").forEach(function (li) {
       var b = li.querySelector("[data-route]");
       var k = b && ROUTE_PH[b.getAttribute("data-route")];
@@ -3136,6 +3176,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   renderStaticPhotos();
   renderCredits();
   fillPhotos();
+  addMapLinks();
   bindMore();
   renderAll();
   bindReveal();
