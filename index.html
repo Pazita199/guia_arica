@@ -582,6 +582,24 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 
 .sec.band .chart-card .bar.now-m { fill: #fff; }
 
+/* Listas largas: se muestran las primeras y el resto con "Ver más" */
+.is-clipped { display: none !important; }
+.more-btn { margin-top: 18px; }
+.more-btn .chev { width: 16px; height: 16px; transition: transform .2s; }
+.more-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .more-btn .chev { transition: none; } }
+
+/* Foto real de portada (se activa desde fotos.js) */
+.hero-art img { display: block; width: 100%; height: auto; aspect-ratio: 560 / 440; object-fit: cover; }
+.hero-art figcaption { padding: 8px 12px; font-size: 12px; color: var(--ink-2); background: var(--surface); border-top: 1px solid var(--line); }
+.gal-sub { margin: 0 0 14px; }
+.gal-sub + .gallery, .user-photos + .gal-sub { margin-top: 0; }
+.user-photos { margin: 0 0 32px; }
+
+/* Clima en vivo */
+.now .live { display: inline-flex; align-items: center; gap: 8px; }
+.now .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c-naturaleza); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-naturaleza) 30%, transparent); }
+
 </style>
 </head>
 <body>
@@ -845,7 +863,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-rutas">Recorridos recomendados</h2>
       <p class="sec-lede">Cinco formas de ordenar el viaje, de un paseo a pie por el centro a dos días en el altiplano. Cada ruta se dibuja en el plano.</p>
     </header>
-    <ul class="routes">
+    <ul class="routes" data-more="3" data-more-label="rutas">
       <li class="card route">
         <div class="meta"><span>Medio día</span><span>A pie</span></div>
         <h3>Centro histórico</h3>
@@ -892,8 +910,13 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     <header class="sec-head">
       <p class="eyebrow">04 · Galería de imágenes</p>
       <h2 id="h-galeria">Arica en imágenes</h2>
-      <p class="sec-lede">Nueve ilustraciones del proyecto con los paisajes y escenas que definen a la ciudad. Toca una para verla grande.</p>
+      <p class="sec-lede" id="gal-lede">Nueve ilustraciones del proyecto con los paisajes y escenas que definen a la ciudad. Toca una para verla grande.</p>
     </header>
+    <div class="user-photos" id="user-photos" hidden>
+      <h3 class="gal-sub">Fotos</h3>
+      <ul class="gallery" id="photo-grid"></ul>
+    </div>
+    <h3 class="gal-sub" id="gal-ill" hidden>Ilustraciones</h3>
     <ul class="gallery" id="gallery">
       <li><button class="shot" type="button" data-cap="El Morro de Arica al atardecer">
         <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="El Morro de Arica al atardecer sobre el mar">
@@ -1003,10 +1026,6 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
         <span class="shot-cap"><b>Muelle pesquero</b><small>Ilustración</small></span></button></li>
     </ul>
 
-    <div class="user-photos" id="user-photos" hidden>
-      <h3 style="margin-bottom:14px">Fotos del proyecto</h3>
-      <ul class="gallery" id="photo-grid"></ul>
-    </div>
     <form class="card photo-admin form" id="photo-form" hidden novalidate>
       <h3>Agregar una foto</h3>
       <p class="status" style="margin:0">Esta opción solo aparece para quienes administran la página. Formatos JPG, PNG o WebP.</p>
@@ -1048,7 +1067,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <li style="--era:var(--accent)"><i></i>Guerra y frontera</li>
       <li style="--era:var(--c-naturaleza)"><i></i>Ciudad moderna</li>
     </ul>
-    <ol class="tl">
+    <ol class="tl" data-more="5" data-more-label="hitos">
       <li class="e1"><span class="yr">Hace más de 7.000 años</span><div><h3>Los Chinchorro</h3><p>Pescadores de la costa desarrollan la momificación artificial, una de las más antiguas que se conocen. El territorio ya estaba poblado desde hace más de 11.000 años.</p></div></li>
       <li class="e1"><span class="yr">Siglos IV al IX</span><div><h3>Influencia de Tiwanaku</h3><p>La cultura tiwanaku llega desde el altiplano y forma caseríos en la zona. Uno de ellos se conoce como Ariaka o Ariqui; el significado del nombre varía según el autor.</p></div></li>
       <li class="e1"><span class="yr">Siglo XI a c. 1473</span><div><h3>Señoríos regionales y dominio inca</h3><p>Distintos señoríos controlan la región hasta que llegan los incas del Cuzco.</p></div></li>
@@ -1077,7 +1096,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-monumentos">Edificios y sitios patrimoniales</h2>
       <p class="sec-lede">Del centro de la ciudad a las quebradas y el altiplano: ocho lugares que cuentan la historia de Arica.</p>
     </header>
-    <ul class="cards">
+    <ul class="cards" data-more="4" data-more-label="monumentos">
       <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">01</span><h3>Morro de Arica</h3><p>Peñón de unos 130 metros con mirador, cañones y el Museo Histórico y de Armas. Aquí ocurrió el asalto de 1880. Es uno de los sitios que integran el Patrimonio Mundial Chinchorro.</p><span class="pill">Historia militar</span></article></li>
       <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">02</span><h3>Catedral de San Marcos</h3><p>Iglesia neoclásica de tres naves, con fachada asimétrica y vitrales de colores. Su estructura de metal se levantó en la década de 1870 y se atribuye al taller de Gustave Eiffel.</p><span class="pill">Plaza Colón</span></article></li>
       <li><article class="card mon" style="border-top:4px solid var(--c-historia)"><span class="num">03</span><h3>Ex Aduana (Casa de la Cultura)</h3><p>Edificio portuario del siglo XIX, también ligado al taller de Eiffel. Hoy funciona como Casa de la Cultura.</p><span class="pill">Centro</span></article></li>
@@ -1151,7 +1170,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-gastro">Comidas típicas</h2>
       <p class="sec-lede">La cocina de Arica mezcla influencias aymaras, peruanas y bolivianas, con el mar y los valles como despensa.</p>
     </header>
-    <ul class="dishes">
+    <ul class="dishes" data-more="6" data-more-label="platos">
       <li class="card dish" style="--tc:var(--c-playas)"><span class="pill">Mar</span><h3>Ceviche</h3><p>Pescado o marisco curado en limón, a la peruana o a la chilena.</p></li>
       <li class="card dish" style="--tc:var(--c-playas)"><span class="pill">Mar</span><h3>Almejas a la parmesana</h3><p>Almejas gratinadas con queso parmesano, un clásico de las costas del norte.</p></li>
       <li class="card dish" style="--tc:var(--c-playas)"><span class="pill">Mar</span><h3>Chicharrones de mariscos</h3><p>Mariscos fritos para picar, con limón.</p></li>
@@ -1179,7 +1198,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </header>
     <div class="eat-group" style="margin-top:0">
       <h3>Mariscos y parrilla</h3>
-      <ul class="eat">
+      <ul class="eat" data-more="3" data-more-label="lugares">
         <li class="card"><span class="type">Mariscos</span><h3>Maracuyá</h3><p>Casona junto a la Playa El Laucho, con vista al mar.</p></li>
         <li class="card"><span class="type">Mariscos</span><h3>Mata-Rangi</h3><p>Local de madera sobre el muelle pesquero.</p></li>
         <li class="card"><span class="type">Cocina peruana</span><h3>Rayú</h3><p>Carta larga y creativa, de influencia peruana, frente a la Playa Chinchorro.</p></li>
@@ -1189,7 +1208,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </div>
     <div class="eat-group">
       <h3>Mercados y picadas</h3>
-      <ul class="eat">
+      <ul class="eat" data-more="3" data-more-label="lugares">
         <li class="card"><span class="type">Mercado</span><h3>Mercado Colón</h3><p>Paila marina, pantrucas y empanadas. Al fondo está la Cevichería Santa Carolina, un puesto con cuatro asientos y la carta en una pizarra.</p></li>
         <li class="card"><span class="type">Pescadería</span><h3>Terminal Pesquero</h3><p>Pescado muy fresco, piure y erizo. Los vendedores entregan cebolla, perejil y limón para armar tu propio ceviche.</p></li>
         <li class="card"><span class="type">Mercado</span><h3>Mercado Central</h3><p>Puestos de comida y productos locales y bolivianos, muy usado por los vecinos.</p></li>
@@ -1198,7 +1217,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </div>
     <div class="eat-group">
       <h3>Cafeterías y comida liviana</h3>
-      <ul class="eat">
+      <ul class="eat" data-more="3" data-more-label="lugares">
         <li class="card"><span class="type">Café</span><h3>Café del Mar</h3><p>Café, ensaladas, crêpes y sándwiches en el paseo peatonal.</p></li>
         <li class="card"><span class="type">Salón de té</span><h3>Salón de Té 890</h3><p>Té, pizzas y pasteles en salas de decoración antigua.</p></li>
         <li class="card"><span class="type">Café y pastas</span><h3>Mousse</h3><p>Pastas, pizzas y desayunos, frente a la Plaza Colón.</p></li>
@@ -1219,7 +1238,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-act">Deportes, paseos y excursiones</h2>
       <p class="sec-lede">Mar, desierto, valles y altiplano en un radio corto. Ocho ideas para llenar los días.</p>
     </header>
-    <ul class="cards">
+    <ul class="cards" data-more="4" data-more-label="actividades">
       <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Principiantes y expertos</span><h3>Surf y bodyboard</h3><p>Chinchorro y Las Machas tienen olas para partir. El Gringo, en la ex isla El Alacrán, es una ola de fama internacional solo para expertos.</p></article></li>
       <li><article class="card act" style="--tc:var(--c-playas)"><span class="lvl">Playa y mar</span><h3>Baño, buceo y kayak</h3><p>Chinchorro, El Laucho y La Lisera son las playas más usadas para bañarse. La Lisera tiene aguas calmas y sirve para bucear; Chinchorro, para kayak y windsurf. El mar es frío: respeta la señalización.</p></article></li>
       <li><article class="card act" style="--tc:var(--accent)"><span class="lvl">Aventura</span><h3>Parapente</h3><p>Se vuela desde los cerros de las playas La Lisera y El Laucho, junto al Morro. Hazlo con un operador local.</p></article></li>
@@ -1243,7 +1262,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 
     <div class="nat-group" style="--tc:var(--c-altiplano);margin-top:0">
       <h3>Mamíferos del altiplano</h3>
-      <ul class="species">
+      <ul class="species" data-more="3" data-more-label="especies">
         <li><b>Vicuña</b><i>Vicugna vicugna</i><span>Se salvó de la extinción en los años setenta gracias a un plan de conservación.</span></li>
         <li><b>Guanaco, llama y alpaca</b><span>Con la vicuña, son los cuatro camélidos que se ven en el parque.</span></li>
         <li><b>Vizcacha peruana</b><i>Lagidium peruanum</i><span>Habita entre las rocas.</span></li>
@@ -1254,7 +1273,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </div>
     <div class="nat-group" style="--tc:var(--a-pink)">
       <h3>Aves</h3>
-      <ul class="species">
+      <ul class="species" data-more="3" data-more-label="especies">
         <li><b>Flamencos</b><span>El parque alberga las tres especies de flamencos de Chile: chileno, parina grande y parina chica.</span></li>
         <li><b>Suri o ñandú del norte</b><i>Rhea pennata tarapacensis</i><span>Corre por la estepa del altiplano.</span></li>
         <li><b>Perdiz de la puna (kiula)</b><i>Tinamotis pentlandii</i><span>Ave de suelo, camuflada entre pastos.</span></li>
@@ -1265,7 +1284,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </div>
     <div class="nat-group" style="--tc:var(--c-naturaleza)">
       <h3>Plantas</h3>
-      <ul class="species">
+      <ul class="species" data-more="3" data-more-label="especies">
         <li><b>Yareta</b><i>Azorella compacta</i><span>Crece sobre los 4.000 metros, de 1 a 2 milímetros por año. Está protegida.</span></li>
         <li><b>Queñoa</b><i>Polylepis rugulosa</i><span>Bosques de precordillera, entre 3.200 y 3.800 metros. Está en peligro por pérdida de hábitat.</span></li>
         <li><b>Queñoa de altura</b><i>Polylepis tarapacana</i><span>El árbol que crece a mayor altitud en el mundo.</span></li>
@@ -1289,11 +1308,11 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </header>
     <div class="weather">
       <div class="card now">
-        <h4>Captura del 15 de octubre de 2026, por la noche</h4>
-        <div class="big">21 °C</div>
-        <div class="cond">Despejado</div>
-        <small>Esta página no puede consultar el clima en vivo: es una captura tomada al publicar. Para el pronóstico al minuto, mira <a href="https://www.meteochile.gob.cl/" target="_blank" rel="noopener noreferrer">meteochile.gob.cl</a>.</small>
-        <ul class="fc" aria-label="Pronóstico a ocho días">
+        <h4 id="w-when">Captura del 15 de octubre de 2026, por la noche</h4>
+        <div class="big" id="w-temp">21 °C</div>
+        <div class="cond" id="w-cond">Despejado</div>
+        <small id="w-note">No se pudo cargar el clima en vivo, así que se muestra una captura de referencia. Para el pronóstico al minuto, mira <a href="https://www.meteochile.gob.cl/" target="_blank" rel="noopener noreferrer">meteochile.gob.cl</a>.</small>
+        <ul class="fc" id="w-fc" aria-label="Pronóstico a ocho días">
           <li><span class="d">Jue 15</span><span class="hi">24°</span><span class="lo">18°</span><span class="rn">5 %</span></li>
           <li><span class="d">Vie 16</span><span class="hi">23°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
           <li><span class="d">Sáb 17</span><span class="hi">22°</span><span class="lo">18°</span><span class="rn">10 %</span></li>
@@ -1329,14 +1348,14 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     </header>
     <div class="eat-group" style="margin-top:0">
       <h3>Hoteles</h3>
-      <ul class="eat">
+      <ul class="eat" data-more="3" data-more-label="lugares">
         <li class="card lodge"><span class="type">Hotel</span><h3>Antay Hotel &amp; Spa</h3><p>Habitaciones con vista al mar, spa, gimnasio, casino y centro de convenciones. Está en la calle Chile.</p></li>
         <li class="card lodge"><span class="type">Hotel</span><h3>Hotel Apacheta</h3><p>En la costa, al sur del centro, entre las playas La Lisera y El Laucho.</p></li>
       </ul>
     </div>
     <div class="eat-group">
       <h3>Hostales</h3>
-      <ul class="eat">
+      <ul class="eat" data-more="3" data-more-label="lugares">
         <li class="card lodge"><span class="type">Hostal</span><h3>Raymi House Hostel</h3><p>Cerca de la catedral y la Plaza Colón.</p></li>
         <li class="card lodge"><span class="type">Hostal</span><h3>Illariy Wasi Hostal</h3><p>En pleno centro de la ciudad.</p></li>
         <li class="card lodge"><span class="type">Hostal</span><h3>Hostel La Posada de Gallo</h3><p>A unos 2 km del centro.</p></li>
@@ -1361,7 +1380,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-tra">Micros, colectivos y cómo llegar</h2>
       <p class="sec-lede">Dentro de la ciudad se anda bien a pie, en micro o en colectivo. Para salir a otras ciudades o a Perú, hay dos terminales de buses casi pegados.</p>
     </header>
-    <ul class="cards cards-3">
+    <ul class="cards cards-3" data-more="3" data-more-label="opciones">
       <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-bus"/></svg></div><h3>Micros urbanas</h3><p>Recorren las avenidas principales y llegan al terminal de buses. Desde el 1 de junio de 2026 todos los recorridos debían operar solo con pago digital: tarjeta Kupos (cuesta $2.500 y se recarga en línea o en puntos físicos), código QR, o TNE validada para estudiantes. Se acerca la tarjeta o el QR al validador de la entrada.</p></article></li>
       <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-car"/></svg></div><h3>Colectivos</h3><p>Taxis compartidos que siguen rutas fijas. Pregunta la tarifa antes de subir y, si dudas, confirma el recorrido con el conductor.</p></article></li>
       <li><article class="card mode"><div class="ic"><svg aria-hidden="true"><use href="#i-walk"/></svg></div><h3>A pie</h3><p>El centro, la Plaza Colón y el comienzo del sendero al Morro se recorren caminando, y varias playas quedan a pocos minutos.</p></article></li>
@@ -1387,7 +1406,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <li><b>US$ 314 M</b><span>exportaciones regionales</span></li>
       <li><b>≈ 280 mil</b><span>habitantes de la región (INE, junio de 2025)</span></li>
     </ul>
-    <ul class="cards cards-3">
+    <ul class="cards cards-3" data-more="3" data-more-label="sectores">
       <li><article class="card eco"><h3>Puerto y comercio</h3><p>El Puerto de Arica es parte del Corredor Bioceánico Central y una puerta de salida clave para el comercio con Bolivia.</p></article></li>
       <li><article class="card eco"><h3>Agricultura de contraestación</h3><p>Los valles de Azapa, Lluta y Camarones producen en meses en que otras zonas no lo hacen: hortalizas, olivos y cítricos.</p></article></li>
       <li><article class="card eco"><h3>Zona Franca e industria</h3><p>La Zona Franca de Arica funciona como plataforma de importación, almacenamiento y reexportación. Los parques industriales, como Chacalluta, también se vinculan a este régimen.</p></article></li>
@@ -1517,7 +1536,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       <h2 id="h-dat">¿Sabías que…?</h2>
       <p class="sec-lede">Diez datos para sorprender a quien viaja contigo.</p>
     </header>
-    <ul class="facts-grid">
+    <ul class="facts-grid" data-more="5" data-more-label="datos">
       <li class="card fact"><p>Las momias Chinchorro, de hace unos 7.000 años, están entre las momias artificiales más antiguas que se conocen. Son Patrimonio Mundial de la UNESCO.</p></li>
       <li class="card fact"><p>En un año normal casi no llueve. Sobre el papel, Arica es una de las ciudades habitadas más áridas del planeta.</p></li>
       <li class="card fact"><p>Desde Arica salieron trenes hacia dos países: el ferrocarril a Tacna (1856) y el que llega a La Paz (1913).</p></li>
@@ -1626,7 +1645,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       </div>
       <div>
         <h3 style="margin-bottom:12px">Fuentes consultadas</h3>
-        <ul class="sources">
+        <ul class="sources" data-more="6" data-more-label="fuentes">
           <li><a href="https://es.hispanopedia.com/wiki/Arica" target="_blank" rel="noopener noreferrer">Hispanopedia · Arica</a></li>
           <li><a href="https://chile.travel/blog/que-hacer-en-arica-ciudad-de-la-eterna-primavera-2/" target="_blank" rel="noopener noreferrer">Chile Travel · Qué hacer en Arica</a></li>
           <li><a href="https://en.wikivoyage.org/wiki/Arica" target="_blank" rel="noopener noreferrer">Wikivoyage · Arica</a></li>
@@ -1664,9 +1683,18 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
 </footer>
 
 
+<script src="fotos.js"></script>
 <script>
 (function () {
   "use strict";
+
+  /* ================= CONFIGURACIÓN =================
+     Formulario de contacto fuera de Claude (por ejemplo, en Vercel):
+     1) Crea una cuenta gratis en https://formspree.io y un formulario nuevo.
+     2) Copia su dirección (se ve así: https://formspree.io/f/abcdwxyz) y pégala abajo, entre las comillas.
+     Los mensajes te llegarán al correo con el que creaste la cuenta.
+     Si lo dejas vacío, el formulario se oculta para que no se vea roto. */
+  var FORM_URL = "";
 
   /* ---------- Utilidades ---------- */
   function $(s, r) { return (r || document).querySelector(s); }
@@ -2103,11 +2131,15 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
       list.replaceChildren(); count.textContent = ""; showNote("Cargando opiniones…");
       return;
     }
+    var head = $(".recs-head");
     if (!state.db) {
+      /* Fuera de Claude no hay dónde guardar opiniones: se oculta el bloque para que no se vea vacío. */
       list.replaceChildren(); count.textContent = "";
-      showNote("Las opiniones de visitantes todavía no están activas en esta versión de la página.");
+      head.hidden = true;
+      showNote("");
       return;
     }
+    head.hidden = false;
     var items = state.recs.filter(function (r) { return r.placeId === state.sel; });
     count.textContent = items.length ? String(items.length) : "";
     var readOnly = state.canWrite === false;
@@ -2365,6 +2397,91 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     }
   }
 
+  /* ---------- Clima en vivo (Open-Meteo, gratis y sin clave) ----------
+     Si no hay internet o la consulta falla, queda la captura escrita en el HTML. */
+  var WMO = {
+    0: "Despejado", 1: "Mayormente despejado", 2: "Parcialmente nublado", 3: "Nublado",
+    45: "Neblina", 48: "Neblina con escarcha",
+    51: "Llovizna débil", 53: "Llovizna", 55: "Llovizna intensa", 56: "Llovizna helada", 57: "Llovizna helada",
+    61: "Lluvia débil", 63: "Lluvia", 65: "Lluvia intensa", 66: "Lluvia helada", 67: "Lluvia helada",
+    71: "Nieve débil", 73: "Nieve", 75: "Nieve intensa", 77: "Granizo fino",
+    80: "Chubascos débiles", 81: "Chubascos", 82: "Chubascos fuertes",
+    85: "Chubascos de nieve", 86: "Chubascos de nieve", 95: "Tormenta", 96: "Tormenta con granizo", 99: "Tormenta con granizo"
+  };
+  var DIAS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  function loadWeather() {
+    if (!window.fetch) return;
+    var url = "https://api.open-meteo.com/v1/forecast?latitude=-18.48&longitude=-70.32"
+      + "&current=temperature_2m,weather_code"
+      + "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+      + "&timezone=America%2FSantiago&forecast_days=8";
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 8000);
+    fetch(url, ctrl ? { signal: ctrl.signal } : {})
+      .then(function (r) { if (!r.ok) throw new Error("http " + r.status); return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        var c = d && d.current, dl = d && d.daily;
+        if (!c || !dl || !Array.isArray(dl.time) || typeof c.temperature_2m !== "number") return;
+        $("#w-temp").textContent = Math.round(c.temperature_2m) + " °C";
+        $("#w-cond").textContent = WMO[c.weather_code] || "—";
+        var hora = String(c.time || "").slice(11, 16);
+        var when = $("#w-when");
+        when.textContent = "Ahora en Arica" + (hora ? " · " + hora + " h" : "");
+        when.classList.add("live");
+        $("#w-note").textContent = "Datos en vivo de Open-Meteo. Para alertas oficiales, revisa ";
+        var a = el("a", null, "meteochile.gob.cl");
+        a.href = "https://www.meteochile.gob.cl/"; a.target = "_blank"; a.rel = "noopener noreferrer";
+        $("#w-note").appendChild(a);
+        $("#w-note").appendChild(document.createTextNode("."));
+        var ul = $("#w-fc");
+        ul.replaceChildren();
+        dl.time.forEach(function (t, i) {
+          var p = String(t).split("-");
+          var day = new Date(+p[0], +p[1] - 1, +p[2]);
+          var li = el("li");
+          li.appendChild(el("span", "d", i === 0 ? "Hoy" : DIAS[day.getDay()] + " " + day.getDate()));
+          li.appendChild(el("span", "hi", Math.round(dl.temperature_2m_max[i]) + "°"));
+          li.appendChild(el("span", "lo", Math.round(dl.temperature_2m_min[i]) + "°"));
+          var rn = dl.precipitation_probability_max ? dl.precipitation_probability_max[i] : null;
+          li.appendChild(el("span", "rn", typeof rn === "number" ? rn + " %" : "—"));
+          ul.appendChild(li);
+        });
+      })
+      .catch(function () { clearTimeout(timer); });
+  }
+
+  /* ---------- Listas largas: se muestran las primeras y el resto con "Ver más" ----------
+     Para usarlo en otra lista, agrégale data-more="cuántas mostrar" y data-more-label="nombre". */
+  function bindMore() {
+    $$("[data-more]").forEach(function (list, k) {
+      var n = parseInt(list.getAttribute("data-more"), 10) || 4;
+      var items = Array.prototype.filter.call(list.children, function (c) { return c.tagName === "LI"; });
+      if (items.length <= n + 1) return;
+      var extra = items.slice(n);
+      var label = list.getAttribute("data-more-label") || "elementos";
+      if (!list.id) list.id = "lista-" + k;
+      var b = el("button", "btn ghost small more-btn");
+      b.type = "button";
+      b.setAttribute("aria-controls", list.id);
+      var txt = el("span");
+      b.appendChild(txt);
+      b.insertAdjacentHTML("beforeend", '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+      function paint(open) {
+        extra.forEach(function (li) { li.classList.toggle("is-clipped", !open); });
+        b.setAttribute("aria-expanded", String(open));
+        txt.textContent = open ? "Ver menos" : "Ver " + extra.length + " " + label + " más";
+      }
+      b.addEventListener("click", function () {
+        var open = b.getAttribute("aria-expanded") !== "true";
+        paint(open);
+        if (!open) b.scrollIntoView({ block: "nearest", behavior: reduceMotion() ? "auto" : "smooth" });
+      });
+      paint(false);
+      list.insertAdjacentElement("afterend", b);
+    });
+  }
+
   /* ---------- Capacidades de Claude (opiniones, noticias, mensajes, fotos) ---------- */
   function use(name) {
     try {
@@ -2382,21 +2499,40 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     var ta = $("#c-text");
     function upd() {
       $("#c-count").textContent = ta.value.length + "/500";
-      $("#c-send").disabled = !canSend() || ta.value.trim().length < 5;
+      $("#c-send").disabled = mode() === "off" || ta.value.trim().length < 5;
     }
     function canSend() { return !!(state.db && state.me && state.me.id && state.canWrite !== false); }
+    function formUrl() { return /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/.test(FORM_URL.trim()) ? FORM_URL.trim() : ""; }
+    function mode() { return canSend() ? "claude" : formUrl() ? "form" : "off"; }
     ta.addEventListener("input", upd);
     $$(".to-contact").forEach(function (a) {
       a.addEventListener("click", function () { $("#c-kind").value = a.getAttribute("data-kind") || "consulta"; });
     });
     $("#c-form").addEventListener("submit", async function (e) {
       e.preventDefault();
-      if (!canSend()) return;
+      var m = mode();
+      if (m === "off") return;
       var text = ta.value.trim();
       if (text.length < 5) return;
       var send = $("#c-send");
       send.disabled = true;
       $("#c-status").textContent = "Enviando…";
+      if (m === "form") {
+        try {
+          var r = await fetch(formUrl(), {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({ tipo: KIND[$("#c-kind").value] || "Consulta", nombre: $("#c-name").value.trim().slice(0, 60), mensaje: text.slice(0, 500) })
+          });
+          if (!r.ok) throw new Error("http " + r.status);
+          ta.value = "";
+          $("#c-status").textContent = "Mensaje enviado. ¡Gracias!";
+        } catch (err) {
+          $("#c-status").textContent = "No se pudo enviar. Revisa tu conexión e intenta de nuevo.";
+        }
+        upd();
+        return;
+      }
       try {
         var ref = state.db.doc("mensajes/" + state.me.id);
         var snap = await ref.get();
@@ -2414,9 +2550,11 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     });
     bindContact.refresh = function () {
       var note = $("#c-note");
+      var form = $("#c-form");
       if (!state.dbChecked) { note.hidden = true; return; }
-      if (canSend()) { note.hidden = true; }
+      if (mode() !== "off") { note.hidden = true; form.hidden = false; }
       else {
+        form.hidden = true;
         note.hidden = false;
         note.textContent = "El formulario de contacto todavía no está activo en esta versión de la página.";
       }
@@ -2506,6 +2644,52 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     }
   }
 
+  /* Fotos fijas (versión alojada en Vercel): se leen de fotos.js y de la carpeta fotos/ */
+  var PHOTO_FILE = /^[A-Za-z0-9_.\-]+\.(jpe?g|png|webp|gif|avif)$/i;
+  function showPhotoHeadings() {
+    $("#gal-ill").hidden = false;
+    $("#gal-lede").textContent = "Fotos de la ciudad y sus alrededores, junto a las ilustraciones del proyecto. Toca una para verla grande.";
+  }
+  /* Foto real en la portada: se configura con window.PORTADA en fotos.js */
+  function renderHeroPhoto() {
+    var o = window.PORTADA;
+    if (!o || !PHOTO_FILE.test(String(o.archivo || ""))) return;
+    var fig = $(".hero-art");
+    var img = document.createElement("img");
+    img.alt = String(o.texto || "Vista de Arica");
+    img.decoding = "async";
+    img.addEventListener("load", function () {
+      fig.replaceChildren(img);
+      if (o.credito) fig.appendChild(el("figcaption", null, String(o.credito)));
+    });
+    img.src = "fotos/" + o.archivo; /* si la foto no existe, se queda la ilustración */
+  }
+  function renderStaticPhotos() {
+    var list = Array.isArray(window.FOTOS) ? window.FOTOS : [];
+    var items = list.filter(function (o) { return o && PHOTO_FILE.test(String(o.archivo || "")); });
+    if (!items.length) return;
+    var grid = $("#photo-grid");
+    grid.replaceChildren();
+    $("#user-photos").hidden = false;
+    showPhotoHeadings();
+    items.forEach(function (o) {
+      var text = String(o.texto || "Foto de Arica");
+      var li = el("li");
+      var b = el("button", "shot"); b.type = "button";
+      b.setAttribute("data-cap", text);
+      var img = document.createElement("img");
+      img.src = "fotos/" + o.archivo; img.alt = text; img.loading = "lazy"; img.decoding = "async";
+      img.addEventListener("error", function () { li.hidden = true; });
+      b.appendChild(img);
+      var cap = el("span", "shot-cap");
+      cap.appendChild(el("b", null, text));
+      cap.appendChild(el("small", null, o.credito ? "Foto: " + String(o.credito) : "Foto"));
+      b.appendChild(cap);
+      li.appendChild(b);
+      grid.appendChild(li);
+    });
+  }
+
   /* Fotos (solo quienes administran la página las suben) */
   function startPhotos() {
     if (!state.db) return;
@@ -2513,6 +2697,7 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
     state.db.collection("galeria").orderBy("ts", "desc").limit(60).onSnapshot(function (snap) {
       grid.replaceChildren();
       $("#user-photos").hidden = snap.empty;
+      if (!snap.empty) showPhotoHeadings();
       snap.docs.forEach(function (d) {
         var o = d.data() || {};
         if (!o.assetId || !/^[0-9a-f]{32}$/.test(String(o.assetId))) return;
@@ -2605,6 +2790,10 @@ h4 { margin: 0; font: 600 12px var(--font-mono); letter-spacing: .1em; text-tran
   bindDirectory();
   bindContact();
   drawChart();
+  loadWeather();
+  bindMore();
+  renderHeroPhoto();
+  renderStaticPhotos();
   renderAll();
   connect();
 })();
