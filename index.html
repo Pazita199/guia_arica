@@ -747,6 +747,65 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 .lines-card .tips b { color: var(--ink); }
 @media (max-width: 599px) { .tbl td:last-child { white-space: normal; } .tbl th, .tbl td { padding: 9px 10px; } }
 
+/* Fotos de los platos típicos */
+.dish.has-ph { padding-top: 0; }
+.dish.has-ph::after { display: none; }
+.dish-ph { margin: 0 -18px 6px; aspect-ratio: 4 / 3; }
+.dish-ph img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.dish:hover .dish-ph img { transform: scale(1.05); }
+.dish.has-ph > .pill { position: absolute; top: 12px; left: 12px; z-index: 3; background: rgba(4,14,20,.72); color: #fff; border-color: transparent; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+@media (prefers-reduced-motion: reduce) { .dish-ph img { transition: none; } .dish:hover .dish-ph img { transform: none; } }
+@media (max-width: 559px) {
+  .dishes { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .dish { padding: 12px; }
+  .dish-ph { margin: 0 -12px 4px; }
+  .dish h3 { font-size: 1rem; }
+  .dish p { font-size: 13px; }
+  .dish .ph-credit { display: none; }
+  .dish.has-ph > .pill { top: 8px; left: 8px; }
+}
+
+/* Índice a pantalla completa con fotos */
+.menu { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; background: #06171d; color: #eef3f5; }
+.menu::backdrop { background: rgba(2, 8, 12, .75); }
+.menu-in { max-width: 1180px; margin: 0 auto; padding: 18px max(16px, env(safe-area-inset-left, 0px)) 40px; }
+.menu-top { align-items: flex-start; margin-bottom: 20px; }
+.menu-kicker { margin: 6px 0 6px; font: 500 12px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--sun); }
+.menu-top h2 { color: #fff; font-size: clamp(2rem, 6vw, 3.4rem); text-transform: none; letter-spacing: -.025em; }
+.menu-x { color: #fff; border: 1px solid rgba(255,255,255,.25); width: 48px; height: 48px; }
+.menu-x:hover { background: rgba(255,255,255,.12); }
+.mgrid { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 800px) { .mgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+.mg { position: relative; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); border-radius: 18px; overflow: hidden; }
+.mg-head { position: relative; display: block; aspect-ratio: 21 / 8; overflow: hidden; }
+.mg-head .ph { position: absolute; inset: 0; }
+.mg-head .ph img { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.mg:hover .mg-head .ph img { transform: scale(1.06); }
+.mg-head::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(6,23,29,1) 0%, rgba(6,23,29,.55) 40%, rgba(6,23,29,.05) 100%); }
+.mg-head .ph-credit { top: 8px; bottom: auto; }
+.mg-t { position: absolute; left: 20px; right: 20px; top: 0; z-index: 2; margin: 0; padding-top: calc((100% * 8 / 21) - 70px); display: grid; gap: 4px; pointer-events: none; color: #fff; font: 800 clamp(1.6rem, 4vw, 2.3rem)/1 var(--font-display); font-stretch: 118%; letter-spacing: -.015em; }
+.mg-t small { font: 500 11px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--sun); }
+.mg ul { list-style: none; margin: 0; padding: 10px 10px 14px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 8px; }
+.mg li a { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 46px; padding: 8px 12px; border-radius: 10px; color: #eef3f5; text-decoration: none; font-weight: 500; font-size: 15px; line-height: 1.25; }
+.mg li a:hover { background: rgba(255,255,255,.08); color: var(--sun); }
+.mg li a svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: .45; transition: transform .2s, opacity .2s; }
+.mg li a:hover svg { transform: translateX(3px); opacity: 1; }
+.menu :focus-visible { outline-color: var(--sun); }
+@media (max-width: 460px) { .mg ul { grid-template-columns: minmax(0, 1fr); } .mg-head { aspect-ratio: 16 / 7; } .mg-t { padding-top: calc((100% * 7 / 16) - 66px); } }
+.menu-quick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.mq { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.06); color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; }
+.mq:hover { border-color: var(--sun); color: #fff; }
+.mq svg { width: 18px; height: 18px; fill: none; stroke: var(--sun); stroke-width: 1.8; stroke-linejoin: round; }
+.mq.sos { background: #B2432B; border-color: #B2432B; }
+.mq.sos b { font: 800 1.35rem/1 var(--font-display); font-stretch: 112%; }
+.menu[open] .mg, .menu[open] .menu-quick { animation: mg-in .5s cubic-bezier(.2,.7,.2,1) both; }
+.menu[open] .mg:nth-child(2) { animation-delay: .06s; }
+.menu[open] .mg:nth-child(3) { animation-delay: .12s; }
+.menu[open] .mg:nth-child(4) { animation-delay: .18s; }
+.menu[open] .menu-quick { animation-delay: .24s; }
+@keyframes mg-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .menu[open] .mg, .menu[open] .menu-quick { animation: none; } .mg-head .ph img, .mg li a svg { transition: none; } }
+
 /* Aparición suave al bajar */
 .js-reveal .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .js-reveal .reveal.in { opacity: 1; transform: none; }
@@ -767,6 +826,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 20v-3M16 20v-3"/><circle cx="8" cy="14.3" r=".6"/><circle cx="16" cy="14.3" r=".6"/></symbol>
     <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 3L3 10.5l6.5 2.5L12 20z"/><path d="M9.5 13L21 3"/></symbol>
@@ -806,57 +866,69 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   </div>
 </header>
 
-<dialog class="menu" id="menu" aria-label="Índice de la guía">
+<dialog class="menu" id="menu" aria-labelledby="menu-title">
   <div class="menu-in">
     <div class="menu-top">
-      <h2>Índice</h2>
-      <button class="icon-btn" id="menu-close" type="button" aria-label="Cerrar el índice"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div>
+        <p class="menu-kicker">Guía de Arica</p>
+        <h2 id="menu-title">¿Qué quieres hacer?</h2>
+      </div>
+      <button class="icon-btn menu-x" id="menu-close" type="button" aria-label="Cerrar el índice"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
-    <div class="menu-groups">
-      <div>
-        <h3>Inspírate</h3>
-        <ol>
-          <li><a href="#experiencias">Experiencias</a></li>
-          <li><a href="#lugares">Lugares, mapa y buscador</a></li>
-          <li><a href="#rutas">Rutas turísticas</a></li>
-          <li><a href="#actividades">Actividades</a></li>
-          <li><a href="#galeria">Galería de fotos</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Vive Arica</h3>
-        <ol>
-          <li><a href="#carnaval">Carnaval Con la Fuerza del Sol</a></li>
-          <li><a href="#eventos">Fiestas del año</a></li>
-          <li><a href="#cultura">Cultura y tradiciones</a></li>
-          <li><a href="#gastronomia">Comida típica</a></li>
-          <li><a href="#comer">Dónde comer</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Planifica tu viaje</h3>
-        <ol>
-          <li><a href="#clima">Clima y pronóstico</a></li>
-          <li><a href="#alojamiento">Alojamiento</a></li>
-          <li><a href="#transporte">Transporte</a></li>
-          <li><a href="#emergencias">Emergencias</a></li>
-          <li><a href="#faq">Preguntas frecuentes</a></li>
-        </ol>
-      </div>
-      <div>
-        <h3>Conoce Arica</h3>
-        <ol>
-          <li><a href="#historia">Historia de la ciudad</a></li>
-          <li><a href="#monumentos">Monumentos históricos</a></li>
-          <li><a href="#naturaleza">Flora y fauna</a></li>
-          <li><a href="#datos">Datos curiosos</a></li>
-          <li><a href="#economia">Economía local</a></li>
-          <li><a href="#negocios">Directorio de negocios</a></li>
-          <li><a href="#noticias">Noticias</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-          <li><a href="#acerca">Sobre el proyecto</a></li>
-        </ol>
-      </div>
+    <div class="mgrid">
+      <section class="mg" aria-labelledby="mg1">
+        <a class="mg-head" href="#experiencias" tabindex="-1" aria-hidden="true"><span class="ph" data-ph="chungara"></span></a>
+        <h3 class="mg-t" id="mg1"><small>Para soñar el viaje</small>Inspírate</h3>
+        <ul>
+          <li><a href="#experiencias">Experiencias<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#lugares">Lugares y mapa<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#rutas">Rutas turísticas<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#actividades">Actividades<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#galeria">Galería de fotos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        </ul>
+      </section>
+      <section class="mg" aria-labelledby="mg2">
+        <a class="mg-head" href="#carnaval" tabindex="-1" aria-hidden="true"><span class="ph" data-ph="carnaval2"></span></a>
+        <h3 class="mg-t" id="mg2"><small>Fiestas, cultura y sabores</small>Vive Arica</h3>
+        <ul>
+          <li><a href="#carnaval">Carnaval Con la Fuerza del Sol<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#eventos">Fiestas del año<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#cultura">Cultura y tradiciones<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#gastronomia">Comida típica<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#comer">Dónde comer<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        </ul>
+      </section>
+      <section class="mg" aria-labelledby="mg3">
+        <a class="mg-head" href="#planifica" tabindex="-1" aria-hidden="true"><span class="ph" data-ph="barcos"></span></a>
+        <h3 class="mg-t" id="mg3"><small>Todo lo práctico</small>Planifica tu viaje</h3>
+        <ul>
+          <li><a href="#clima">Clima y pronóstico<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#alojamiento">Dónde dormir<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#transporte">Micros y transporte<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#emergencias">Emergencias<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#faq">Preguntas frecuentes<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        </ul>
+      </section>
+      <section class="mg" aria-labelledby="mg4">
+        <a class="mg-head" href="#conoce" tabindex="-1" aria-hidden="true"><span class="ph" data-ph="poconchile"></span></a>
+        <h3 class="mg-t" id="mg4"><small>Historia y naturaleza</small>Conoce Arica</h3>
+        <ul>
+          <li><a href="#historia">Historia de la ciudad<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#monumentos">Monumentos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#naturaleza">Flora y fauna<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#datos">Datos curiosos<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#economia">Economía local<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#negocios">Directorio de negocios<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#noticias">Noticias<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#acerca">Sobre el proyecto<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="menu-quick">
+      <a class="mq sos" href="tel:131"><b>131</b> Ambulancia</a>
+      <a class="mq" href="#emergencias">Todos los números de emergencia</a>
+      <button class="mq" id="menu-favs" type="button"><svg aria-hidden="true"><use href="#i-star"/></svg> Mis lugares guardados</button>
+      <a class="mq" href="#contacto">Contacto</a>
     </div>
   </div>
 </dialog>
@@ -1893,6 +1965,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     var menu = $("#menu");
     $("#menu-btn").addEventListener("click", function () { openDialog(menu); });
     $("#menu-close").addEventListener("click", function () { closeDialog(menu); });
+    $("#menu-favs").addEventListener("click", function () { closeDialog(menu); $("#fav-btn").click(); });
     menu.addEventListener("click", function (e) {
       if (e.target === menu) closeDialog(menu);
       var a = e.target.closest && e.target.closest("a");
@@ -2678,7 +2751,28 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     quenoa: wmPhoto("Queñoa (Polylepis rugulosa)", "Alexander Yates", "CC BY-SA 2.0", "e/eb/Polylepis_rugulosa_%28A._Yates%29.jpg"),
     quenoa2: wmPhoto("Queñoa de altura", "Rodrisan", "CC BY-SA 3.0", "9/9c/Polylepis_Tarapacana_1.jpg"),
     puskayo: wmPhoto("Puskayo", "Michael Wolf", "CC BY-SA 3.0", "b/b3/Cumulopuntia_boliviana_01.jpg"),
-    bofedal: wmPhoto("Llamas en el bofedal de Parinacota", "Rafa arica", "CC BY-SA 3.0", "5/51/Llamas_en_el_Bofedal_de_Parinacota.JPG")
+    bofedal: wmPhoto("Llamas en el bofedal de Parinacota", "Rafa arica", "CC BY-SA 3.0", "5/51/Llamas_en_el_Bofedal_de_Parinacota.JPG"),
+    /* Comida típica */
+    ceviche: wmPhoto("Ceviche chileno", "Fabián Gutiérrez Cortés", "CC BY-SA 4.0", "3/31/Ceviche_Chilien.jpg", { big: "https://upload.wikimedia.org/wikipedia/commons/3/31/Ceviche_Chilien.jpg", sm: "https://upload.wikimedia.org/wikipedia/commons/3/31/Ceviche_Chilien.jpg" }),
+    almejas: wmPhoto("Machas a la parmesana", "Mariela Morales", "CC BY 2.0", "6/6a/Machas_a_la_parmesana_-_Flickr_-_Marieloreto.jpg"),
+    chicharron: wmPhoto("Chicharrón mixto de mariscos", "Dtarazona", "Dominio público", "2/22/ChicharronMixto.JPG"),
+    picante: wmPhoto("Picante de mariscos con arroz", "Ranstevens", "CC BY-SA 4.0", "c/ca/Picante_de_Mariscos_con_Arroz.JPG"),
+    erizo: wmPhoto("Erizos frescos", "TUTOXIC", "CC BY-SA 4.0", "f/fd/ERIZOS_FRESCOS_%28Loxechinus_albus%29.jpg"),
+    pescado: wmPhoto("Pescado frito", "Mariela Morales", "CC BY 2.0", "a/ac/Pescado_frito_con_ensaladas_-_Flickr_-_Marieloreto.jpg"),
+    paila: wmPhoto("Paila marina", "Daniel Norero", "CC BY-SA 2.5", "b/b7/Paila_Marina.jpg"),
+    aceitunas: wmPhoto("Aceitunas de Azapa", "Andrea021", "CC BY-SA 3.0", "4/46/P05-06-11_13.jpg", { big: "https://upload.wikimedia.org/wikipedia/commons/4/46/P05-06-11_13.jpg", sm: "https://upload.wikimedia.org/wikipedia/commons/4/46/P05-06-11_13.jpg" }),
+    empanadas: wmPhoto("Empanadas de queso", "E4024", "CC BY-SA 4.0", "7/7d/Empanadas_de_queso.jpg"),
+    calapurca: wmPhoto("Calapurca", "Hipnotron", "CC BY-SA 3.0", "9/93/Calapurca_iquique.jpg", { big: "https://upload.wikimedia.org/wikipedia/commons/9/93/Calapurca_iquique.jpg", sm: "https://upload.wikimedia.org/wikipedia/commons/9/93/Calapurca_iquique.jpg" }),
+    humitas: wmPhoto("Humitas", "JordiCuber", "CC BY-SA 4.0", "9/99/Humitas_%284%29.jpg"),
+    chumbeque: wmPhoto("Chumbeque de Iquique", "Viva Iquique", "CC BY 2.0", "2/2d/Chumbeque_chileno.jpg")
+  };
+  /* Foto de cada plato de "Comida típica", según el título de su tarjeta */
+  var DISH_PH = {
+    "Ceviche": "ceviche", "Almejas a la parmesana": "almejas", "Chicharrones de mariscos": "chicharron",
+    "Picante de mariscos": "picante", "Piure y erizo": "erizo", "Sargo frito": "pescado",
+    "Paila marina y pantrucas": "paila", "Pan con aceitunas de Azapa": "aceitunas",
+    "Empanadas de queso o mariscos": "empanadas", "Sopa calapurca": "calapurca",
+    "Humitas de Tani": "humitas", "Chumbeque y melcocha": "chumbeque"
   };
   /* Foto de cada especie de "Flora y fauna", según el nombre en negrita de su tarjeta */
   var SPECIES_PH = {
@@ -2739,6 +2833,15 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 
   /* Rellena cada <span class="ph" data-ph="clave"> con su foto y su crédito */
   function fillPhotos() {
+    $$(".dishes > li").forEach(function (li) {
+      var h = li.querySelector("h3");
+      var k = h && DISH_PH[h.textContent.trim()];
+      if (!k || li.querySelector(".dish-ph")) return;
+      var s = el("span", "ph dish-ph");
+      s.setAttribute("data-ph", k);
+      li.insertBefore(s, li.firstChild);
+      li.classList.add("has-ph");
+    });
     $$(".species > li").forEach(function (li) {
       var b = li.querySelector("b");
       var k = b && SPECIES_PH[b.textContent.trim()];
