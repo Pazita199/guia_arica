@@ -815,6 +815,114 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 /* Aparición suave al bajar */
 .js-reveal .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .js-reveal .reveal.in { opacity: 1; transform: none; }
+
+/* =====================================================================
+   MENÚ DE ACCESIBILIDAD
+   ===================================================================== */
+.a11y-fab { position: fixed; z-index: 45; left: 16px; bottom: 16px; width: 56px; height: 56px; border-radius: 50%; border: 3px solid #fff; background: #17458F; color: #fff; display: grid; place-items: center; padding: 0; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+.a11y-fab svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.a11y-fab:hover { background: #0F3066; }
+.a11y-fab:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+.a11y-fab.on::after { content: ""; position: absolute; top: 0; right: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--sun); border: 2px solid #fff; }
+@media (min-width: 900px) {
+  .a11y-fab { left: 0; bottom: auto; top: 50%; transform: translateY(-50%); border-radius: 0 14px 14px 0; border-left: 0; width: 54px; height: 60px; }
+}
+.a11y-panel { position: fixed; z-index: 46; left: 12px; right: 12px; bottom: 84px; max-height: calc(100dvh - 110px); overflow: auto; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 18px; padding: 18px; box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+@media (min-width: 900px) { .a11y-panel { left: 70px; right: auto; bottom: auto; top: 50%; transform: translateY(-50%); width: 400px; max-height: calc(100dvh - 40px); } }
+.a11y-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.a11y-head h2 { margin: 0; display: flex; align-items: center; gap: 10px; font: 800 1.5rem/1.1 var(--font-display); }
+.a11y-head h2 svg { width: 30px; height: 30px; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.a11y-lede { margin: 8px 0 14px; font-size: 14px; color: var(--ink-2); }
+.a11y-size { display: grid; grid-template-columns: 1fr auto auto auto; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line); margin-bottom: 10px; }
+.a11y-size span { font-weight: 700; }
+.a11y-step { min-width: 48px; min-height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 800 18px var(--font-body); }
+.a11y-step:disabled { opacity: .4; cursor: not-allowed; }
+.a11y-size output { min-width: 52px; text-align: center; font: 700 15px var(--font-mono); }
+.a11y-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.a11y-opt { display: grid; grid-template-columns: 40px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 10px; align-items: center; text-align: left; padding: 10px; min-height: 64px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface-2); color: var(--ink); }
+.a11y-opt .a11y-ic { grid-row: span 2; }
+.a11y-opt b { font-size: 14px; line-height: 1.2; }
+.a11y-opt small { font-size: 12px; line-height: 1.25; color: var(--ink-2); }
+.a11y-opt:hover { border-color: var(--accent); }
+.a11y-opt[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.a11y-opt[aria-pressed="true"] .a11y-ic { background: var(--accent); color: var(--on-accent); }
+.a11y-ic { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); font: 800 16px var(--font-body); color: var(--ink); }
+.a11y-ic svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.a11y-ic-u { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.a11y-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+.a11y-foot a { font-size: 14px; }
+@media (max-width: 380px) { .a11y-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Sección de accesibilidad */
+.acc { padding: 20px; display: grid; gap: 8px; align-content: start; height: 100%; }
+.acc .a11y-ic { width: 46px; height: 46px; font-size: 18px; background: var(--sun); color: var(--on-sun); border: 0; }
+.acc p { margin: 0; color: var(--ink-2); font-size: 15px; }
+.acc-cta { margin-top: 24px; }
+.sec.band .acc-note { color: var(--ink); }
+
+/* Guía de lectura y aviso de lectura en voz alta */
+.a11y-guide-bar { position: fixed; left: 0; right: 0; height: 2.6em; z-index: 44; pointer-events: none; background: rgba(242,179,61,.16); border-top: 2px solid rgba(242,179,61,.9); border-bottom: 2px solid rgba(242,179,61,.9); transform: translateY(-50%); }
+.a11y-reading { position: fixed; z-index: 47; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 16px; border-radius: 999px; background: #0B2530; color: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.35); font-weight: 600; }
+.a11y-reading span { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+@media (max-width: 899px) { .a11y-reading { bottom: 86px; } }
+.a11y-reading svg { width: 20px; height: 20px; fill: none; stroke: var(--sun); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.a11y-voice main p, .a11y-voice main h2, .a11y-voice main h3, .a11y-voice main li, .a11y-voice main td, .a11y-voice main dd, .a11y-voice main summary { cursor: pointer; }
+.a11y-voice main p:hover, .a11y-voice main h2:hover, .a11y-voice main h3:hover, .a11y-voice main td:hover, .a11y-voice main dd:hover { outline: 2px dashed var(--sun); outline-offset: 3px; }
+.is-reading { outline: 3px solid var(--sun) !important; outline-offset: 3px; background: rgba(242,179,61,.15); }
+
+/* Opción: texto más grande (agranda toda la página de forma pareja) */
+/* (la barra de arriba y el panel quedan igual: ya tienen botones grandes y así no se desbordan) */
+.a11y-zoom main, .a11y-zoom .foot { zoom: var(--a11y-zoom, 1); }
+/* Con el texto agrandado, las palabras largas pasan a la línea siguiente en vez de salirse */
+.sec-head { grid-template-columns: minmax(0, 1fr); }
+.a11y-zoom h1, .a11y-zoom h2, .a11y-zoom h3, .a11y-zoom p, .a11y-zoom li, .a11y-zoom a, .a11y-zoom td { overflow-wrap: break-word; hyphens: auto; }
+.a11y-zoom main .btn { max-width: 100%; white-space: normal; text-align: center; }
+.social a > *, .sos a > *, .lines li > * { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 599px) {
+  .a11y-zoom .sec h2, .a11y-zoom .banner h2 { font-size: 1.75rem; }
+  .a11y-zoom .hero h1 { font-size: 3.2rem; }
+}
+
+/* Opción: alto contraste */
+:root.a11y-contrast {
+  --bg: #000; --surface: #000; --surface-2: #111; --ink: #fff; --ink-2: #fff; --line: #fff;
+  --accent: #FFE14D; --on-accent: #000; --accent-soft: #2a2600; --sun: #FFE14D; --on-sun: #000; --sun-soft: #1d1a00;
+  --band: #000; --on-band: #fff; --band-2: #000; --sea: #001018; --land: #111; --valley: #2f4a1a;
+  color-scheme: dark;
+}
+.a11y-contrast body { background: #000; color: #fff; }
+.a11y-contrast a:not(.btn):not(.exp-card):not(.mg-head) { color: #FFE14D !important; text-decoration: underline; }
+.a11y-contrast .card, .a11y-contrast .chip, .a11y-contrast .btn.ghost, .a11y-contrast .species li, .a11y-contrast .faq details { border: 1px solid #fff !important; }
+.a11y-contrast .btn:not(.sun):not(.ghost):not(.glass) { background: #FFE14D; border-color: #FFE14D; color: #000; }
+.a11y-contrast .topbar { background: #000 !important; border-bottom: 1px solid #fff; }
+.a11y-contrast .hero-shade, .a11y-contrast .banner-shade { background: rgba(0,0,0,.72); }
+.a11y-contrast .exp-card::after, .a11y-contrast .mg-head::after { background: linear-gradient(to top, #000 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.3) 100%); }
+.a11y-contrast .shot-cap { background: rgba(0,0,0,.85); }
+.a11y-contrast .dish.has-ph > .pill { background: #000; border: 1px solid #fff; }
+.a11y-contrast .menu, .a11y-contrast .mg { background: #000; }
+.a11y-contrast .a11y-fab { background: #000; border-color: #FFE14D; color: #FFE14D; }
+.a11y-contrast :focus-visible { outline: 3px solid #FFE14D !important; outline-offset: 3px; }
+
+/* Opción: letra fácil de leer */
+:root.a11y-legible { --font-display: Verdana, Tahoma, Arial, sans-serif; --font-body: Verdana, Tahoma, Arial, sans-serif; --font-mono: Verdana, Tahoma, Arial, sans-serif; }
+.a11y-legible body { letter-spacing: .03em; word-spacing: .12em; line-height: 1.8; }
+.a11y-legible p, .a11y-legible li, .a11y-legible dd { line-height: 1.8; }
+.a11y-legible h1, .a11y-legible h2, .a11y-legible h3, .a11y-legible .brand, .a11y-legible .eyebrow, .a11y-legible .coords, .a11y-legible .kicker, .a11y-legible .type { font-stretch: 100% !important; letter-spacing: .01em !important; text-transform: none; }
+.a11y-legible .hero h1 { font-size: clamp(3.6rem, 15vw, 9rem); letter-spacing: 0; }
+.a11y-legible .sec h2, .a11y-legible .banner h2 { font-size: clamp(1.9rem, 5vw, 3.2rem); }
+
+/* Opción: resaltar enlaces */
+.a11y-links a { text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 4px; }
+.a11y-links a:hover, .a11y-links button:hover { outline: 3px solid var(--sun); outline-offset: 2px; }
+.a11y-links .btn, .a11y-links .chip, .a11y-links .quick a, .a11y-links .mq { box-shadow: 0 0 0 2px var(--sun); }
+
+/* Opción: detener animaciones */
+.a11y-still *, .a11y-still *::before, .a11y-still *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+.a11y-still.js-reveal .reveal { opacity: 1 !important; transform: none !important; }
+.a11y-still .hero-media img.on { transform: none !important; }
+
+/* Opción: cursor grande */
+.a11y-cursor, .a11y-cursor * { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M5 3.5l13 7.2-5.6 1.5 3.4 6.3-2.6 1.4-3.4-6.3L5.5 17.5z' fill='%23000' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 8 6, auto !important; }
 </style>
 </head>
 <body>
@@ -832,6 +940,9 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6.9" r="1.5" fill="currentColor" stroke="none"/><path d="M6.8 9.6l5.2 1.1 5.2-1.1M12 10.7v3.6l-2.6 4.3M12 14.3l2.6 4.3"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3.5l13 7.2-5.6 1.5 3.4 6.3-2.6 1.4-3.4-6.3L5.5 17.5z"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></symbol>
     <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 20v-3M16 20v-3"/><circle cx="8" cy="14.3" r=".6"/><circle cx="16" cy="14.3" r=".6"/></symbol>
@@ -913,6 +1024,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
           <li><a href="#transporte">Micros y transporte<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           <li><a href="#emergencias">Emergencias<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
           <li><a href="#faq">Preguntas frecuentes<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
+          <li><a href="#accesibilidad">Accesibilidad<svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
         </ul>
       </section>
       <section class="mg" aria-labelledby="mg4">
@@ -934,6 +1046,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
       <a class="mq sos" href="tel:131"><b>131</b> Ambulancia</a>
       <a class="mq" href="#emergencias">Todos los números de emergencia</a>
       <button class="mq" id="menu-favs" type="button"><svg aria-hidden="true"><use href="#i-star"/></svg> Mis lugares guardados</button>
+      <button class="mq" id="menu-a11y" type="button"><svg aria-hidden="true"><use href="#i-a11y"/></svg> Accesibilidad</button>
       <a class="mq" href="#contacto">Contacto</a>
     </div>
   </div>
@@ -1780,6 +1893,29 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   </div>
 </section>
 
+<!-- ================= ACCESIBILIDAD ================= -->
+<section class="sec band" id="accesibilidad" aria-labelledby="h-acc">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Accesibilidad</p>
+      <h2 id="h-acc">Una página para todas las personas</h2>
+      <p class="sec-lede">ArikaTur está pensada para que cualquier persona pueda planificar su viaje, en línea con las normas de igualdad de oportunidades e inclusión de la Ley 20.422. Toca el botón con el ícono de la persona para ajustar la página.</p>
+    </header>
+    <ul class="cards cards-3 acc-list">
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true">A+</span><h3>Tamaño del texto</h3><p>Agranda todo el contenido hasta un 150%, sin perder el orden de la página.</p></article></li>
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true">◐</span><h3>Alto contraste</h3><p>Texto claro sobre fondo negro y enlaces en amarillo, para personas con baja visión.</p></article></li>
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true">Aa</span><h3>Letra fácil de leer</h3><p>Una letra más simple, con más espacio entre letras, palabras y líneas. Ayuda a personas con dislexia.</p></article></li>
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-speaker"/></svg></span><h3>Leer en voz alta</h3><p>Al activarlo, toca cualquier texto y la página lo lee en español.</p></article></li>
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-pause"/></svg></span><h3>Sin animaciones</h3><p>Detiene las fotos que cambian solas y los movimientos, para quien se marea o se distrae con ellos.</p></article></li>
+      <li><article class="card acc"><span class="a11y-ic" aria-hidden="true">⇥</span><h3>Uso con teclado</h3><p>Toda la página funciona con Tab y Enter. El enlace “Saltar al contenido” lleva directo a la información.</p></article></li>
+    </ul>
+    <div class="acc-cta">
+      <button class="btn sun big" type="button" id="acc-open"><svg aria-hidden="true"><use href="#i-a11y"/></svg> Abrir opciones de accesibilidad</button>
+    </div>
+    <p class="note acc-note"><b>Turismo accesible:</b> la Playa El Laucho es una de las playas inclusivas de Chile, con sillas anfibias y baños accesibles. Además, todas las fotos de esta página tienen una descripción para lectores de pantalla.</p>
+  </div>
+</section>
+
 <!-- ================= CONTACTO ================= -->
 <section class="sec alt" id="contacto" aria-labelledby="h-con">
   <div class="wrap">
@@ -1892,6 +2028,43 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   </div>
 </footer>
 
+<!-- ================= MENÚ DE ACCESIBILIDAD ================= -->
+<button class="a11y-fab" id="a11y-btn" type="button" aria-expanded="false" aria-controls="a11y-panel" aria-label="Opciones de accesibilidad" title="Opciones de accesibilidad">
+  <svg aria-hidden="true"><use href="#i-a11y"/></svg>
+</button>
+<section class="a11y-panel" id="a11y-panel" role="dialog" aria-modal="false" aria-labelledby="a11y-title" hidden>
+  <div class="a11y-head">
+    <h2 id="a11y-title"><svg aria-hidden="true"><use href="#i-a11y"/></svg> Accesibilidad</h2>
+    <button class="icon-btn" id="a11y-close" type="button" aria-label="Cerrar las opciones de accesibilidad"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <p class="a11y-lede">Ajusta la página a tu forma de ver, leer y navegar. Tus preferencias quedan guardadas en este navegador.</p>
+  <div class="a11y-size" role="group" aria-labelledby="a11y-size-l">
+    <span id="a11y-size-l">Tamaño del texto</span>
+    <button class="a11y-step" type="button" data-size="-1" aria-label="Achicar el texto">A−</button>
+    <output id="a11y-size-v" aria-live="polite">100%</output>
+    <button class="a11y-step" type="button" data-size="1" aria-label="Agrandar el texto">A+</button>
+  </div>
+  <div class="a11y-grid">
+    <button class="a11y-opt" type="button" data-opt="contrast" aria-pressed="false"><span class="a11y-ic" aria-hidden="true">◐</span><b>Alto contraste</b><small>Texto claro sobre fondo negro</small></button>
+    <button class="a11y-opt" type="button" data-opt="legible" aria-pressed="false"><span class="a11y-ic" aria-hidden="true">Aa</span><b>Letra fácil de leer</b><small>Más espacio entre letras y líneas</small></button>
+    <button class="a11y-opt" type="button" data-opt="voice" aria-pressed="false" id="a11y-voice-opt"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-speaker"/></svg></span><b>Leer en voz alta</b><small>Toca un texto para escucharlo</small></button>
+    <button class="a11y-opt" type="button" data-opt="links" aria-pressed="false"><span class="a11y-ic a11y-ic-u" aria-hidden="true">ab</span><b>Resaltar enlaces</b><small>Subraya los enlaces y botones</small></button>
+    <button class="a11y-opt" type="button" data-opt="still" aria-pressed="false"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-pause"/></svg></span><b>Detener animaciones</b><small>Sin movimiento ni cambios de foto</small></button>
+    <button class="a11y-opt" type="button" data-opt="cursor" aria-pressed="false"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-cursor"/></svg></span><b>Cursor grande</b><small>Más fácil de seguir con la vista</small></button>
+    <button class="a11y-opt" type="button" data-opt="guide" aria-pressed="false"><span class="a11y-ic" aria-hidden="true">☰</span><b>Guía de lectura</b><small>Una franja que sigue al mouse</small></button>
+    <button class="a11y-opt" type="button" data-opt="dark" aria-pressed="false"><span class="a11y-ic" aria-hidden="true"><svg><use href="#i-moon"/></svg></span><b>Modo oscuro</b><small>Menos brillo en la pantalla</small></button>
+  </div>
+  <div class="a11y-foot">
+    <button class="btn ghost small" id="a11y-reset" type="button">Restablecer todo</button>
+    <a href="#accesibilidad" id="a11y-more">¿Qué hace cada opción?</a>
+  </div>
+</section>
+<div class="a11y-guide-bar" id="a11y-guide" aria-hidden="true" hidden></div>
+<div class="a11y-reading" id="a11y-reading" role="status" hidden>
+  <span><svg aria-hidden="true"><use href="#i-speaker"/></svg> Leyendo en voz alta…</span>
+  <button class="btn small sun" id="a11y-stop" type="button">Detener</button>
+</div>
+
 
 <script src="fotos.js"></script>
 <script>
@@ -1919,7 +2092,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function catVar(cat) { return "var(--c-" + cat + ")"; }
-  function reduceMotion() { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+  function reduceMotion() { return document.documentElement.classList.contains("a11y-still") || window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
   function openDialog(d) { try { d.showModal(); } catch (e) { d.setAttribute("open", ""); } }
   function closeDialog(d) { try { d.close(); } catch (e) { d.removeAttribute("open"); } }
   function safeUrl(u) { return /^https?:\/\/[^\s]+$/i.test(String(u || "").trim()) ? String(u).trim() : ""; }
@@ -2923,6 +3096,8 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     pause.addEventListener("click", function () { paused = !paused; paintPause(); restart(); });
     document.addEventListener("visibilitychange", function () { if (document.hidden) clearInterval(timer); else restart(); });
     show(0); paintPause(); restart();
+    /* El menú de accesibilidad puede pausar las fotos */
+    startHero.setPaused = function (v) { paused = !!v; paintPause(); restart(); };
   }
 
   /* La barra de arriba es transparente mientras se ve la portada */
@@ -3265,6 +3440,133 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     try { startPhotos(); } catch (e) {}
   }
 
+  /* =====================================================================
+     MENÚ DE ACCESIBILIDAD
+     Cada opción agrega una clase al <html> (a11y-contrast, a11y-legible, ...) y el CSS
+     hace el resto. Las preferencias se guardan en este navegador.
+     ===================================================================== */
+  var A11Y_KEY = "guia-arica:accesibilidad";
+  var A11Y_SIZES = [1, 1.15, 1.3, 1.5];
+  var A11Y_OPTS = ["contrast", "legible", "voice", "links", "still", "cursor", "guide"];
+  var a11y = { size: 0, contrast: false, legible: false, voice: false, links: false, still: false, cursor: false, guide: false };
+  function a11yApply(save) {
+    var r = document.documentElement;
+    r.style.setProperty("--a11y-zoom", String(A11Y_SIZES[a11y.size]));
+    r.classList.toggle("a11y-zoom", a11y.size > 0);
+    A11Y_OPTS.forEach(function (k) { r.classList.toggle("a11y-" + k, !!a11y[k]); });
+    $$(".a11y-opt").forEach(function (b) {
+      var k = b.getAttribute("data-opt");
+      b.setAttribute("aria-pressed", String(k === "dark" ? isDark() : !!a11y[k]));
+    });
+    $("#a11y-size-v").textContent = Math.round(A11Y_SIZES[a11y.size] * 100) + "%";
+    $('.a11y-step[data-size="-1"]').disabled = a11y.size === 0;
+    $('.a11y-step[data-size="1"]').disabled = a11y.size === A11Y_SIZES.length - 1;
+    $("#a11y-guide").hidden = !a11y.guide;
+    var any = a11y.size > 0 || A11Y_OPTS.some(function (k) { return a11y[k]; });
+    $("#a11y-btn").classList.toggle("on", any);
+    if (!a11y.voice) stopReading();
+    if (save) lsSet(A11Y_KEY, JSON.stringify(a11y));
+  }
+  function loadA11y() {
+    try {
+      var s = JSON.parse(lsGet(A11Y_KEY) || "{}");
+      Object.keys(a11y).forEach(function (k) {
+        if (k in s) a11y[k] = k === "size" ? Math.max(0, Math.min(A11Y_SIZES.length - 1, +s[k] || 0)) : !!s[k];
+      });
+    } catch (e) {}
+    a11yApply(false);
+  }
+
+  /* Leer en voz alta: usa la voz en español que trae el navegador (Web Speech API) */
+  var canSpeak = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  var readingEl = null;
+  function stopReading() {
+    if (canSpeak) { try { window.speechSynthesis.cancel(); } catch (e) {} }
+    if (readingEl) readingEl.classList.remove("is-reading");
+    readingEl = null;
+    var bar = $("#a11y-reading");
+    if (bar) bar.hidden = true;
+  }
+  function speak(el, text) {
+    text = String(text || "").replace(/\s+/g, " ").trim();
+    if (!canSpeak || !text) return;
+    stopReading();
+    var u = new SpeechSynthesisUtterance(text.slice(0, 3000));
+    u.lang = "es-CL";
+    u.rate = 0.95;
+    var voices = window.speechSynthesis.getVoices() || [];
+    var v = voices.filter(function (x) { return /^es[-_]CL/i.test(x.lang); })[0] || voices.filter(function (x) { return /^es/i.test(x.lang); })[0];
+    if (v) u.voice = v;
+    u.onend = u.onerror = function () { if (readingEl === el) stopReading(); };
+    readingEl = el;
+    if (el) el.classList.add("is-reading");
+    $("#a11y-reading").hidden = false;
+    window.speechSynthesis.speak(u);
+  }
+
+  function bindA11y() {
+    var btn = $("#a11y-btn"), panel = $("#a11y-panel");
+    if (!canSpeak) { $("#a11y-voice-opt").hidden = true; a11y.voice = false; }
+    function open() {
+      panel.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+      var first = panel.querySelector(".a11y-step:not(:disabled), .a11y-opt");
+      if (first) first.focus();
+    }
+    function close(back) {
+      panel.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+      if (back) btn.focus();
+    }
+    btn.addEventListener("click", function () { if (panel.hidden) open(); else close(true); });
+    $("#a11y-close").addEventListener("click", function () { close(true); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { if (!panel.hidden) close(true); stopReading(); }
+    });
+    document.addEventListener("click", function (e) {
+      if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target) && !e.target.closest("#acc-open, #menu-a11y")) close(false);
+    });
+    $$(".a11y-step").forEach(function (b) {
+      b.addEventListener("click", function () {
+        a11y.size = Math.max(0, Math.min(A11Y_SIZES.length - 1, a11y.size + +b.getAttribute("data-size")));
+        a11yApply(true);
+      });
+    });
+    $$(".a11y-opt").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-opt");
+        if (k === "dark") { $("#theme-btn").click(); a11yApply(false); return; }
+        a11y[k] = !a11y[k];
+        if (k === "still" && startHero.setPaused) startHero.setPaused(a11y.still);
+        a11yApply(true);
+        if (k === "voice" && a11y.voice) speak(null, "Lectura en voz alta activada. Toca cualquier texto para escucharlo.");
+      });
+    });
+    $("#a11y-reset").addEventListener("click", function () {
+      Object.keys(a11y).forEach(function (k) { a11y[k] = k === "size" ? 0 : false; });
+      a11yApply(true);
+    });
+    $("#a11y-more").addEventListener("click", function () { close(false); });
+    $("#acc-open").addEventListener("click", function (e) { e.stopPropagation(); open(); });
+    $("#menu-a11y").addEventListener("click", function (e) { e.stopPropagation(); closeDialog($("#menu")); open(); });
+    $("#a11y-stop").addEventListener("click", stopReading);
+    $("#theme-btn").addEventListener("click", function () { setTimeout(function () { a11yApply(false); }, 0); });
+
+    /* Guía de lectura: una franja que sigue al mouse o al dedo */
+    var guide = $("#a11y-guide");
+    document.addEventListener("mousemove", function (e) { if (a11y.guide) guide.style.top = e.clientY + "px"; }, { passive: true });
+    document.addEventListener("touchmove", function (e) { if (a11y.guide && e.touches[0]) guide.style.top = e.touches[0].clientY + "px"; }, { passive: true });
+
+    /* Con "Leer en voz alta" activo, tocar un texto lo lee */
+    document.addEventListener("click", function (e) {
+      if (!a11y.voice || e.target.closest("#a11y-panel, #a11y-btn, #a11y-reading")) return;
+      var t = e.target.closest("a, button, summary, input, select, textarea");
+      if (t) { speak(t, t.getAttribute("aria-label") || t.innerText || t.value); return; }
+      var el = e.target.closest("main p, main h1, main h2, main h3, main h4, main li, main td, main th, main dt, main dd, main figcaption, footer p");
+      if (el) speak(el, el.innerText);
+    }, true);
+  }
+
   /* ---------- Arranque ---------- */
   loadFavs();
   var h = (location.hash || "").replace("#", "");
@@ -3278,6 +3580,8 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   bindContact();
   drawChart();
   loadWeather();
+  loadA11y();
+  bindA11y();
   startHero();
   bindTopbar();
   bindExperiences();
