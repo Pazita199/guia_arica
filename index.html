@@ -936,6 +936,19 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 .lang-list button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
 .lang-list button[aria-pressed="true"] small { color: inherit; }
 .lang-note { margin: 10px 4px 2px; font-size: 12px; line-height: 1.4; color: var(--ink-2); }
+.lang-menu { width: 290px; max-width: calc(100vw - 24px); }
+.lang-search { position: relative; margin-bottom: 8px; }
+.lang-search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; fill: none; stroke: var(--ink-2); stroke-width: 1.8; stroke-linecap: round; pointer-events: none; }
+.lang-search input { width: 100%; min-height: 44px; padding: 8px 12px 8px 36px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); font: 500 15px var(--font-body); }
+.lang-scroll { max-height: min(52vh, 420px); overflow-y: auto; overscroll-behavior: contain; margin: 0 -4px; padding: 0 4px; }
+.lang-group + .lang-group { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+.lang-gtitle { margin: 2px 8px 4px; font: 600 11px var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.lang-list button small { font-family: var(--font-body); font-size: 12px; text-transform: none; letter-spacing: 0; white-space: nowrap; }
+.lang-empty { margin: 10px 8px; font-size: 14px; color: var(--ink-2); }
+@media (max-width: 520px) { .lang-menu { position: fixed; left: 12px; right: 12px; top: 68px; width: auto; max-width: none; } .lang-scroll { max-height: calc(100dvh - 260px); } }
+/* Árabe y hebreo se leen de derecha a izquierda (Google agrega la clase translated-rtl) */
+.translated-rtl main, .translated-rtl .foot, .translated-rtl .a11y-panel { direction: rtl; text-align: right; }
+.translated-rtl .hero-cta, .translated-rtl .actions, .translated-rtl .map-links { justify-content: flex-start; }
 .lang-note.err { color: var(--c-historia); font-weight: 600; }
 body.on-hero .topbar .lang-btn { color: #fff; }
 /* En celulares chicos, el modo oscuro queda en el menú de accesibilidad para dar espacio al idioma */
@@ -1014,15 +1027,13 @@ font { vertical-align: inherit !important; }
       </button>
       <div class="lang-menu" id="lang-menu" hidden>
         <p class="lang-title">Idioma · Language</p>
-        <ul class="lang-list">
-          <li><button type="button" data-lang="es" lang="es" aria-pressed="true"><span>Español</span><small>ES</small></button></li>
-          <li><button type="button" data-lang="en" lang="en" aria-pressed="false"><span>English</span><small>EN</small></button></li>
-          <li><button type="button" data-lang="pt" lang="pt" aria-pressed="false"><span>Português</span><small>PT</small></button></li>
-          <li><button type="button" data-lang="fr" lang="fr" aria-pressed="false"><span>Français</span><small>FR</small></button></li>
-          <li><button type="button" data-lang="de" lang="de" aria-pressed="false"><span>Deutsch</span><small>DE</small></button></li>
-          <li><button type="button" data-lang="it" lang="it" aria-pressed="false"><span>Italiano</span><small>IT</small></button></li>
-          <li><button type="button" data-lang="ay" lang="ay" aria-pressed="false"><span>Aymar aru</span><small>AY</small></button></li>
-        </ul>
+        <div class="lang-search">
+          <svg aria-hidden="true"><use href="#i-search"/></svg>
+          <label class="sr" for="lang-q">Buscar idioma · Search language</label>
+          <input id="lang-q" type="search" placeholder="Buscar · Search…" autocomplete="off">
+        </div>
+        <div class="lang-scroll" id="lang-scroll"><!-- La lista se arma desde LANGS en el código --></div>
+        <p class="lang-empty" id="lang-empty" hidden>Sin resultados · No results</p>
         <p class="lang-note" id="lang-note">Traducción automática de Google · Automatic translation by Google</p>
       </div>
     </div>
@@ -1701,7 +1712,7 @@ font { vertical-align: inherit !important; }
       <details><summary>¿Qué hago con la altura en Putre y Lauca?</summary><div class="ans"><p>Putre está a unos 3.500 metros y Parinacota y Lauca, sobre los 4.000. Conviene dormir una noche en Putre, tomar agua, moverse con calma y llevar abrigo.</p></div></details>
       <details><summary>¿Dónde veo las momias Chinchorro?</summary><div class="ans"><p>En el Museo Arqueológico San Miguel de Azapa, en el valle de Azapa. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p></div></details>
       <details><summary>¿Puedo cruzar a Tacna, en Perú?</summary><div class="ans"><p>Sí. Los colectivos salen del Terminal Internacional. Lleva tu documento y revisa los requisitos migratorios y los horarios de la frontera antes de viajar.</p></div></details>
-      <details><summary>¿Puedo ver la página en otro idioma?</summary><div class="ans"><p>Sí. Toca el botón del globo, arriba (muestra “ES”), y elige English, Português, Français, Deutsch, Italiano o Aymar aru. Se traduce toda la página, y “Leer en voz alta” habla en el idioma elegido.</p><p>La traducción es automática, hecha por Google, así que puede tener pequeños errores. El servicio de Google solo se usa si eliges otro idioma.</p></div></details>
+      <details><summary>¿Puedo ver la página en otro idioma?</summary><div class="ans"><p>Sí. Toca el botón del globo, arriba (muestra “ES”), y elige entre más de 30 idiomas: inglés, portugués, francés, alemán, chino, japonés, coreano, árabe y muchos más, además de aymara, quechua y guaraní. Usa el buscador para encontrar el tuyo. Se traduce toda la página, y “Leer en voz alta” habla en el idioma elegido.</p><p>La traducción es automática, hecha por Google, así que puede tener pequeños errores. El servicio de Google solo se usa si eliges otro idioma.</p></div></details>
       <details><summary>¿Mis lugares guardados se comparten con otras personas?</summary><div class="ans"><p>No. Los lugares que guardas quedan solo en este navegador. Las opiniones de visitantes se activarán más adelante.</p></div></details>
       <details><summary>¿Cómo corrijo un dato o agrego mi negocio?</summary><div class="ans"><p>Escríbenos por el <a href="#contacto" class="to-contact" data-kind="correccion">formulario de contacto</a>.</p></div></details>
     </div>
@@ -3641,21 +3652,90 @@ font { vertical-align: inherit !important; }
      El código de Google solo se descarga si alguien elige otro idioma.
      La voz de "Leer en voz alta" usa el idioma elegido.
      ===================================================================== */
+  /* Cada idioma: name (en su propio idioma), es/en (para el buscador), g (grupo del menú),
+     code (lo que muestra el botón), voice (voz para leer en voz alta) y, si corresponde,
+     voiceOn / ask / yes / no (frases del aviso, escritas en ese idioma).
+     Las claves son los códigos que usa Google (ojo: hebreo = "iw", noruego = "no"). */
+  var LANG_GROUPS = [
+    ["top", "Más usados · Most used"],
+    ["andes", "Pueblos originarios · Indigenous languages"],
+    ["europa", "Europa · Europe"],
+    ["asia", "Asia y Medio Oriente · Asia & Middle East"]
+  ];
   var LANGS = {
-    es: { name: "Español", code: "ES", voice: "es-CL", voiceOn: "Lectura en voz alta activada. Toca cualquier texto para escucharlo." },
-    en: { name: "English", code: "EN", voice: "en-US", voiceOn: "Read aloud is on. Tap any text to hear it.",
+    es: { g: "top", name: "Español", es: "Español", en: "Spanish", code: "ES", voice: "es-CL", voiceOn: "Lectura en voz alta activada. Toca cualquier texto para escucharlo." },
+    en: { g: "top", name: "English", es: "Inglés", en: "English", code: "EN", voice: "en-US", voiceOn: "Read aloud is on. Tap any text to hear it.",
       ask: "This guide is in Spanish. Would you like to read it in English?", yes: "Read in English", no: "Keep Spanish" },
-    pt: { name: "Português", code: "PT", voice: "pt-BR", voiceOn: "Leitura em voz alta ativada. Toque em qualquer texto para ouvi-lo.",
+    pt: { g: "top", name: "Português", es: "Portugués", en: "Portuguese", code: "PT", voice: "pt-BR", voiceOn: "Leitura em voz alta ativada. Toque em qualquer texto para ouvi-lo.",
       ask: "Este guia está em espanhol. Quer lê-lo em português?", yes: "Ler em português", no: "Manter em espanhol" },
-    fr: { name: "Français", code: "FR", voice: "fr-FR", voiceOn: "Lecture à voix haute activée. Touchez un texte pour l’écouter.",
+    fr: { g: "top", name: "Français", es: "Francés", en: "French", code: "FR", voice: "fr-FR", voiceOn: "Lecture à voix haute activée. Touchez un texte pour l’écouter.",
       ask: "Ce guide est en espagnol. Voulez-vous le lire en français ?", yes: "Lire en français", no: "Garder l’espagnol" },
-    de: { name: "Deutsch", code: "DE", voice: "de-DE", voiceOn: "Vorlesen ist aktiviert. Tippen Sie auf einen Text, um ihn zu hören.",
+    de: { g: "top", name: "Deutsch", es: "Alemán", en: "German", code: "DE", voice: "de-DE", voiceOn: "Vorlesen ist aktiviert. Tippen Sie auf einen Text, um ihn zu hören.",
       ask: "Dieser Reiseführer ist auf Spanisch. Möchten Sie ihn auf Deutsch lesen?", yes: "Auf Deutsch lesen", no: "Auf Spanisch bleiben" },
-    it: { name: "Italiano", code: "IT", voice: "it-IT", voiceOn: "Lettura ad alta voce attivata. Tocca un testo per ascoltarlo.",
+    it: { g: "top", name: "Italiano", es: "Italiano", en: "Italian", code: "IT", voice: "it-IT", voiceOn: "Lettura ad alta voce attivata. Tocca un testo per ascoltarlo.",
       ask: "Questa guida è in spagnolo. Vuoi leggerla in italiano?", yes: "Leggi in italiano", no: "Resta in spagnolo" },
-    /* El aymara no tiene voz en los navegadores: se lee con la voz en español */
-    ay: { name: "Aymar aru", code: "AY", voice: "es-CL", voiceOn: "Lectura en voz alta activada. Toca cualquier texto para escucharlo." }
+    "zh-CN": { g: "top", name: "中文（简体）", es: "Chino simplificado", en: "Chinese (Simplified)", code: "ZH", voice: "zh-CN", voiceOn: "朗读已开启。点击任意文字即可收听。",
+      ask: "本指南为西班牙语。您想用中文阅读吗？", yes: "用中文阅读", no: "保留西班牙语" },
+    ja: { g: "top", name: "日本語", es: "Japonés", en: "Japanese", code: "JA", voice: "ja-JP", voiceOn: "読み上げがオンになりました。テキストをタップすると聞けます。",
+      ask: "このガイドはスペイン語です。日本語で読みますか？", yes: "日本語で読む", no: "スペイン語のまま" },
+    ko: { g: "top", name: "한국어", es: "Coreano", en: "Korean", code: "KO", voice: "ko-KR", voiceOn: "소리 내어 읽기가 켜졌습니다. 텍스트를 누르면 들을 수 있습니다.",
+      ask: "이 안내서는 스페인어로 되어 있습니다. 한국어로 읽으시겠습니까?", yes: "한국어로 읽기", no: "스페인어 유지" },
+    /* Pueblos originarios: no tienen voz en los navegadores, así que se leen con la voz en español */
+    ay: { g: "andes", name: "Aymar aru", es: "Aymara", en: "Aymara", code: "AY", voice: "es-CL" },
+    qu: { g: "andes", name: "Runa Simi", es: "Quechua", en: "Quechua", code: "QU", voice: "es-CL" },
+    gn: { g: "andes", name: "Avañe’ẽ", es: "Guaraní", en: "Guarani", code: "GN", voice: "es-CL" },
+    nl: { g: "europa", name: "Nederlands", es: "Neerlandés", en: "Dutch", code: "NL", voice: "nl-NL", voiceOn: "Voorlezen staat aan. Tik op een tekst om hem te horen.",
+      ask: "Deze gids is in het Spaans. Wilt u hem in het Nederlands lezen?", yes: "Lees in het Nederlands", no: "Spaans houden" },
+    pl: { g: "europa", name: "Polski", es: "Polaco", en: "Polish", code: "PL", voice: "pl-PL", voiceOn: "Czytanie na głos jest włączone. Dotknij tekstu, aby go usłyszeć.",
+      ask: "Ten przewodnik jest po hiszpańsku. Czy chcesz przeczytać go po polsku?", yes: "Czytaj po polsku", no: "Zostaw po hiszpańsku" },
+    sv: { g: "europa", name: "Svenska", es: "Sueco", en: "Swedish", code: "SV", voice: "sv-SE", voiceOn: "Uppläsning är på. Tryck på en text för att höra den.",
+      ask: "Den här guiden är på spanska. Vill du läsa den på svenska?", yes: "Läs på svenska", no: "Behåll spanska" },
+    no: { g: "europa", name: "Norsk", es: "Noruego", en: "Norwegian", code: "NO", voice: "nb-NO", voiceOn: "Opplesning er på. Trykk på en tekst for å høre den.",
+      ask: "Denne guiden er på spansk. Vil du lese den på norsk?", yes: "Les på norsk", no: "Behold spansk" },
+    da: { g: "europa", name: "Dansk", es: "Danés", en: "Danish", code: "DA", voice: "da-DK", voiceOn: "Oplæsning er slået til. Tryk på en tekst for at høre den.",
+      ask: "Denne guide er på spansk. Vil du læse den på dansk?", yes: "Læs på dansk", no: "Behold spansk" },
+    fi: { g: "europa", name: "Suomi", es: "Finés", en: "Finnish", code: "FI", voice: "fi-FI", voiceOn: "Ääneen lukeminen on päällä. Napauta tekstiä kuullaksesi sen.",
+      ask: "Tämä opas on espanjaksi. Haluatko lukea sen suomeksi?", yes: "Lue suomeksi", no: "Pidä espanjaksi" },
+    ru: { g: "europa", name: "Русский", es: "Ruso", en: "Russian", code: "RU", voice: "ru-RU", voiceOn: "Чтение вслух включено. Нажмите на текст, чтобы его прослушать.",
+      ask: "Этот путеводитель на испанском. Хотите прочитать его на русском?", yes: "Читать на русском", no: "Оставить на испанском" },
+    uk: { g: "europa", name: "Українська", es: "Ucraniano", en: "Ukrainian", code: "UK", voice: "uk-UA", voiceOn: "Читання вголос увімкнено. Торкніться тексту, щоб його почути.",
+      ask: "Цей путівник іспанською. Бажаєте прочитати його українською?", yes: "Читати українською", no: "Залишити іспанською" },
+    cs: { g: "europa", name: "Čeština", es: "Checo", en: "Czech", code: "CS", voice: "cs-CZ", voiceOn: "Předčítání je zapnuté. Klepněte na text a poslechněte si ho.",
+      ask: "Tento průvodce je ve španělštině. Chcete si ho přečíst v češtině?", yes: "Číst česky", no: "Ponechat španělsky" },
+    el: { g: "europa", name: "Ελληνικά", es: "Griego", en: "Greek", code: "EL", voice: "el-GR", voiceOn: "Η ανάγνωση φωναχτά είναι ενεργή. Πατήστε ένα κείμενο για να το ακούσετε.",
+      ask: "Αυτός ο οδηγός είναι στα ισπανικά. Θέλετε να τον διαβάσετε στα ελληνικά;", yes: "Ανάγνωση στα ελληνικά", no: "Παραμονή στα ισπανικά" },
+    ro: { g: "europa", name: "Română", es: "Rumano", en: "Romanian", code: "RO", voice: "ro-RO", voiceOn: "Citirea cu voce tare este activată. Atinge un text pentru a-l asculta.",
+      ask: "Acest ghid este în spaniolă. Doriți să îl citiți în română?", yes: "Citește în română", no: "Păstrează spaniola" },
+    hu: { g: "europa", name: "Magyar", es: "Húngaro", en: "Hungarian", code: "HU", voice: "hu-HU", voiceOn: "A felolvasás be van kapcsolva. Koppintson egy szövegre a meghallgatáshoz.",
+      ask: "Ez az útmutató spanyol nyelvű. Szeretné magyarul olvasni?", yes: "Olvasás magyarul", no: "Maradjon spanyolul" },
+    tr: { g: "europa", name: "Türkçe", es: "Turco", en: "Turkish", code: "TR", voice: "tr-TR", voiceOn: "Sesli okuma açık. Dinlemek için bir metne dokunun.",
+      ask: "Bu rehber İspanyolca. Türkçe okumak ister misiniz?", yes: "Türkçe oku", no: "İspanyolca kalsın" },
+    ca: { g: "europa", name: "Català", es: "Catalán", en: "Catalan", code: "CA", voice: "ca-ES" },
+    eu: { g: "europa", name: "Euskara", es: "Euskera", en: "Basque", code: "EU", voice: "eu-ES" },
+    gl: { g: "europa", name: "Galego", es: "Gallego", en: "Galician", code: "GL", voice: "gl-ES" },
+    "zh-TW": { g: "asia", name: "中文（繁體）", es: "Chino tradicional", en: "Chinese (Traditional)", code: "ZH", voice: "zh-TW", voiceOn: "朗讀已開啟。點選任何文字即可收聽。",
+      ask: "本指南為西班牙文。您想用中文閱讀嗎？", yes: "用中文閱讀", no: "保留西班牙文" },
+    hi: { g: "asia", name: "हिन्दी", es: "Hindi", en: "Hindi", code: "HI", voice: "hi-IN", voiceOn: "ज़ोर से पढ़ना चालू है। सुनने के लिए किसी भी टेक्स्ट पर टैप करें।",
+      ask: "यह गाइड स्पेनिश में है। क्या आप इसे हिंदी में पढ़ना चाहेंगे?", yes: "हिंदी में पढ़ें", no: "स्पेनिश में रहने दें" },
+    ar: { g: "asia", rtl: true, name: "العربية", es: "Árabe", en: "Arabic", code: "AR", voice: "ar-SA", voiceOn: "القراءة بصوت عالٍ مفعّلة. اضغط على أي نص لسماعه.",
+      ask: "هذا الدليل باللغة الإسبانية. هل تريد قراءته بالعربية؟", yes: "اقرأ بالعربية", no: "الإبقاء على الإسبانية" },
+    iw: { g: "asia", rtl: true, name: "עברית", es: "Hebreo", en: "Hebrew", code: "HE", voice: "he-IL", voiceOn: "הקראה בקול פעילה. הקישו על טקסט כדי לשמוע אותו.",
+      ask: "המדריך הזה בספרדית. האם תרצו לקרוא אותו בעברית?", yes: "קריאה בעברית", no: "להשאיר בספרדית" },
+    id: { g: "asia", name: "Bahasa Indonesia", es: "Indonesio", en: "Indonesian", code: "ID", voice: "id-ID", voiceOn: "Bacakan dengan suara aktif. Ketuk teks mana pun untuk mendengarnya.",
+      ask: "Panduan ini berbahasa Spanyol. Ingin membacanya dalam bahasa Indonesia?", yes: "Baca dalam bahasa Indonesia", no: "Tetap bahasa Spanyol" },
+    vi: { g: "asia", name: "Tiếng Việt", es: "Vietnamita", en: "Vietnamese", code: "VI", voice: "vi-VN", voiceOn: "Đã bật đọc to. Chạm vào văn bản bất kỳ để nghe.",
+      ask: "Hướng dẫn này bằng tiếng Tây Ban Nha. Bạn có muốn đọc bằng tiếng Việt không?", yes: "Đọc bằng tiếng Việt", no: "Giữ tiếng Tây Ban Nha" },
+    th: { g: "asia", name: "ไทย", es: "Tailandés", en: "Thai", code: "TH", voice: "th-TH", voiceOn: "เปิดการอ่านออกเสียงแล้ว แตะข้อความใดก็ได้เพื่อฟัง",
+      ask: "คู่มือนี้เป็นภาษาสเปน คุณต้องการอ่านเป็นภาษาไทยไหม", yes: "อ่านเป็นภาษาไทย", no: "ใช้ภาษาสเปนต่อ" }
   };
+  /* Idioma del navegador → clave de LANGS */
+  function detectLang(raw) {
+    var l = String(raw || "").toLowerCase();
+    if (/^zh/.test(l)) return /(tw|hk|mo|hant)/.test(l) ? "zh-TW" : "zh-CN";
+    if (/^(he|iw)/.test(l)) return "iw";
+    if (/^(nb|nn|no)/.test(l)) return "no";
+    return l.slice(0, 2);
+  }
   var LANG_KEY = "guia-arica:idioma";
   var curLang = "es";
   var gteReady = null;
@@ -3695,6 +3775,51 @@ font { vertical-align: inherit !important; }
     $("#lang-btn").setAttribute("aria-label", "Idioma: " + L.name + ". Cambiar idioma · Change language");
     $$(".lang-list button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === curLang)); });
   }
+  /* Arma el menú de idiomas por grupos, a partir de LANGS */
+  function buildLangMenu() {
+    var box = $("#lang-scroll");
+    box.replaceChildren();
+    LANG_GROUPS.forEach(function (gr) {
+      var keys = Object.keys(LANGS).filter(function (k) { return LANGS[k].g === gr[0]; });
+      if (!keys.length) return;
+      var sec = el("div", "lang-group");
+      sec.appendChild(el("p", "lang-gtitle", gr[1]));
+      var ul = el("ul", "lang-list");
+      keys.forEach(function (k) {
+        var L = LANGS[k];
+        var li = el("li");
+        var b = el("button");
+        b.type = "button";
+        b.setAttribute("data-lang", k);
+        b.setAttribute("lang", k === "iw" ? "he" : k);
+        b.setAttribute("aria-pressed", "false");
+        b.setAttribute("data-search", (L.name + " " + L.es + " " + L.en + " " + k).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""));
+        var nm = el("span", null, L.name);
+        if (L.rtl) nm.setAttribute("dir", "rtl");
+        b.appendChild(nm);
+        b.appendChild(el("small", null, L.name === L.es ? L.code : L.es));
+        li.appendChild(b);
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+      box.appendChild(sec);
+    });
+  }
+  function filterLangs(q) {
+    q = String(q || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+    var shown = 0;
+    $$(".lang-group").forEach(function (g) {
+      var n = 0;
+      $$("li", g).forEach(function (li) {
+        var ok = !q || li.firstChild.getAttribute("data-search").indexOf(q) >= 0;
+        li.hidden = !ok;
+        if (ok) n++;
+      });
+      g.hidden = n === 0;
+      shown += n;
+    });
+    $("#lang-empty").hidden = shown > 0;
+  }
   function langError() {
     var note = $("#lang-note");
     note.classList.add("err");
@@ -3707,7 +3832,8 @@ font { vertical-align: inherit !important; }
     stopReading();
     if (l === "es") {
       /* volver al original: se borra la cookie de Google y se recarga la página */
-      if (curLang !== "es" || document.documentElement.classList.contains("translated-ltr")) { setGoogCookie("es"); location.reload(); }
+      var rc = document.documentElement.classList;
+      if (curLang !== "es" || rc.contains("translated-ltr") || rc.contains("translated-rtl")) { setGoogCookie("es"); location.reload(); }
       return;
     }
     setGoogCookie(l);
@@ -3718,31 +3844,47 @@ font { vertical-align: inherit !important; }
     }).catch(langError);
   }
   function bindLang() {
-    var btn = $("#lang-btn"), menu = $("#lang-menu");
+    var btn = $("#lang-btn"), menu = $("#lang-menu"), q = $("#lang-q");
+    buildLangMenu();
+    paintLang();
     function close(back) { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); if (back) btn.focus(); }
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
       var open = menu.hidden;
       menu.hidden = !open;
       btn.setAttribute("aria-expanded", String(open));
-      if (open) { var cur = menu.querySelector('[aria-pressed="true"]'); if (cur) cur.focus(); }
+      if (open) {
+        q.value = ""; filterLangs("");
+        var cur = menu.querySelector('[aria-pressed="true"]');
+        if (cur) cur.scrollIntoView({ block: "nearest" });
+        /* en computador, el cursor queda listo en el buscador */
+        if (window.matchMedia("(pointer: fine)").matches) q.focus(); else if (cur) cur.focus();
+      }
     });
-    $$(".lang-list button").forEach(function (b) {
-      b.addEventListener("click", function () { close(true); setLang(b.getAttribute("data-lang"), true); });
+    q.addEventListener("input", function () { filterLangs(q.value); });
+    q.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { var first = menu.querySelector(".lang-list li:not([hidden]) button"); if (first) first.click(); }
     });
-    document.addEventListener("click", function (e) { if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close(false); });
+    menu.addEventListener("click", function (e) {
+      var b = e.target.closest(".lang-list button");
+      if (!b) return;
+      close(true);
+      setLang(b.getAttribute("data-lang"), true);
+    });
+    document.addEventListener("click", function (e) { if (!menu.hidden && !menu.contains(e.target) && !btn.contains(e.target)) close(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) close(true); });
 
     /* Idioma guardado, o aviso para quien tiene el navegador en otro idioma */
     var saved = lsGet(LANG_KEY);
     if (saved && saved !== "es" && LANGS[saved]) { setLang(saved, false); return; }
     if (saved) { setGoogCookie("es"); return; }
-    var nav = String((navigator.languages && navigator.languages[0]) || navigator.language || "es").slice(0, 2).toLowerCase();
+    var nav = detectLang((navigator.languages && navigator.languages[0]) || navigator.language || "es");
     var L = LANGS[nav];
     if (nav === "es" || !L || !L.ask) return;
     var toast = $("#lang-toast");
     $("#lang-toast-text").textContent = L.ask;
-    $("#lang-toast-text").setAttribute("lang", nav);
+    $("#lang-toast-text").setAttribute("lang", nav === "iw" ? "he" : nav);
+    if (L.rtl) toast.setAttribute("dir", "rtl");
     $("#lang-toast-yes").textContent = L.yes;
     $("#lang-toast-no").textContent = L.no;
     toast.hidden = false;
