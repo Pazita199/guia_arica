@@ -921,6 +921,38 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 .a11y-still.js-reveal .reveal { opacity: 1 !important; transform: none !important; }
 .a11y-still .hero-media img.on { transform: none !important; }
 
+/* =====================================================================
+   IDIOMAS (traducción automática de Google con nuestro propio selector)
+   ===================================================================== */
+.lang { position: relative; }
+.lang-btn { gap: 4px; padding: 0 10px; font: 700 13px var(--font-mono); }
+.lang-btn svg { width: 20px; height: 20px; }
+.lang-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; width: 240px; padding: 12px; border-radius: 16px; background: var(--surface); color: var(--ink); border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(0,0,0,.3); }
+.lang-title { margin: 2px 4px 8px; font: 600 12px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.lang-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.lang-list button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 8px 12px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: 600 15px var(--font-body); text-align: left; }
+.lang-list button small { font: 600 11px var(--font-mono); color: var(--ink-2); }
+.lang-list button:hover { background: var(--accent-soft); }
+.lang-list button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.lang-list button[aria-pressed="true"] small { color: inherit; }
+.lang-note { margin: 10px 4px 2px; font-size: 12px; line-height: 1.4; color: var(--ink-2); }
+.lang-note.err { color: var(--c-historia); font-weight: 600; }
+body.on-hero .topbar .lang-btn { color: #fff; }
+/* En celulares chicos, el modo oscuro queda en el menú de accesibilidad para dar espacio al idioma */
+@media (max-width: 400px) { #theme-btn { display: none; } }
+.lang-toast { position: fixed; z-index: 48; left: 50%; bottom: 18px; transform: translateX(-50%); width: min(560px, calc(100vw - 24px)); display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px 12px; align-items: center; padding: 14px 16px; border-radius: 16px; background: #0B2530; color: #fff; box-shadow: 0 14px 40px rgba(0,0,0,.4); }
+.lang-toast > svg { width: 28px; height: 28px; fill: none; stroke: var(--sun); stroke-width: 1.7; }
+.lang-toast p { margin: 0; font-weight: 600; }
+.lang-toast-btns { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.lang-toast .btn.ghost { color: #fff; border-color: rgba(255,255,255,.4); }
+@media (max-width: 899px) { .lang-toast { bottom: 86px; } }
+/* Esconder la barra y los avisos propios de Google: usamos nuestro botón */
+#gte { position: absolute; left: -9999px; top: 0; width: 1px; height: 1px; overflow: hidden; }
+body > .skiptranslate, iframe.skiptranslate, #goog-gt-tt, .goog-te-banner-frame, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd, .VIpgJd-ZVi9od-aZ2wEe-wOHMyf, .VIpgJd-yAWNEb-L7lbkb { display: none !important; }
+body { top: 0 !important; }
+.goog-text-highlight, .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q { background: none !important; box-shadow: none !important; }
+font { vertical-align: inherit !important; }
+
 /* Opción: cursor grande */
 .a11y-cursor, .a11y-cursor * { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M5 3.5l13 7.2-5.6 1.5 3.4 6.3-2.6 1.4-3.4-6.3L5.5 17.5z' fill='%23000' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 8 6, auto !important; }
 </style>
@@ -940,6 +972,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.7 5.6 3.7 9s-1.2 6.4-3.7 9M12 3c-2.5 2.6-3.7 5.6-3.7 9s1.2 6.4 3.7 9"/></symbol>
     <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6.9" r="1.5" fill="currentColor" stroke="none"/><path d="M6.8 9.6l5.2 1.1 5.2-1.1M12 10.7v3.6l-2.6 4.3M12 14.3l2.6 4.3"/></symbol>
     <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
     <symbol id="i-cursor" viewBox="0 0 24 24"><path d="M5 3.5l13 7.2-5.6 1.5 3.4 6.3-2.6 1.4-3.4-6.3L5.5 17.5z"/></symbol>
@@ -959,7 +992,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
 
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="#inicio" aria-label="Arika Tur, inicio">
+    <a class="brand notranslate" translate="no" href="#inicio" aria-label="Arika Tur, inicio">
       <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6" fill="var(--sun)"/><circle cx="16" cy="16" r="11" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="3 5.64"/></svg>
       Arika Tur
     </a>
@@ -974,6 +1007,25 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     <button class="icon-btn" id="fav-btn" type="button" aria-label="Mis lugares guardados">
       <svg aria-hidden="true"><use href="#i-star"/></svg><span class="count" id="fav-count">0</span>
     </button>
+    <!-- Selector de idioma (traducción automática de Google; solo se carga si eliges otro idioma) -->
+    <div class="lang notranslate" translate="no">
+      <button class="icon-btn lang-btn" id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" aria-label="Idioma: Español. Cambiar idioma · Change language">
+        <svg aria-hidden="true"><use href="#i-globe"/></svg><span id="lang-code">ES</span>
+      </button>
+      <div class="lang-menu" id="lang-menu" hidden>
+        <p class="lang-title">Idioma · Language</p>
+        <ul class="lang-list">
+          <li><button type="button" data-lang="es" lang="es" aria-pressed="true"><span>Español</span><small>ES</small></button></li>
+          <li><button type="button" data-lang="en" lang="en" aria-pressed="false"><span>English</span><small>EN</small></button></li>
+          <li><button type="button" data-lang="pt" lang="pt" aria-pressed="false"><span>Português</span><small>PT</small></button></li>
+          <li><button type="button" data-lang="fr" lang="fr" aria-pressed="false"><span>Français</span><small>FR</small></button></li>
+          <li><button type="button" data-lang="de" lang="de" aria-pressed="false"><span>Deutsch</span><small>DE</small></button></li>
+          <li><button type="button" data-lang="it" lang="it" aria-pressed="false"><span>Italiano</span><small>IT</small></button></li>
+          <li><button type="button" data-lang="ay" lang="ay" aria-pressed="false"><span>Aymar aru</span><small>AY</small></button></li>
+        </ul>
+        <p class="lang-note" id="lang-note">Traducción automática de Google · Automatic translation by Google</p>
+      </div>
+    </div>
     <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar entre tema claro y oscuro" aria-pressed="false">
       <svg aria-hidden="true" id="theme-ic"><use href="#i-moon"/></svg>
     </button>
@@ -1649,6 +1701,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
       <details><summary>¿Qué hago con la altura en Putre y Lauca?</summary><div class="ans"><p>Putre está a unos 3.500 metros y Parinacota y Lauca, sobre los 4.000. Conviene dormir una noche en Putre, tomar agua, moverse con calma y llevar abrigo.</p></div></details>
       <details><summary>¿Dónde veo las momias Chinchorro?</summary><div class="ans"><p>En el Museo Arqueológico San Miguel de Azapa, en el valle de Azapa. Según guías de viaje abre todos los días de 10:00 a 18:00; confirma antes de ir.</p></div></details>
       <details><summary>¿Puedo cruzar a Tacna, en Perú?</summary><div class="ans"><p>Sí. Los colectivos salen del Terminal Internacional. Lleva tu documento y revisa los requisitos migratorios y los horarios de la frontera antes de viajar.</p></div></details>
+      <details><summary>¿Puedo ver la página en otro idioma?</summary><div class="ans"><p>Sí. Toca el botón del globo, arriba (muestra “ES”), y elige English, Português, Français, Deutsch, Italiano o Aymar aru. Se traduce toda la página, y “Leer en voz alta” habla en el idioma elegido.</p><p>La traducción es automática, hecha por Google, así que puede tener pequeños errores. El servicio de Google solo se usa si eliges otro idioma.</p></div></details>
       <details><summary>¿Mis lugares guardados se comparten con otras personas?</summary><div class="ans"><p>No. Los lugares que guardas quedan solo en este navegador. Las opiniones de visitantes se activarán más adelante.</p></div></details>
       <details><summary>¿Cómo corrijo un dato o agrego mi negocio?</summary><div class="ans"><p>Escríbenos por el <a href="#contacto" class="to-contact" data-kind="correccion">formulario de contacto</a>.</p></div></details>
     </div>
@@ -2060,6 +2113,16 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
   </div>
 </section>
 <div class="a11y-guide-bar" id="a11y-guide" aria-hidden="true" hidden></div>
+<!-- Aviso para visitantes con el navegador en otro idioma -->
+<div class="lang-toast notranslate" id="lang-toast" translate="no" role="region" aria-label="Language" hidden>
+  <svg aria-hidden="true"><use href="#i-globe"/></svg>
+  <p id="lang-toast-text"></p>
+  <div class="lang-toast-btns">
+    <button class="btn sun small" id="lang-toast-yes" type="button"></button>
+    <button class="btn ghost small" id="lang-toast-no" type="button"></button>
+  </div>
+</div>
+<div id="gte" aria-hidden="true"></div>
 <div class="a11y-reading" id="a11y-reading" role="status" hidden>
   <span><svg aria-hidden="true"><use href="#i-speaker"/></svg> Leyendo en voz alta…</span>
   <button class="btn small sun" id="a11y-stop" type="button">Detener</button>
@@ -3492,10 +3555,14 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     if (!canSpeak || !text) return;
     stopReading();
     var u = new SpeechSynthesisUtterance(text.slice(0, 3000));
-    u.lang = "es-CL";
+    /* La voz habla en el idioma en que se está mostrando la página */
+    var L = LANGS[curLang] || LANGS.es;
+    var tag = L.voice, base = tag.slice(0, 2);
+    u.lang = tag;
     u.rate = 0.95;
     var voices = window.speechSynthesis.getVoices() || [];
-    var v = voices.filter(function (x) { return /^es[-_]CL/i.test(x.lang); })[0] || voices.filter(function (x) { return /^es/i.test(x.lang); })[0];
+    var re1 = new RegExp("^" + tag.replace("-", "[-_]"), "i"), re2 = new RegExp("^" + base, "i");
+    var v = voices.filter(function (x) { return re1.test(x.lang); })[0] || voices.filter(function (x) { return re2.test(x.lang); })[0];
     if (v) u.voice = v;
     u.onend = u.onerror = function () { if (readingEl === el) stopReading(); };
     readingEl = el;
@@ -3539,7 +3606,7 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
         a11y[k] = !a11y[k];
         if (k === "still" && startHero.setPaused) startHero.setPaused(a11y.still);
         a11yApply(true);
-        if (k === "voice" && a11y.voice) speak(null, "Lectura en voz alta activada. Toca cualquier texto para escucharlo.");
+        if (k === "voice" && a11y.voice) speak(null, (LANGS[curLang] || LANGS.es).voiceOn);
       });
     });
     $("#a11y-reset").addEventListener("click", function () {
@@ -3567,7 +3634,124 @@ body.on-hero .brand svg circle:last-child { stroke: #fff; }
     }, true);
   }
 
+  /* =====================================================================
+     IDIOMAS
+     La página está escrita en español. Para otros idiomas usamos la traducción
+     automática de Google, con nuestro propio botón (la barra de Google queda oculta).
+     El código de Google solo se descarga si alguien elige otro idioma.
+     La voz de "Leer en voz alta" usa el idioma elegido.
+     ===================================================================== */
+  var LANGS = {
+    es: { name: "Español", code: "ES", voice: "es-CL", voiceOn: "Lectura en voz alta activada. Toca cualquier texto para escucharlo." },
+    en: { name: "English", code: "EN", voice: "en-US", voiceOn: "Read aloud is on. Tap any text to hear it.",
+      ask: "This guide is in Spanish. Would you like to read it in English?", yes: "Read in English", no: "Keep Spanish" },
+    pt: { name: "Português", code: "PT", voice: "pt-BR", voiceOn: "Leitura em voz alta ativada. Toque em qualquer texto para ouvi-lo.",
+      ask: "Este guia está em espanhol. Quer lê-lo em português?", yes: "Ler em português", no: "Manter em espanhol" },
+    fr: { name: "Français", code: "FR", voice: "fr-FR", voiceOn: "Lecture à voix haute activée. Touchez un texte pour l’écouter.",
+      ask: "Ce guide est en espagnol. Voulez-vous le lire en français ?", yes: "Lire en français", no: "Garder l’espagnol" },
+    de: { name: "Deutsch", code: "DE", voice: "de-DE", voiceOn: "Vorlesen ist aktiviert. Tippen Sie auf einen Text, um ihn zu hören.",
+      ask: "Dieser Reiseführer ist auf Spanisch. Möchten Sie ihn auf Deutsch lesen?", yes: "Auf Deutsch lesen", no: "Auf Spanisch bleiben" },
+    it: { name: "Italiano", code: "IT", voice: "it-IT", voiceOn: "Lettura ad alta voce attivata. Tocca un testo per ascoltarlo.",
+      ask: "Questa guida è in spagnolo. Vuoi leggerla in italiano?", yes: "Leggi in italiano", no: "Resta in spagnolo" },
+    /* El aymara no tiene voz en los navegadores: se lee con la voz en español */
+    ay: { name: "Aymar aru", code: "AY", voice: "es-CL", voiceOn: "Lectura en voz alta activada. Toca cualquier texto para escucharlo." }
+  };
+  var LANG_KEY = "guia-arica:idioma";
+  var curLang = "es";
+  var gteReady = null;
+
+  /* Google recuerda el idioma con la cookie "googtrans" */
+  function setGoogCookie(l) {
+    var val = l === "es" ? "" : "/es/" + l;
+    var exp = l === "es" ? "; expires=Thu, 01 Jan 1970 00:00:00 GMT" : "";
+    document.cookie = "googtrans=" + val + "; path=/" + exp;
+    var host = location.hostname;
+    if (host.indexOf(".") > 0) document.cookie = "googtrans=" + val + "; path=/; domain=." + host + exp;
+  }
+  function loadGoogle() {
+    if (gteReady) return gteReady;
+    gteReady = new Promise(function (resolve, reject) {
+      window.arikaGteInit = function () {
+        try {
+          new google.translate.TranslateElement({ pageLanguage: "es", includedLanguages: Object.keys(LANGS).filter(function (k) { return k !== "es"; }).join(","), autoDisplay: false }, "gte");
+        } catch (e) { reject(e); return; }
+        var n = 0;
+        (function wait() {
+          var sel = document.querySelector("#gte select.goog-te-combo");
+          if (sel) resolve(sel); else if (++n > 75) reject(new Error("sin selector")); else setTimeout(wait, 200);
+        })();
+      };
+      var s = document.createElement("script");
+      s.src = "https://translate.google.com/translate_a/element.js?cb=arikaGteInit";
+      s.async = true;
+      s.onerror = function () { reject(new Error("no carga")); };
+      document.head.appendChild(s);
+    });
+    return gteReady;
+  }
+  function paintLang() {
+    var L = LANGS[curLang] || LANGS.es;
+    $("#lang-code").textContent = L.code;
+    $("#lang-btn").setAttribute("aria-label", "Idioma: " + L.name + ". Cambiar idioma · Change language");
+    $$(".lang-list button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === curLang)); });
+  }
+  function langError() {
+    var note = $("#lang-note");
+    note.classList.add("err");
+    note.textContent = "No se pudo cargar la traducción. Revisa tu conexión a internet. · Translation could not be loaded.";
+    curLang = "es"; paintLang(); setGoogCookie("es");
+  }
+  function setLang(l, save) {
+    if (!LANGS[l]) l = "es";
+    if (save) lsSet(LANG_KEY, l);
+    stopReading();
+    if (l === "es") {
+      /* volver al original: se borra la cookie de Google y se recarga la página */
+      if (curLang !== "es" || document.documentElement.classList.contains("translated-ltr")) { setGoogCookie("es"); location.reload(); }
+      return;
+    }
+    setGoogCookie(l);
+    curLang = l;
+    paintLang();
+    loadGoogle().then(function (sel) {
+      if (sel.value !== l) { sel.value = l; sel.dispatchEvent(new Event("change")); }
+    }).catch(langError);
+  }
+  function bindLang() {
+    var btn = $("#lang-btn"), menu = $("#lang-menu");
+    function close(back) { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); if (back) btn.focus(); }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = menu.hidden;
+      menu.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      if (open) { var cur = menu.querySelector('[aria-pressed="true"]'); if (cur) cur.focus(); }
+    });
+    $$(".lang-list button").forEach(function (b) {
+      b.addEventListener("click", function () { close(true); setLang(b.getAttribute("data-lang"), true); });
+    });
+    document.addEventListener("click", function (e) { if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) close(true); });
+
+    /* Idioma guardado, o aviso para quien tiene el navegador en otro idioma */
+    var saved = lsGet(LANG_KEY);
+    if (saved && saved !== "es" && LANGS[saved]) { setLang(saved, false); return; }
+    if (saved) { setGoogCookie("es"); return; }
+    var nav = String((navigator.languages && navigator.languages[0]) || navigator.language || "es").slice(0, 2).toLowerCase();
+    var L = LANGS[nav];
+    if (nav === "es" || !L || !L.ask) return;
+    var toast = $("#lang-toast");
+    $("#lang-toast-text").textContent = L.ask;
+    $("#lang-toast-text").setAttribute("lang", nav);
+    $("#lang-toast-yes").textContent = L.yes;
+    $("#lang-toast-no").textContent = L.no;
+    toast.hidden = false;
+    $("#lang-toast-yes").addEventListener("click", function () { toast.hidden = true; setLang(nav, true); });
+    $("#lang-toast-no").addEventListener("click", function () { toast.hidden = true; lsSet(LANG_KEY, "es"); });
+  }
+
   /* ---------- Arranque ---------- */
+  bindLang();
   loadFavs();
   var h = (location.hash || "").replace("#", "");
   if (byId[h]) state.sel = h;
